@@ -12,6 +12,7 @@ A contributor can clone a project that has a memory set, load the memories, make
 - Multilingual: supports several languages out of the box, and can handle others.
 - Supports regular *read-write* memory sets, *read-only* memory sets for distributing documentation (like the [`scatterhoard-cookbook`](scatterhoard_mem/scatterhoard-cookbook.json)) and *evaluation mode* for exploring a memory set you're reviewing.
 - Runs as a stdio-based MCP server with low context load and fast lookups.
+- Sharing preferences manage things about you that you don't want in the memories. Built-in rules manage memories about other people.
 
 # Quick Start
 
@@ -45,6 +46,7 @@ cargo build --release
 echo '**/scatterhoard_mem/*.json merge=scatterhoard' >> .gitattributes
 git config merge.scatterhoard.driver '/path/to/scatterhoard/target/release/scatterhoard merge-file %O %A %B; s=$?; [ $s -eq 127 ] || exit $s; echo "scatterhoard: merge driver not found; falling back to git merge-file" >&2; git merge-file -L ours -L base -L theirs %A %O %B'
 ```
+8. At the start of your first session, Scatterhoard creates `sharing-preferences.md` in Scatterhoard’s data directory (`~/.local/share/scatterhoard/` by default; on Windows, the directory you set as `SCATTERHOARD_HOME`). Optionally edit it to say what about you may be stored or shared.
 
 # Other Useful Things
 - The [`scatterhoard-cookbook`](scatterhoard_mem/scatterhoard-cookbook.json) is a read-only memory set containing Scatterhoard tips and tricks.
@@ -71,7 +73,8 @@ Each memory set loads into a vector database built on [SQLite](https://sqlite.or
 
 A memory is a small block of text. Memories have both keywords and links to other memories. Recall can be semantic (land on a memory through semantic similarity, then walk the links to get adjacent ones), by keyword (useful for broader searches and fancy tricks like gathering observations and flagging recall topics), or directly by memory ID.
 
-Memory sets export to a JSON format that is designed for easy review and merging. You can see the exported set of memories from developing Scatterhoard [here](scatterhoard_mem/scatterhoard.json).
+Memory sets export to a JSON format that is designed for easy review and merging. You can download the exported set of memories from developing Scatterhoard [here](scatterhoard_mem/scatterhoard.json) (it's too large to view in Github) or see
+the Scatterhoard Cookbook memories [here](scatterhoard_mem/scatterhoard-cookbook.json).
 
 The `hoard_conventions` command the agent runs at the start of the session returns a set of prompts telling the agent how to use the tools and when and where to record new memories.
 
