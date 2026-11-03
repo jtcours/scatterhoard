@@ -1,0 +1,66 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": {
+          "sets": [
+            {
+              "author": "jtcours",
+              "embedding_model": {
+                "recorded": "marker-embedder",
+                "state": "current"
+              },
+              "file": null,
+              "floor_source": null,
+              "forgotten": 0,
+              "labelled_since_calibration": 0,
+              "language_note": "This set's charter declares no language. Supersede it with a `hoard-lang-` keyword added for each language its memories are written in, such as `hoard-lang-en`. Sessions write memories and phrase queries in a declared language, because the loaded model may not represent others: a memory in one it lacks can be stored and never found by meaning.",
+              "languages": [],
+              "memories": 10,
+              "mode": "read-write",
+              "non_match_floor": null,
+              "scope": "shared:scatterhoard",
+              "semantic_search_available": true,
+              "set_id": "<id-1>",
+              "watch_marks": [
+                "hoard-signpost",
+                "hoard-collect",
+                "hoard-investigation"
+              ]
+            },
+            {
+              "author": null,
+              "author_note": "Nothing has been written to this set yet, so it records no author. The next write claims it for jtcours, this machine's account name, and `hoard_sets` action \"rename\" changes that afterwards.",
+              "embedding_model": {
+                "note": "Nothing has embedded into this set, so it holds no vectors. Keyword search and hoard_lookup are the search here, and are unaffected.",
+                "state": "unembedded"
+              },
+              "file": null,
+              "floor_source": null,
+              "forgotten": 0,
+              "labelled_since_calibration": 0,
+              "language_note": "This set has no `hoard-scope-topics` charter, so it declares neither what it is for nor what language it is written in. Write one, with a `hoard-lang-` keyword for each language its memories are written in, such as `hoard-lang-en`.",
+              "languages": [],
+              "memories": 0,
+              "mode": "read-write",
+              "non_match_floor": null,
+              "scope": "local",
+              "semantic_search_available": false,
+              "set_id": null,
+              "watch_marks": [
+                "hoard-signpost",
+                "hoard-collect",
+                "hoard-investigation"
+              ]
+            }
+          ]
+        },
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": "(present: identical to content[0].text, and checked against the output schema)"
+  }
+}

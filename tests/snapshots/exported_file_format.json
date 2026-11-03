@@ -1,0 +1,78 @@
+{
+  "lines": [
+    {
+      "format_version": "0.4.0",
+      "scope": {
+        "shared": "scatterhoard"
+      },
+      "set_id": "<id-1>"
+    },
+    {
+      "ancestry": [
+        {
+          "label": "supersedes",
+          "target": "<id-2>"
+        }
+      ],
+      "forgot": "<checksum>",
+      "forgotten": {
+        "at": "<timestamp>",
+        "by": "<id-3>"
+      },
+      "id": "<id-4>"
+    },
+    {
+      "confidence": 1.0,
+      "content": "This set holds the fixtures these tests write.",
+      "created": {
+        "at": "<timestamp>",
+        "by": "<id-3>"
+      },
+      "id": "<id-5>",
+      "keywords": [
+        "hoard-scope-topics"
+      ],
+      "modified": {
+        "at": "<timestamp>",
+        "by": "<id-3>"
+      },
+      "origin": "human"
+    },
+    {
+      "confidence": 1.0,
+      "content": "jtcours",
+      "created": {
+        "at": "<timestamp>",
+        "by": "<id-3>"
+      },
+      "id": "<id-3>",
+      "keywords": [
+        "hoard-author"
+      ],
+      "modified": {
+        "at": "<timestamp>",
+        "by": "<id-3>"
+      },
+      "origin": "human",
+      "why": "The name this set attributes writes to. Held as a memory so that changing it supersedes one record rather than rewriting every record that names it."
+    },
+    {
+      "confidence": 0.7,
+      "content": "the memory that stays",
+      "created": {
+        "at": "<timestamp>",
+        "by": "<id-3>"
+      },
+      "id": "<id-2>",
+      "keywords": [
+        "kept"
+      ],
+      "modified": {
+        "at": "<timestamp>",
+        "by": "<id-3>"
+      },
+      "origin": "llm",
+      "why": "so the file has an ordinary record in it"
+    }
+  ]
+}

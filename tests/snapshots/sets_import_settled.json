@@ -1,0 +1,41 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": {
+          "adopted_set_id": null,
+          "describes": {
+            "clusters": [
+              {
+                "about": [
+                  "Alpha-Routing",
+                  "MemoryView"
+                ],
+                "memories": 5
+              },
+              {
+                "about": [],
+                "memories": 3
+              },
+              {
+                "about": [],
+                "memories": 1
+              }
+            ],
+            "derivation": "clusters/2"
+          },
+          "outcomes": {
+            "unchanged": 11
+          },
+          "path_form": "directory",
+          "read": "<directory>/scatterhoard_mem/scatterhoard.json"
+        },
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": "(present: identical to content[0].text, and checked against the output schema)"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "already_known must hold whole memory ids as hoard_recall returned them, and \"1a2b3c4d\" is not one. Pass the ids from an earlier result, not a prefix.",
+        "type": "text"
+      }
+    ],
+    "isError": true
+  }
+}

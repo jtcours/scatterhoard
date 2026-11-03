@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "hoard_recall takes a query or keywords, not both: a similarity and a match count are different scales and cannot be ranked against each other. Search by meaning, or match keywords exactly, and call twice if you want both.",
+        "type": "text"
+      }
+    ],
+    "isError": true
+  }
+}

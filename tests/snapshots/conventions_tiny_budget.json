@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": [
+          "{\"conventions\":[{\"id\":\"store-when\",\"reinforcem",
+          {
+            "server_version": "<version>"
+          },
+          "The conventions are not loaded yet. Call hoard_conventions again with {\"cursor\": 46, \"max_chars\": 200} for the rest."
+        ],
+        "type": "text"
+      }
+    ],
+    "isError": false
+  }
+}

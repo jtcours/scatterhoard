@@ -1,0 +1,46 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": {
+          "memories": [
+            {
+              "confidence": 0.9,
+              "content": "alpha alpha alpha governs how requests are routed",
+              "context": "recorded while building the approval fixture",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-2>",
+              "incoming": [
+                {
+                  "label": "supports",
+                  "source": "<id-3>"
+                }
+              ],
+              "keywords": [
+                "Alpha-Routing",
+                "MemoryView"
+              ],
+              "matched_keywords": 2,
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "joint",
+              "scope": "shared:scatterhoard",
+              "why": "the routing rule was decided before the code existed"
+            }
+          ],
+          "semantic_search_available": true
+        },
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": "(present: identical to content[0].text, and checked against the output schema)"
+  }
+}

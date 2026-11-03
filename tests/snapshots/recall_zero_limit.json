@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "`limit` must be a whole number of 1 or more, not 0: it is how many memories to return, best first. Omit it for 8.",
+        "type": "text"
+      }
+    ],
+    "isError": true
+  }
+}

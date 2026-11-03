@@ -1,0 +1,42 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": {
+          "memories": [
+            {
+              "confidence": 0.8,
+              "content": "alpha in the local set",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-2>",
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "llm",
+              "scope": "local",
+              "similarity": 0.0,
+              "why": "so one set can answer while the other cannot"
+            }
+          ],
+          "note": "Some sets in scope could not be searched by meaning, and `skipped_sets` names which and why. The memories returned were searched by meaning and their scores are sound -- an unsearchable set is left out of the scan rather than compared across vector spaces -- so treat this as an incomplete answer rather than an unreliable one, and say which sets were missing if it matters to the conclusion.",
+          "semantic_search_available": false,
+          "skipped_sets": [
+            {
+              "reason": "this set's vectors were produced by marker-embedder, and this server has other-embedder. Searching it would compare across two vector spaces and return confident nonsense. Decide which model should win: `hoard_sets` action \"reembed\" and this scope rebuilds with the model this server holds.",
+              "scope": "shared:scatterhoard"
+            }
+          ]
+        },
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": "(present: identical to content[0].text, and checked against the output schema)"
+  }
+}

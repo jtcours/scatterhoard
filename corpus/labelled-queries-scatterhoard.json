@@ -1,0 +1,516 @@
+{
+ "provenance": "labelled from ~/.claude/projects/*scatterhoard*/*.jsonl by corpus/label_queries.py: the recall named this set, or a memory it returned from this set was used later in the same session",
+ "store": "shared:scatterhoard",
+ "queries": [
+  {
+   "query": "reconciliation base migration",
+   "first_seen": "2026-08-12T03:53:30.564Z",
+   "session": "d086964c",
+   "label": "scoped"
+  },
+  {
+   "query": "attribution",
+   "first_seen": "2026-08-12T03:54:18.139Z",
+   "session": "d086964c",
+   "label": "scoped"
+  },
+  {
+   "query": "store registry design",
+   "first_seen": "2026-08-12T04:30:48.555Z",
+   "session": "d086964c",
+   "label": "scoped"
+  },
+  {
+   "query": "store registry in-tree",
+   "first_seen": "2026-08-12T14:10:52.400Z",
+   "session": "d086964c",
+   "label": "scoped"
+  },
+  {
+   "query": "how does recall decide how many memories to return",
+   "first_seen": "2026-08-19T17:29:14.286Z",
+   "session": "4d156871",
+   "label": "scoped"
+  },
+  {
+   "query": "malformed tool call damage",
+   "first_seen": "2026-08-19T17:29:40.366Z",
+   "session": "4d156871",
+   "label": "scoped"
+  },
+  {
+   "query": "why keep stores central instead of inside the checkout",
+   "first_seen": "2026-08-19T21:08:45.645Z",
+   "session": "4d156871",
+   "label": "scoped"
+  },
+  {
+   "query": "how large must a corpus be before traversal beats simply raising the limit",
+   "first_seen": "2026-08-19T21:09:00.112Z",
+   "session": "4d156871",
+   "label": "scoped"
+  },
+  {
+   "query": "tool-call markup damage, escaping angle brackets when writing about tags",
+   "first_seen": "2026-08-20T04:36:28.012Z",
+   "session": "4477c546",
+   "label": "scoped"
+  },
+  {
+   "query": "what happens when a tool call arrives with a mis-closed parameter",
+   "first_seen": "2026-08-20T04:37:47.466Z",
+   "session": "4477c546",
+   "label": "scoped"
+  },
+  {
+   "query": "keyword match count comparable across memory sets",
+   "first_seen": "2026-08-20T17:35:57.273Z",
+   "session": "fcd72c5d",
+   "label": "scoped"
+  },
+  {
+   "query": "why the embedding model identity must be recorded when vectors are not exported",
+   "first_seen": "2026-08-20T22:59:24.890Z",
+   "session": "fcd72c5d",
+   "label": "scoped"
+  },
+  {
+   "query": "tuning conventions by observing behaviour over sessions, personal memory overriding convention-governed behaviour",
+   "first_seen": "2026-08-21T05:03:28.639Z",
+   "session": "7985a6b0",
+   "label": "used"
+  },
+  {
+   "query": "report rather than resolve: surface a conflict to the model instead of software adjudicating it",
+   "first_seen": "2026-08-24T00:41:22.773Z",
+   "session": "53142ec7",
+   "label": "used"
+  },
+  {
+   "query": "writing a test that observes traversal inheritance requires keeping the memory out of the seed set",
+   "first_seen": "2026-08-25T01:43:14.682Z",
+   "session": "e575cd9e",
+   "label": "scoped"
+  },
+  {
+   "query": "a set's charter description decides what kinds of memory get stored into it",
+   "first_seen": "2026-08-25T04:38:26.384Z",
+   "session": "e575cd9e",
+   "label": "used"
+  },
+  {
+   "query": "a session records what it was told more readily than what it decided itself",
+   "first_seen": "2026-08-25T05:44:04.779Z",
+   "session": "e575cd9e",
+   "label": "used"
+  },
+  {
+   "query": "catalog character budget, whether the conventions carry avoidable length or the budget is too small",
+   "first_seen": "2026-08-25T13:49:05.859Z",
+   "session": "94ae9574",
+   "label": "used"
+  },
+  {
+   "query": "two different ways of counting the catalog size, ids counted or not, a figure that disagrees with the enforced budget",
+   "first_seen": "2026-08-25T23:21:06.730Z",
+   "session": "94ae9574",
+   "label": "used"
+  },
+  {
+   "query": "prose style of served instruction text, sentence length, wordiness, how convention wording should be shaped",
+   "first_seen": "2026-08-25T23:21:07.211Z",
+   "session": "94ae9574",
+   "label": "used"
+  },
+  {
+   "query": "how often corrections happen, amendment versus supersession frequency measured in the live sets",
+   "first_seen": "2026-08-30T03:45:50.116Z",
+   "session": "b796e354",
+   "label": "used"
+  },
+  {
+   "query": "branch descriptions in a oneOf tool schema are dropped when the schema is flattened, so only the top-level tool description reaches a client",
+   "first_seen": "2026-08-30T14:40:36.441Z",
+   "session": "2a820c6d",
+   "label": "used"
+  },
+  {
+   "query": "measuring whether a convention or guideline actually changes behaviour, by looking at an observable in the artifacts it produces before and after",
+   "first_seen": "2026-08-30T22:41:26.460Z",
+   "session": "2a820c6d",
+   "label": "used"
+  },
+  {
+   "query": "set UUID hard cut, minting UUIDs manually into existing sets rather than on next export",
+   "first_seen": "2026-08-31T17:59:51.707Z",
+   "session": "732983a9",
+   "label": "used"
+  },
+  {
+   "query": "how attribution and author identity should be handled in memory sets",
+   "first_seen": "2026-09-02T04:23:44.779Z",
+   "session": "7e8bbfe0",
+   "label": "used"
+  },
+  {
+   "query": "which direction a cross-set link may point between a personal set and a shared one",
+   "first_seen": "2026-09-02T19:04:42.170Z",
+   "session": "7e8bbfe0",
+   "label": "used"
+  },
+  {
+   "query": "how the graph traversal walk from seed memories was designed, what was tried and rejected, and why it works the way it does",
+   "first_seen": "2026-09-03T04:32:09.579Z",
+   "session": "1d6eedd4",
+   "label": "scoped"
+  },
+  {
+   "query": "a memory I know exists has vanished from search results and I cannot work out why",
+   "first_seen": "2026-09-03T04:37:16.998Z",
+   "session": "1d6eedd4",
+   "label": "used"
+  },
+  {
+   "query": "the default result limit was measured and found too low, F1 peaks, the cut is a window rather than a fixed count",
+   "first_seen": "2026-09-03T04:47:39.170Z",
+   "session": "1d6eedd4",
+   "label": "scoped"
+  },
+  {
+   "query": "choosing a conservative bound instead of a tuned weight when no data exists to tune it",
+   "first_seen": "2026-09-03T04:48:29.664Z",
+   "session": "1d6eedd4",
+   "label": "used"
+  },
+  {
+   "query": "why is the recall limit a window rather than a fixed number of results, and what was the old default",
+   "first_seen": "2026-09-03T04:50:48.837Z",
+   "session": "1d6eedd4",
+   "label": "scoped"
+  },
+  {
+   "query": "triggering a recall from a file path or symbol name the model is about to touch, rather than from a question",
+   "first_seen": "2026-09-03T23:50:25.773Z",
+   "session": "1d6eedd4",
+   "label": "used"
+  },
+  {
+   "query": "a keyword on a superseded memory still matches searches, so keywords cannot be retired by superseding",
+   "first_seen": "2026-09-04T00:39:10.214Z",
+   "session": "1d6eedd4",
+   "label": "scoped"
+  },
+  {
+   "query": "what to write in a memory's context field — when and in response to what it came up",
+   "first_seen": "2026-09-05T03:45:15.553Z",
+   "session": "c702a9b9",
+   "label": "used"
+  },
+  {
+   "query": "context field pointing at a file that no longer exists; context rots because nothing re-reads it",
+   "first_seen": "2026-09-05T03:47:26.090Z",
+   "session": "c702a9b9",
+   "label": "used"
+  },
+  {
+   "query": "where guidance about filling a tool parameter belongs: schema description versus the convention catalog",
+   "first_seen": "2026-09-05T04:29:03.847Z",
+   "session": "c702a9b9",
+   "label": "used"
+  },
+  {
+   "query": "reserving unconditional context for what a reader would never think to search for; push versus pull",
+   "first_seen": "2026-09-05T06:32:22.268Z",
+   "session": "c702a9b9",
+   "label": "used"
+  },
+  {
+   "query": "re-deriving a measured constant from a spec reveals the shape its author assumed",
+   "first_seen": "2026-09-06T13:50:28.341Z",
+   "session": "da1409f9",
+   "label": "used"
+  },
+  {
+   "query": "hold on re-tuning the conventions until performance under them has been evaluated",
+   "first_seen": "2026-09-06T20:34:27.323Z",
+   "session": "da1409f9",
+   "label": "used"
+  },
+  {
+   "query": "migrating a large body of prose into memory clusters: batching, verifying order, how deep to go",
+   "first_seen": "2026-09-07T13:35:13.541Z",
+   "session": "b191dfe6",
+   "label": "scoped"
+  },
+  {
+   "query": "renaming a keyword across many exported memories is expensive because amendment is refused and supersession is the only path",
+   "first_seen": "2026-09-07T14:55:53.710Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "a project's own tooling reads keywords from the set; reserving a namespace for project-specific control marks",
+   "first_seen": "2026-09-07T14:55:54.858Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "bulk mechanical rewrite of a whole memory set through export, edit the file, and restore",
+   "first_seen": "2026-09-07T15:54:30.036Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "release gate: what must be settled before publishing, and that publication makes the memory sets public",
+   "first_seen": "2026-09-07T17:10:41.943Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "summary output mode on recall: a derived line capped at 120 characters, and the store response echoing it",
+   "first_seen": "2026-09-07T17:20:32.964Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "amend echoes the derived summary line when content is among the fields amended",
+   "first_seen": "2026-09-07T17:22:11.163Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "memories record outcomes and conclusions but not the path or reasoning that led there; a convention to capture method",
+   "first_seen": "2026-09-07T18:57:28.101Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "the originating case for the watch convention: a directory whose name does not cue a recall, and a README nobody knows exists",
+   "first_seen": "2026-09-07T19:07:04.381Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "confidence values cluster in the top fifth of the scale; measured distribution across the live sets",
+   "first_seen": "2026-09-07T19:22:29.924Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "the 429-memory traversal corpus built from design documents: edges per memory, share of targets outside a top-k cut, per-label percentiles",
+   "first_seen": "2026-09-07T19:54:40.713Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "blind labelling worksheet: harvested queries, allowlist not denylist, structure leaking through context and record order",
+   "first_seen": "2026-09-07T19:54:41.891Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "a mechanism filed under its weakest benefit disappears when that benefit is measured away",
+   "first_seen": "2026-09-07T21:58:05.734Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "capture-before-ending trigger moments: about to commit, about to export, a multi-turn piece of work finished",
+   "first_seen": "2026-09-07T22:28:58.008Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "splitting a tracked item so the ready half is not held behind an external or unproven blocker",
+   "first_seen": "2026-09-07T22:40:49.308Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "cluster-shape guidance for migrating a tracking file into memories — how to shape an entry's cluster",
+   "first_seen": "2026-09-08T00:04:16.642Z",
+   "session": "d5d6801e",
+   "label": "scoped"
+  },
+  {
+   "query": "where should guidance about writing memory clusters be documented — a design document, the served conventions, or CLAUDE.md",
+   "first_seen": "2026-09-08T00:04:22.788Z",
+   "session": "d5d6801e",
+   "label": "scoped"
+  },
+  {
+   "query": "a slug that is also a subject keyword over-gathers unrelated memories into the index",
+   "first_seen": "2026-09-08T00:59:21.404Z",
+   "session": "d5d6801e",
+   "label": "scoped"
+  },
+  {
+   "query": "every migrated member must state when the thing happened because created is the migration date",
+   "first_seen": "2026-09-08T00:59:22.017Z",
+   "session": "d5d6801e",
+   "label": "scoped"
+  },
+  {
+   "query": "unify ISSUES BACKLOG and open-questions into a single tracking file with sections",
+   "first_seen": "2026-09-08T01:01:02.085Z",
+   "session": "d5d6801e",
+   "label": "scoped"
+  },
+  {
+   "query": "running MCP server is an older build than the binary on disk, stale served conventions after rebuild",
+   "first_seen": "2026-09-08T01:01:02.968Z",
+   "session": "d5d6801e",
+   "label": "scoped"
+  },
+  {
+   "query": "checkpoint filenames timezone UTC ordering",
+   "first_seen": "2026-09-08T03:42:06.257Z",
+   "session": "ec7fb95e",
+   "label": "scoped"
+  },
+  {
+   "query": "cluster-shaping guidance placed in STANDARDS.md rather than the catalog or memory",
+   "first_seen": "2026-09-08T03:48:15.599Z",
+   "session": "ec7fb95e",
+   "label": "scoped"
+  },
+  {
+   "query": "why recall subtracts the corpus centroid before scoring similarity, hubs",
+   "first_seen": "2026-09-08T17:16:20.252Z",
+   "session": "ec7fb95e",
+   "label": "scoped"
+  },
+  {
+   "query": "synthetic corpus built from markdown files, what it can and cannot measure",
+   "first_seen": "2026-09-08T17:33:48.169Z",
+   "session": "ec7fb95e",
+   "label": "scoped"
+  },
+  {
+   "query": "why model2vec was chosen over a transformer embedder, the ladder of candidates",
+   "first_seen": "2026-09-08T19:26:49.413Z",
+   "session": "ec7fb95e",
+   "label": "scoped"
+  },
+  {
+   "query": "a vector with no direction, every component zero, is refused",
+   "first_seen": "2026-09-08T23:33:26.377Z",
+   "session": "629f34a1",
+   "label": "scoped"
+  },
+  {
+   "query": "off-corpus query set composition decides whether a separation mechanism appears to work",
+   "first_seen": "2026-09-08T23:34:59.900Z",
+   "session": "629f34a1",
+   "label": "scoped"
+  },
+  {
+   "query": "what text is embedded for a memory, content why keywords composition ablation",
+   "first_seen": "2026-09-08T23:35:01.386Z",
+   "session": "629f34a1",
+   "label": "scoped"
+  },
+  {
+   "query": "absolute floor on top score fails to separate, no threshold exists",
+   "first_seen": "2026-09-08T23:46:42.332Z",
+   "session": "629f34a1",
+   "label": "scoped"
+  },
+  {
+   "query": "a low score for an off-domain query is correct behaviour, not a defect to equalise across sets",
+   "first_seen": "2026-09-09T00:24:31.394Z",
+   "session": "629f34a1",
+   "label": "scoped"
+  },
+  {
+   "query": "mining past sessions to build a test corpus, what that biases",
+   "first_seen": "2026-09-09T04:55:05.365Z",
+   "session": "629f34a1",
+   "label": "scoped"
+  },
+  {
+   "query": "unifying correct and supersede into one call, dispatching on export status",
+   "first_seen": "2026-09-09T20:18:59.179Z",
+   "session": "629f34a1",
+   "label": "scoped"
+  },
+  {
+   "query": "non-English text, language support, what happens to memories not in English",
+   "first_seen": "2026-09-10T05:33:40.207Z",
+   "session": "629f34a1",
+   "label": "scoped"
+  },
+  {
+   "query": "the off-domain probe set is a property of the embedding model and not portable across a model swap",
+   "first_seen": "2026-09-11T04:00:04.499Z",
+   "session": "7776e75e",
+   "label": "used"
+  },
+  {
+   "query": "calibrate the floor from the answerable side: a store has its own query history and can never sample what it will not be asked",
+   "first_seen": "2026-09-11T04:00:23.642Z",
+   "session": "7776e75e",
+   "label": "scoped"
+  },
+  {
+   "query": "non-English users, multilingual embedding model, other languages and scripts",
+   "first_seen": "2026-09-11T04:01:02.896Z",
+   "session": "7776e75e",
+   "label": "used"
+  },
+  {
+   "query": "recording a store's query history so the floor can be calibrated from real queries; cold start for a new store with no queries",
+   "first_seen": "2026-09-11T04:01:04.396Z",
+   "session": "7776e75e",
+   "label": "scoped"
+  },
+  {
+   "query": "how a running store would know which of its past recall queries were answerable, to calibrate a floor without harvesting transcripts",
+   "first_seen": "2026-09-11T04:02:12.560Z",
+   "session": "7776e75e",
+   "label": "scoped"
+  },
+  {
+   "query": "one memory that cannot be embedded fails the whole batch, and a write commits the memory before embedding it, so a store stops accepting writes",
+   "first_seen": "2026-09-11T04:05:31.823Z",
+   "session": "7776e75e",
+   "label": "scoped"
+  },
+  {
+   "query": "Embedder trait design: batch embed returns one Result for all texts; per-item failure; a text that embeds to a zero vector",
+   "first_seen": "2026-09-11T04:14:39.452Z",
+   "session": "7776e75e",
+   "label": "scoped"
+  },
+  {
+   "query": "status reports a store as mismatched when the server simply has no model loaded, and blames another server",
+   "first_seen": "2026-09-11T04:42:50.214Z",
+   "session": "7776e75e",
+   "label": "scoped"
+  },
+  {
+   "query": "why the set charter keyword is named hoard-scope-topics: a set's scope and the topics it covers",
+   "first_seen": "2026-09-11T12:59:18.216Z",
+   "session": "7776e75e",
+   "label": "used"
+  },
+  {
+   "query": "refusing or validating reserved hoard- keywords at write time, so a subject memory cannot carry a control mark",
+   "first_seen": "2026-09-11T14:14:11.621Z",
+   "session": "7776e75e",
+   "label": "scoped"
+  },
+  {
+   "query": "a running store cannot tell which of its past recall queries were answerable, because unscoped recall sends every query to every store, so a floor set from its query history would sink",
+   "first_seen": "2026-09-11T18:37:47.445Z",
+   "session": "7776e75e",
+   "label": "scoped"
+  },
+  {
+   "query": "a set declares which language its memories are written in, so a server can report that its model does not cover that language",
+   "first_seen": "2026-09-11T23:35:16.651Z",
+   "session": "7776e75e",
+   "label": "used"
+  }
+ ]
+}

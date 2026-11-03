@@ -1,0 +1,25 @@
+[package]
+name = "scatterhoard"
+version = "0.9.0-beta.2"
+edition = "2024"
+license = "MIT"
+
+[dependencies]
+# Together these compose `toNFKC_Casefold`, the operation Unicode defines for caseless identifier
+# matching (UAX #31). No crate provides it as one call -- ICU4X had it in 1.x and dropped it in 2.x
+# -- so it is composed as NFKC, fold, NFKC. Chosen over `icu_casemap`, which gives an identical
+# answer on every case tested and pulls seventy-six transitive crates against these four.
+caseless = "0.2.2"
+jiff = { version = "0.2.35", features = ["serde", "std"], default-features = false }
+model2vec-rs = { version = "0.2.1", default-features = false, features = ["local-only", "fancy-regex"] }
+rusqlite = { version = "0.40.1", features = ["bundled"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+thiserror = "2.0.19"
+unicode-normalization = "0.1.25"
+uuid = { version = "1.24.0", features = ["v7", "serde"] }
+
+[dev-dependencies]
+# Used only to build a store at the *previous* schema, so the migration that adds the folded
+# keyword column can be tested against a database this code did not create.
+rusqlite = { version = "0.40.1", features = ["bundled"] }

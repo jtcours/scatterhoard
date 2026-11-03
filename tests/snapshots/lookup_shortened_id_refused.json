@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "\"01M0G089\" is not a whole memory id. An id is 26 characters. If this is part of one, pass it as `fragment` -- and prefer a piece from the *end*, which identifies a memory far more sharply than one from the start.",
+        "type": "text"
+      }
+    ],
+    "isError": true
+  }
+}

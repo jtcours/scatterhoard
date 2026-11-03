@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "unknown action \"obliterate\". hoard_sets accepts: status, create, reembed, calibrate, uncalibrate, mint, identify, rename, export, evaluate, import, restore, absorb, drop, backup, review, clear.",
+        "type": "text"
+      }
+    ],
+    "isError": true
+  }
+}

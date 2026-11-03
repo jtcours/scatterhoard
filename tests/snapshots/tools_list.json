@@ -1,0 +1,2655 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "tools": [
+      {
+        "description": "Load Scatterhoard's operating conventions. Call this at the start of a session that uses Scatterhoard, before storing or recalling anything, and again after the conversation has been summarized or compacted. With no `max_chars` the whole catalog arrives at once. With one it arrives in pages, and each page's last line says either how to call for the rest or that every convention is loaded: keep calling until it says they are all loaded. Each page's first line is a slice of one JSON document; joined in order, the slices are the whole of it.",
+        "inputSchema": {
+          "properties": {
+            "cursor": {
+              "description": "Where the next page starts, as the previous page's last line gives it.",
+              "type": "integer"
+            },
+            "max_chars": {
+              "description": "The most characters a page may hold, everything on it counted. Omit it to receive the whole catalog in one page.",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "name": "hoard_conventions"
+      },
+      {
+        "description": "Store a memory. Write `&lt;` `&gt;` `&amp;` where you mean those characters -- they are decoded on the way in, so a memory *about* markup can be written without emitting any. A call whose parameter was closed with the wrong tag is refused rather than stored damaged. You must say which memory set it belongs to: Scatterhoard cannot work that out, and a personal memory committed to a shared repository cannot be taken back. Give every memory its reasoning in `why`. The response echoes `summary`: the one line this memory would show as in an index, cut from its opening and ending in an ellipsis if it was cut. Read it -- if it does not say what the memory is for, the opening is where to fix that, not the length. A link's `label` is one of `related_to`, `refers_to`, `causes`, `results_from`, `motivated_by`, `supports`, `contradicts`, `supersedes`, `superseded_by`, `resolves`, `depends_on`, `exception_to`, `violates`, `instance_of`; one copied from the memory being superseded or amended keeps its label as written.",
+        "inputSchema": {
+          "properties": {
+            "confidence": {
+              "description": "0.0 to 1.0.",
+              "type": "number"
+            },
+            "content": {
+              "description": "The memory itself.",
+              "type": "string"
+            },
+            "context": {
+              "description": "A handle to help a human place this memory later -- not information about it. Write what was being worked on when it came up, named the way a person would say it rather than the way the repository does: \"Making the author changeable. Documenting that `bg` is a memory ID.\", not \"make-author-changeable step 4\". Include other work from the same stretch even where it has nothing to do with this memory -- a session runs as one thread, and naming any part of it can pull the rest back. Leave out what the record already carries: the date, the id, the author. Where something can be checked goes in `content` or `why`, which are searched; this is not.",
+              "type": "string"
+            },
+            "keywords": {
+              "description": "Terms for exact-match search, and the only path that still works with no embedding model loaded. See the `keyword-standards` convention for how to choose and spell them. Optional -- except alongside a `supersedes` link, where the whole set the replacement is indexed under has to be stated, because neither carrying the old terms over nor leaving them empty is a safe default. Send `[]` if it genuinely belongs under none.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "links": {
+              "description": "Labelled edges to other memories, written outbound from this one.",
+              "items": {
+                "properties": {
+                  "label": {
+                    "description": "What this memory claims about the target: one of `related_to`, `refers_to`, `causes`, `results_from`, `motivated_by`, `supports`, `contradicts`, `supersedes`, `superseded_by`, `resolves`, `depends_on`, `exception_to`, `violates`, `instance_of`. A link copied from the memory being superseded or amended keeps its label as written, even one not listed here.",
+                    "type": "string"
+                  },
+                  "target": {
+                    "description": "The id of the memory this one points at. A target need not resolve: a link to a set that is not loaded is allowed and stays dangling.",
+                    "type": "string"
+                  },
+                  "target_keywords": {
+                    "description": "Only alongside `target_set`: the target's keywords, kept so a reference that goes dangling has something to be re-found by.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "target_set": {
+                    "description": "Only for a memory in *another* set: the set's bare name, `coding-lessons` where `scope` takes `shared:coding-lessons`. Omit it for the ordinary case of a link within this set.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "label",
+                  "target"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "origin": {
+              "description": "Whose reasoning produced the content.",
+              "enum": [
+                "human",
+                "llm",
+                "joint"
+              ],
+              "type": "string"
+            },
+            "scope": {
+              "description": "Which memory set this belongs to. Required, and never guessed. Either `local` -- this machine only, never shared to a repository and so never through export review, though it can still be exported, which for this scope means writing a backup -- or `shared:example` naming a set that can be exported and shared, written with the set's own name after the colon.",
+              "type": "string"
+            },
+            "why": {
+              "description": "The reasoning behind it.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "scope",
+            "content",
+            "confidence",
+            "origin"
+          ],
+          "type": "object"
+        },
+        "name": "hoard_memorize",
+        "outputSchema": {
+          "properties": {
+            "author_note": {
+              "description": "Present only when this write settled who writes to the set from the human's own answer to a form you did not see: what they answered.",
+              "type": "string"
+            },
+            "findable_by_meaning": {
+              "type": "boolean"
+            },
+            "id": {
+              "type": "string"
+            },
+            "keyword_delta": {
+              "description": "Present only when this memory supersedes another.",
+              "items": {
+                "properties": {
+                  "added": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "dropped": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "retained": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "superseded": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "superseded",
+                  "added",
+                  "dropped",
+                  "retained"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "keyword_delta_note": {
+              "description": "What `keyword_delta` means for this store. Beside it.",
+              "type": "string"
+            },
+            "link_delta": {
+              "description": "Present only when this memory supersedes another.",
+              "items": {
+                "properties": {
+                  "left_behind": {
+                    "items": {
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "target": {
+                          "description": "A memory id, or an object naming a memory in another set."
+                        }
+                      },
+                      "required": [
+                        "label",
+                        "target"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "restated": {
+                    "items": {
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "target": {
+                          "description": "A memory id, or an object naming a memory in another set."
+                        }
+                      },
+                      "required": [
+                        "label",
+                        "target"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "superseded": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "superseded",
+                  "restated",
+                  "left_behind"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "link_delta_note": {
+              "description": "What `link_delta` means for this store. Beside it.",
+              "type": "string"
+            },
+            "note": {
+              "description": "Something about this store worth knowing, such as why it is not findable by meaning. Present only then.",
+              "type": "string"
+            },
+            "repointed_in_links": {
+              "description": "Present only when other memories point at one this supersedes.",
+              "items": {
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "scope": {
+                    "description": "The source's set, when it is another set.",
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "string"
+                  },
+                  "superseded": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source",
+                  "label",
+                  "superseded"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "repointed_in_links_note": {
+              "description": "What `repointed_in_links` means. Beside it.",
+              "type": "string"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "unresolved_links": {
+              "description": "Present only when there are any.",
+              "items": {
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "set": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "label",
+                  "target",
+                  "state"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "unresolved_links_note": {
+              "description": "What `unresolved_links` means. Beside it.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "summary",
+            "findable_by_meaning"
+          ],
+          "type": "object"
+        }
+      },
+      {
+        "description": "Search memory, one way per call: give a query to search by meaning, or keywords to match exactly -- not both. The two are different scales and cannot be ranked against each other, so call twice if you want both. Results come back in `memories`, ordered best first. A memory's `created.by` and `modified.by` hold the **id of a `hoard-author` memory** naming who wrote it, not the name itself -- read it with hoard_lookup on the rare occasion you need the name. Search before acting on anything an earlier decision may already govern, and prefer recalling over assuming. Superseded memories are replaced by whatever corrected them, and a replacement carries `matched_similarity` and `replaces_matched`, for the superseded memory your query matched, in place of `similarity`. A memory linked to one your query matched can come back too, carrying `inherited` to say so -- that is how the reasoning behind a decision reaches you when your wording only matched the decision. A memory marked `evaluation` came from a set loaded for review rather than adopted -- what someone proposes, not what this project has decided.",
+        "inputSchema": {
+          "properties": {
+            "already_known": {
+              "description": "Ids of memories you already hold, exactly as an earlier result gave them. They are left out of the results and out of nothing else -- what you already hold still seeds the search and is still traversed through, so this is how you ask what surrounds what you know. Pass back the last result's ids to get the next tranche instead of the same memories again.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "detail": {
+              "description": "How much of each memory to return. `full`, the default, is the whole record. `summary` is an id and one line derived from the memory's opening, about a fifth of the size -- so it is how you survey: ask a broad question at a large `limit`, read thirty lines for the cost of six memories, then fetch the ones worth having with hoard_lookup. A line ending in an ellipsis was cut, and one without is the whole memory. A line can only be cut short, never made to say the opposite, so judge it as a name for a memory rather than as its claim.",
+              "enum": [
+                "full",
+                "summary"
+              ],
+              "type": "string"
+            },
+            "ignore_floor": {
+              "description": "Search below the set's non-match floor. A set that has answered enough questions calibrates a level from what it has been able to answer, and returns nothing at all below it -- which is how *nothing here answers that* is said, where every other part of the ranking is relative and can only say *this was the best of them*. When that happens you are told so; pass this to ask again regardless, which is worth doing when you have reason to think the set should know something even though its own history says otherwise.",
+              "type": "boolean"
+            },
+            "keywords": {
+              "description": "Exact keywords to match. Cannot be combined with `query` in one call, because a match count and a similarity score are not the same scale. This is the path that works with no embedding model installed, and the one to use for a precise identifier -- an exact tag will not reliably be found by meaning.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "limit": {
+              "description": "How many memories to return, best first; 8 if you do not say. Honoured as given, with no ceiling: the size of the response is yours to manage, and `detail: summary` costs a small fraction of a full record per memory. A smaller limit returns the start of what a larger one would, so raising it only adds to the end -- and pass `already_known` to page past what you have rather than asking for it all again. Fewer come back when fewer clear the set's non-match floor.",
+              "minimum": 1,
+              "type": "integer"
+            },
+            "query": {
+              "description": "What you are looking for, in your own words. Searched by meaning.",
+              "type": "string"
+            },
+            "scope": {
+              "description": "Which memory set to search. Omit to search every loaded set, which is usually what you want -- a personal preference can matter while working on a project. Each result says which set it came from. Either `local` -- this machine only, never shared to a repository and so never through export review, though it can still be exported, which for this scope means writing a backup -- or `shared:example` naming a set that can be exported and shared, written with the set's own name after the colon.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "name": "hoard_recall",
+        "outputSchema": {
+          "properties": {
+            "answered_only_without_a_floor": {
+              "description": "Sets whose floor silenced everything, which `ignore_floor` would ask again. Present only then.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "language_note": {
+              "description": "Present when a set searched by meaning declares a language its model serves poorly.",
+              "type": "string"
+            },
+            "memories": {
+              "description": "The results, best first. Fewer than the limit when fewer clear the set's non-match floor.",
+              "items": {
+                "properties": {
+                  "confidence": {
+                    "description": "How far the memory's evidence reaches, 0.0 to 1.0.",
+                    "type": "number"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "context": {
+                    "description": "A handle for placing it in time: what was being worked on. Present only when written.",
+                    "type": "string"
+                  },
+                  "created": {
+                    "properties": {
+                      "at": {
+                        "description": "When, as an RFC 3339 timestamp.",
+                        "type": "string"
+                      },
+                      "by": {
+                        "description": "The id of the `hoard-author` memory naming who; read it with hoard_lookup for the name.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "at",
+                      "by"
+                    ],
+                    "type": "object"
+                  },
+                  "cross_set_targets": {
+                    "description": "Present only when a link names a set by identity and more than one loaded set answers to it.",
+                    "items": {
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "label": {
+                          "type": "string"
+                        },
+                        "loaded": {
+                          "items": {
+                            "properties": {
+                              "mode": {
+                                "type": "string"
+                              },
+                              "scope": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "scope"
+                            ],
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "set": {
+                          "type": "string"
+                        },
+                        "set_id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "disputed_by": {
+                    "description": "Claims another loaded set makes over this memory. Present only when there are any.",
+                    "items": {
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "set": {
+                          "type": "string"
+                        },
+                        "source": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "set",
+                        "source",
+                        "label"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "evaluation": {
+                    "description": "True when the memory came from a set loaded for review rather than adopted. Present only then.",
+                    "type": "boolean"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "incoming": {
+                    "description": "Edges arriving from memories in the same set. Present only when there are any.",
+                    "items": {
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "source": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "label",
+                        "source"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "inherited": {
+                    "description": "Score the memory received through a link from one the query matched. Present only when the walk reached it.",
+                    "type": "number"
+                  },
+                  "keywords": {
+                    "description": "Terms for exact-match search. Present only when it has any.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "links": {
+                    "description": "Edges written outbound from this memory. Present only when it has any.",
+                    "items": {
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "target": {
+                          "anyOf": [
+                            {
+                              "description": "A memory in the same set, by id.",
+                              "type": "string"
+                            },
+                            {
+                              "description": "A memory in another set.",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "keywords": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "type": "array"
+                                },
+                                "set": {
+                                  "type": "string"
+                                },
+                                "set_id": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "set"
+                              ],
+                              "type": "object"
+                            }
+                          ],
+                          "description": "An id for a memory in the same set, or an object naming another set."
+                        }
+                      },
+                      "required": [
+                        "label",
+                        "target"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "matched_keywords": {
+                    "description": "How many of the query's keywords the memory carries, on a keyword recall. Present only on that path.",
+                    "type": "integer"
+                  },
+                  "matched_similarity": {
+                    "description": "On a semantic recall where a superseded memory matched and its replacement is returned instead: how closely the superseded one matched. Never appears beside `similarity`.",
+                    "type": "number"
+                  },
+                  "modified": {
+                    "properties": {
+                      "at": {
+                        "description": "When, as an RFC 3339 timestamp.",
+                        "type": "string"
+                      },
+                      "by": {
+                        "description": "The id of the `hoard-author` memory naming who; read it with hoard_lookup for the name.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "at",
+                      "by"
+                    ],
+                    "type": "object"
+                  },
+                  "origin": {
+                    "type": "string"
+                  },
+                  "referenced_from": {
+                    "description": "Links to this memory from other sets this machine holds. Present only when there are any.",
+                    "items": {
+                      "description": "A link to this memory from a memory in another set this machine holds.",
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "scope": {
+                          "type": "string"
+                        },
+                        "source": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "scope",
+                        "source",
+                        "label"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "replacement_forgotten": {
+                    "description": "True when the memory that replaced this one has been forgotten, so this is superseded by something no longer readable. Present only then.",
+                    "type": "boolean"
+                  },
+                  "replaces_matched": {
+                    "description": "The id of the superseded memory the query actually matched, beside `matched_similarity`.",
+                    "type": "string"
+                  },
+                  "scope": {
+                    "description": "The set it came from: `local`, or `shared:<name>`. Absent on a summary-detail recall hit.",
+                    "type": "string"
+                  },
+                  "similarity": {
+                    "description": "How closely the memory matched the query, on a semantic recall. Absent on a substituted hit, which carries `matched_similarity` instead.",
+                    "type": "number"
+                  },
+                  "summary": {
+                    "description": "One line derived from the memory's opening. Present only on a summary-detail recall hit, which carries `id` and this and nothing else.",
+                    "type": "string"
+                  },
+                  "superseded_by": {
+                    "description": "Ids of memories that replace this one; the last is the end of the chain. Present only on a superseded memory, which recall never returns and lookup does.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "supersession_cycle": {
+                    "description": "True when this memory's history is broken: two memories each claim to replace the other. Present only then.",
+                    "type": "boolean"
+                  },
+                  "why": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "note": {
+              "description": "Something about this recall worth knowing, such as a floor that silenced a set. Present only then.",
+              "type": "string"
+            },
+            "semantic_search_available": {
+              "type": "boolean"
+            },
+            "skipped_sets": {
+              "description": "Sets that could not be searched. Present only when there are any.",
+              "items": {
+                "properties": {
+                  "reason": {
+                    "type": "string"
+                  },
+                  "scope": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "scope",
+                  "reason"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "under_review_note": {
+              "description": "Present when results include memories from a set loaded for review.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "memories",
+            "semantic_search_available"
+          ],
+          "type": "object"
+        }
+      },
+      {
+        "description": "Fetch a memory by its whole id, or search for one by a `fragment` of an id when a whole one is not to hand. Use this when you already have an id -- from a link, from a memory's `created.by`, or from a recall result that replaced something. Unlike hoard_recall, a superseded memory is returned rather than swapped for its replacement, so this is how you read history. `superseded_by` names the end of the chain; to walk it one link at a time, follow the `supersedes` edge in `incoming`. A memory marked `supersession_cycle` has a broken history -- two memories each claiming to replace the other -- which no tool can resolve for you and which usually means a merge went wrong.",
+        "inputSchema": {
+          "properties": {
+            "fragment": {
+              "description": "Part of an id, when a whole one is not to hand. Prefer a piece from the *end*: the leading characters are a timestamp, so memories written close together share them and a fragment from the start matches all of them.",
+              "type": "string"
+            },
+            "id": {
+              "description": "A whole memory id: 26 characters. A shortened one is refused rather than guessed at -- use `fragment` for that.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "name": "hoard_lookup",
+        "outputSchema": {
+          "properties": {
+            "forgotten": {
+              "description": "Forgotten memories the id or fragment matched. Present only when there are any.",
+              "items": {
+                "description": "A tombstone: a memory that was forgotten, which keeps its id but not its text.",
+                "properties": {
+                  "forgotten": {
+                    "properties": {
+                      "at": {
+                        "description": "When, as an RFC 3339 timestamp.",
+                        "type": "string"
+                      },
+                      "by": {
+                        "description": "The id of the `hoard-author` memory naming who; read it with hoard_lookup for the name.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "at",
+                      "by"
+                    ],
+                    "type": "object"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "incoming": {
+                    "items": {
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "source": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "label",
+                        "source"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "scope": {
+                    "type": "string"
+                  },
+                  "superseded_by": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "id",
+                  "scope"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "memories": {
+              "description": "The memories found: one for a whole id, any number for a fragment.",
+              "items": {
+                "properties": {
+                  "confidence": {
+                    "description": "How far the memory's evidence reaches, 0.0 to 1.0.",
+                    "type": "number"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "context": {
+                    "description": "A handle for placing it in time: what was being worked on. Present only when written.",
+                    "type": "string"
+                  },
+                  "created": {
+                    "properties": {
+                      "at": {
+                        "description": "When, as an RFC 3339 timestamp.",
+                        "type": "string"
+                      },
+                      "by": {
+                        "description": "The id of the `hoard-author` memory naming who; read it with hoard_lookup for the name.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "at",
+                      "by"
+                    ],
+                    "type": "object"
+                  },
+                  "cross_set_targets": {
+                    "description": "Present only when a link names a set by identity and more than one loaded set answers to it.",
+                    "items": {
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "label": {
+                          "type": "string"
+                        },
+                        "loaded": {
+                          "items": {
+                            "properties": {
+                              "mode": {
+                                "type": "string"
+                              },
+                              "scope": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "scope"
+                            ],
+                            "type": "object"
+                          },
+                          "type": "array"
+                        },
+                        "set": {
+                          "type": "string"
+                        },
+                        "set_id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "disputed_by": {
+                    "description": "Claims another loaded set makes over this memory. Present only when there are any.",
+                    "items": {
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "set": {
+                          "type": "string"
+                        },
+                        "source": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "set",
+                        "source",
+                        "label"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "evaluation": {
+                    "description": "True when the memory came from a set loaded for review rather than adopted. Present only then.",
+                    "type": "boolean"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "incoming": {
+                    "description": "Edges arriving from memories in the same set. Present only when there are any.",
+                    "items": {
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "source": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "label",
+                        "source"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "inherited": {
+                    "description": "Score the memory received through a link from one the query matched. Present only when the walk reached it.",
+                    "type": "number"
+                  },
+                  "keywords": {
+                    "description": "Terms for exact-match search. Present only when it has any.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "links": {
+                    "description": "Edges written outbound from this memory. Present only when it has any.",
+                    "items": {
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "target": {
+                          "anyOf": [
+                            {
+                              "description": "A memory in the same set, by id.",
+                              "type": "string"
+                            },
+                            {
+                              "description": "A memory in another set.",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "keywords": {
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "type": "array"
+                                },
+                                "set": {
+                                  "type": "string"
+                                },
+                                "set_id": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "set"
+                              ],
+                              "type": "object"
+                            }
+                          ],
+                          "description": "An id for a memory in the same set, or an object naming another set."
+                        }
+                      },
+                      "required": [
+                        "label",
+                        "target"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "matched_keywords": {
+                    "description": "How many of the query's keywords the memory carries, on a keyword recall. Present only on that path.",
+                    "type": "integer"
+                  },
+                  "matched_similarity": {
+                    "description": "On a semantic recall where a superseded memory matched and its replacement is returned instead: how closely the superseded one matched. Never appears beside `similarity`.",
+                    "type": "number"
+                  },
+                  "modified": {
+                    "properties": {
+                      "at": {
+                        "description": "When, as an RFC 3339 timestamp.",
+                        "type": "string"
+                      },
+                      "by": {
+                        "description": "The id of the `hoard-author` memory naming who; read it with hoard_lookup for the name.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "at",
+                      "by"
+                    ],
+                    "type": "object"
+                  },
+                  "origin": {
+                    "type": "string"
+                  },
+                  "referenced_from": {
+                    "description": "Links to this memory from other sets this machine holds. Present only when there are any.",
+                    "items": {
+                      "description": "A link to this memory from a memory in another set this machine holds.",
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "scope": {
+                          "type": "string"
+                        },
+                        "source": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "scope",
+                        "source",
+                        "label"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "replacement_forgotten": {
+                    "description": "True when the memory that replaced this one has been forgotten, so this is superseded by something no longer readable. Present only then.",
+                    "type": "boolean"
+                  },
+                  "replaces_matched": {
+                    "description": "The id of the superseded memory the query actually matched, beside `matched_similarity`.",
+                    "type": "string"
+                  },
+                  "scope": {
+                    "description": "The set it came from: `local`, or `shared:<name>`. Absent on a summary-detail recall hit.",
+                    "type": "string"
+                  },
+                  "similarity": {
+                    "description": "How closely the memory matched the query, on a semantic recall. Absent on a substituted hit, which carries `matched_similarity` instead.",
+                    "type": "number"
+                  },
+                  "summary": {
+                    "description": "One line derived from the memory's opening. Present only on a summary-detail recall hit, which carries `id` and this and nothing else.",
+                    "type": "string"
+                  },
+                  "superseded_by": {
+                    "description": "Ids of memories that replace this one; the last is the end of the chain. Present only on a superseded memory, which recall never returns and lookup does.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "supersession_cycle": {
+                    "description": "True when this memory's history is broken: two memories each claim to replace the other. Present only then.",
+                    "type": "boolean"
+                  },
+                  "why": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "note": {
+              "description": "Something about this lookup worth knowing. Present only then.",
+              "type": "string"
+            },
+            "under_review_note": {
+              "description": "Present when a result came from a set loaded for review.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "memories"
+          ],
+          "type": "object"
+        }
+      },
+      {
+        "description": "Repair a memory that has never left this machine, or remove one entirely. Amend fixes anything about a memory nobody has seen yet -- a mistyped keyword, a link pointing at the wrong id, a confidence that was off, damaged text, the claim itself. Once a memory has been exported anywhere, including a backup, amending it is refused and the server says so: a second copy exists, so the change has to leave a trail, and you make it by storing the corrected memory with a `supersedes` link -- which keeps the old version readable as a record of what was believed. You do not have to work out which case you are in. Amending `content` echoes `summary`, the line the memory now shows as in an index -- so getting an opening to say what a memory is for is amend, read the line, amend again. Write `&lt;` `&gt;` `&amp;` where you mean those characters; a call whose parameter was closed with the wrong tag is refused rather than applied. A link's `label` is one of `related_to`, `refers_to`, `causes`, `results_from`, `motivated_by`, `supports`, `contradicts`, `supersedes`, `superseded_by`, `resolves`, `depends_on`, `exception_to`, `violates`, `instance_of`; one copied from the memory being superseded or amended keeps its label as written.",
+        "inputSchema": {
+          "properties": {
+            "action": {
+              "description": "Which operation to perform. Each action takes only its own arguments: `amend` takes scope and id, and optionally confidence, content, context, keywords, links, origin and why; `forget` takes scope and id.",
+              "enum": [
+                "amend",
+                "forget"
+              ],
+              "type": "string"
+            },
+            "confidence": {
+              "description": "0.0 to 1.0.",
+              "type": "number"
+            },
+            "content": {
+              "description": "Replaces the memory itself. Reaches only a memory that has never been exported -- nobody has read that one, so there is no belief to destroy.",
+              "type": "string"
+            },
+            "context": {
+              "description": "Replaces the context. Send null to remove it.",
+              "type": "string"
+            },
+            "id": {
+              "description": "The memory's full id. Not a prefix -- a prefix constrains time rather than identity, so it could match a memory written moments away from the one you mean.",
+              "type": "string"
+            },
+            "keywords": {
+              "description": "Replaces every keyword. An empty list removes them all.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "links": {
+              "description": "Replaces every outbound link. An empty list removes them all.",
+              "items": {
+                "properties": {
+                  "label": {
+                    "description": "What this memory claims about the target: one of `related_to`, `refers_to`, `causes`, `results_from`, `motivated_by`, `supports`, `contradicts`, `supersedes`, `superseded_by`, `resolves`, `depends_on`, `exception_to`, `violates`, `instance_of`. A link copied from the memory being superseded or amended keeps its label as written, even one not listed here.",
+                    "type": "string"
+                  },
+                  "target": {
+                    "description": "The id of the memory this one points at. A target need not resolve: a link to a set that is not loaded is allowed and stays dangling.",
+                    "type": "string"
+                  },
+                  "target_keywords": {
+                    "description": "Only alongside `target_set`: the target's keywords, kept so a reference that goes dangling has something to be re-found by.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "target_set": {
+                    "description": "Only for a memory in *another* set: the set's bare name, `coding-lessons` where `scope` takes `shared:coding-lessons`. Omit it for the ordinary case of a link within this set.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "label",
+                  "target"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "origin": {
+              "description": "Corrects whose reasoning produced the content, where it was recorded wrongly. Nobody believed the wrong value, so this is an amendment rather than a new claim.",
+              "enum": [
+                "human",
+                "llm",
+                "joint"
+              ],
+              "type": "string"
+            },
+            "scope": {
+              "description": "Which set holds the memory. Either `local` -- this machine only, never shared to a repository and so never through export review, though it can still be exported, which for this scope means writing a backup -- or `shared:example` naming a set that can be exported and shared, written with the set's own name after the colon.",
+              "type": "string"
+            },
+            "why": {
+              "description": "Replaces the reasoning. Send null to remove it. Same condition as `content`.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "action"
+          ],
+          "type": "object"
+        },
+        "name": "hoard_correct",
+        "outputSchema": {
+          "anyOf": [
+            {
+              "properties": {
+                "amended": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "author_note": {
+                  "description": "Present only when this write settled who writes to the set from the human's own answer to a form you did not see: what they answered.",
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "in_links": {
+                  "description": "Links pointing at the memory, whose claims may need reviewing after a change to its content. Present only then.",
+                  "items": {
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "source": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "source"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "in_links_note": {
+                  "description": "What `in_links` means. Beside it.",
+                  "type": "string"
+                },
+                "semantic_search_available": {
+                  "type": "boolean"
+                },
+                "summary": {
+                  "type": "string"
+                },
+                "unresolved_links": {
+                  "description": "Present only when there are any.",
+                  "items": {
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "target": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "target",
+                      "state"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "unresolved_links_note": {
+                  "description": "What `unresolved_links` means. Beside it.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "amended"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "already_absent": {
+                  "description": "True when there was nothing left to forget. Present only then.",
+                  "type": "boolean"
+                },
+                "author_note": {
+                  "description": "Present only when this write settled who writes to the set from the human's own answer to a form you did not see: what they answered.",
+                  "type": "string"
+                },
+                "forgotten": {
+                  "type": "string"
+                },
+                "note": {
+                  "description": "What forgetting kept: the id, as a tombstone.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "forgotten"
+              ],
+              "type": "object"
+            }
+          ],
+          "description": "What a correction did: an `amend` or a `forget` result.",
+          "type": "object"
+        }
+      },
+      {
+        "description": "Manage memory sets themselves rather than their contents: find out which sets this machine holds, bring a new shared set into existence, or write one out to a file to be committed or kept as a backup. Setup-time and commit-time work -- storing and recalling do not need it.",
+        "inputSchema": {
+          "properties": {
+            "action": {
+              "description": "Which operation to perform. Each action takes only its own arguments: `status` takes nothing else; `create` takes name, and optionally mode; `reembed` takes scope; `calibrate` takes scope; `uncalibrate` takes scope; `mint` takes scope and author; `identify` takes scope and record; `rename` takes scope and author; `export` takes scope and either directory or file; `evaluate` takes label and either directory or file, and optionally set; `import` takes scope and either directory or file; `restore` takes scope, save_to and either directory or file; `absorb` takes scope, save_to and either directory or file, and optionally set; `drop` takes name, and optionally save_to; `backup` takes scope; `review` takes scope, and optionally directory, file, full and recheck; `clear` takes scope, and optionally answers and person_cleared.",
+              "enum": [
+                "status",
+                "create",
+                "reembed",
+                "calibrate",
+                "uncalibrate",
+                "mint",
+                "identify",
+                "rename",
+                "export",
+                "evaluate",
+                "import",
+                "restore",
+                "absorb",
+                "drop",
+                "backup",
+                "review",
+                "clear"
+              ],
+              "type": "string"
+            },
+            "answers": {
+              "items": {
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "sentences": {
+                    "items": {
+                      "properties": {
+                        "about": {
+                          "enum": [
+                            "project",
+                            "the person",
+                            "someone else"
+                          ],
+                          "type": "string"
+                        },
+                        "mentions": {
+                          "description": "Items from the sharing preferences the sentence mentions, quoted as listed -- not the sentence's own words.",
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "n": {
+                          "type": "integer"
+                        },
+                        "says": {
+                          "description": "Only for a sentence about the person or someone else.",
+                          "enum": [
+                            "reports",
+                            "judges"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "n",
+                        "about",
+                        "mentions"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "id",
+                  "sentences"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "author": {
+              "description": "The name to publish under in this set. Ask the human rather than guessing: it is how they are known where this set is published, which varies by set -- an account name on one host, a full name and title somewhere academic -- and is a fact about them rather than about the machine.",
+              "type": "string"
+            },
+            "directory": {
+              "description": "The directory the memory file sits in -- for a project, the root of the checkout. The headers in its `scatterhoard_mem` are searched for the set's file: by identity for a set this machine holds, by `set` for one it is reading. An export with no file there writes one named after the set. State it every time: one set can legitimately have several checkouts, and only you know which one this session concerns.",
+              "type": "string"
+            },
+            "file": {
+              "description": "The whole path of the memory file, used exactly as given with nothing appended -- written there by `export`, read from there by `import`, `restore`, `absorb` and `evaluate`. For a file outside any checkout: a backup, a set kept in a synced folder, or a file you were handed to read. Give an export and its import the same path -- it is what the two sides record their agreement against, so a set exported to one path and imported from another reconciles against nothing. The directory has to exist already and may not be a `scatterhoard_mem`, which `directory` already reaches. Use `directory` for a checkout.",
+              "type": "string"
+            },
+            "full": {
+              "description": "Review every memory again, as before a first publication.",
+              "type": "boolean"
+            },
+            "label": {
+              "description": "Which copy this is, in the user's words -- a branch, an issue number, a version. It becomes part of the name every memory from this copy is reported under, so it is how the user tells two open reviews apart. Ask them for it rather than inventing one; the software makes whatever they say into a legal name.",
+              "type": "string"
+            },
+            "mode": {
+              "description": "How this machine holds the set, fixed at creation. Omit it for a set of your own, which is read-write. Choose `read-only` when taking on reference material someone else publishes -- a product's documentation, a policy set -- and then import their file: a read-only set is refreshed from that file and never written here.",
+              "enum": [
+                "read-write",
+                "read-only"
+              ],
+              "type": "string"
+            },
+            "name": {
+              "description": "The set's shared identity. It travels in the exported file's header, so every copy of the set agrees on it. Where the set is exported to is stated at export time, not here.",
+              "type": "string"
+            },
+            "person_cleared": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "recheck": {
+              "description": "After a review reports stricter preferences: the groups the change could apply to, or an empty list.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "record": {
+              "description": "The id of the `hoard-author` record that is you in this set. Refused if the set does not hold it, if it is an ordinary memory, or if it has been superseded -- a superseded record is a name somebody used to publish under.",
+              "type": "string"
+            },
+            "save_to": {
+              "description": "The whole path to write the set's current contents to before they stop being the set's contents. This is the copy you would work back from if the operation turns out to have been a mistake, so it goes somewhere the set does not already live: a path this set is exported to is refused, as is anywhere inside a `scatterhoard_mem`, and for `restore` and `absorb` so is the file being read -- writing over that would destroy the good copy in the act of protecting the bad one. The directory has to exist already. For a set this machine could have written to it is written first and always -- there is no way to skip it and no flag to force one -- so `drop` requires it unless the set is read-only, where its memories came from a file its publisher holds and no copy is written unless you give this anyway. What lands there is an ordinary memory file, so it can be diffed against the result and individual memories put back.",
+              "type": "string"
+            },
+            "scope": {
+              "description": "Which set to rebuild. One at a time: you are answering a question about one store, and the others have not been asked about. Either `local` -- this machine only, never shared to a repository and so never through export review, though it can still be exported, which for this scope means writing a backup -- or `shared:example` naming a set that can be exported and shared, written with the set's own name after the colon.",
+              "type": "string"
+            },
+            "set": {
+              "description": "The set to read, as its file's header names it. Needed with `directory`, whose `scatterhoard_mem` can hold several sets: the headers are searched for this name. With `file`, optional, and the header must then agree.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "action"
+          ],
+          "type": "object"
+        },
+        "name": "hoard_sets",
+        "outputSchema": {
+          "anyOf": [
+            {
+              "properties": {
+                "configuration_note": {
+                  "description": "Present only when the configuration needs attention.",
+                  "type": "string"
+                },
+                "sets": {
+                  "items": {
+                    "properties": {
+                      "author": {
+                        "description": "The name this machine publishes under in the set, or null before one is minted.",
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "author_note": {
+                        "description": "Present when the author needs attention.",
+                        "type": "string"
+                      },
+                      "calibration_note": {
+                        "description": "Present when calibration needs attention.",
+                        "type": "string"
+                      },
+                      "embedding_model": {
+                        "properties": {
+                          "loaded": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "note": {
+                            "type": "string"
+                          },
+                          "recorded": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "state"
+                        ],
+                        "type": "object"
+                      },
+                      "file": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "floor_source": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "forgotten": {
+                        "type": "integer"
+                      },
+                      "labelled_since_calibration": {
+                        "type": "integer"
+                      },
+                      "language_note": {
+                        "description": "Present when the languages need saying.",
+                        "type": "string"
+                      },
+                      "language_scores": {
+                        "additionalProperties": {
+                          "type": "integer"
+                        },
+                        "description": "How well the loaded model represents each declared language, 0 to 10, keyed by tag. Present when the set can be searched by meaning and declares a language with built-in test sentences.",
+                        "type": "object"
+                      },
+                      "languages": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "memories": {
+                        "type": "integer"
+                      },
+                      "mode": {
+                        "description": "How this machine holds it: `read-write`, `read-only`, or a review copy.",
+                        "type": "string"
+                      },
+                      "non_match_floor": {
+                        "description": "The calibrated floor, or null when there is none.",
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "recommended_models": {
+                        "description": "Models this set's authors recommend for it, from `hoard-fit-model` memories linking to its hub. Present when there are any.",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "languages": {
+                              "description": "The languages it was measured on; empty where it concerns the whole set.",
+                              "items": {
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            "summary": {
+                              "description": "Its opening line, which names the model.",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "summary",
+                            "languages"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "scope": {
+                        "type": "string"
+                      },
+                      "semantic_search_available": {
+                        "type": "boolean"
+                      },
+                      "set_id": {
+                        "description": "The set's identity, or null before it has one.",
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "watch_marks": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "scope",
+                      "mode"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "shadowed": {
+                  "description": "Present only when there are any.",
+                  "items": {
+                    "description": "A store file another set's name now reaches.",
+                    "properties": {
+                      "file": {
+                        "type": "string"
+                      },
+                      "note": {
+                        "type": "string"
+                      },
+                      "scope": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "scope",
+                      "note"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "withheld": {
+                  "description": "Present only when there are any.",
+                  "items": {
+                    "properties": {
+                      "file": {
+                        "type": "string"
+                      },
+                      "memories": {
+                        "type": "integer"
+                      },
+                      "note": {
+                        "type": "string"
+                      },
+                      "scope": {
+                        "type": "string"
+                      },
+                      "set_id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "scope",
+                      "note"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "sets"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "created": {
+                  "type": "string"
+                },
+                "memories": {
+                  "type": "integer"
+                },
+                "mode": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "created"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "author": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "describes": {
+                  "description": "What the set amounts to as a whole, derived from its memories. Null when it could not be derived.",
+                  "properties": {
+                    "clusters": {
+                      "items": {
+                        "properties": {
+                          "about": {
+                            "items": {
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "memories": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "about",
+                          "memories"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "derivation": {
+                      "type": "string"
+                    }
+                  },
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                "forgotten": {
+                  "type": "integer"
+                },
+                "identities": {
+                  "type": "integer"
+                },
+                "memories": {
+                  "type": "integer"
+                },
+                "note": {
+                  "description": "Present only when something about the export needs saying.",
+                  "type": "string"
+                },
+                "path_form": {
+                  "type": "string"
+                },
+                "prohibited_data_found": {
+                  "description": "Present only when something was found.",
+                  "items": {
+                    "properties": {
+                      "category": {
+                        "type": "string"
+                      },
+                      "memory": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "memory",
+                      "category"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "prohibited_data_guidance": {
+                  "description": "What to do about it. Beside it.",
+                  "type": "string"
+                },
+                "prohibited_data_note": {
+                  "type": "string"
+                },
+                "prohibited_data_scanned": {
+                  "type": "boolean"
+                },
+                "records": {
+                  "type": "integer"
+                },
+                "replaced_file": {
+                  "properties": {
+                    "changed": {
+                      "description": "Records that changed.",
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        },
+                        "ids": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "count",
+                        "ids"
+                      ],
+                      "type": "object"
+                    },
+                    "new": {
+                      "description": "Records the file did not have.",
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        },
+                        "ids": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "count",
+                        "ids"
+                      ],
+                      "type": "object"
+                    },
+                    "note": {
+                      "description": "Present when there was nothing to compare against.",
+                      "type": "string"
+                    },
+                    "removed": {
+                      "description": "Records the file had and this export does not.",
+                      "properties": {
+                        "count": {
+                          "type": "integer"
+                        },
+                        "ids": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "count",
+                        "ids"
+                      ],
+                      "type": "object"
+                    },
+                    "state": {
+                      "type": "string"
+                    },
+                    "unchanged": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "state"
+                  ],
+                  "type": "object"
+                },
+                "written": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "written"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "adopted_set_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "anomalies": {
+                  "description": "Present only when there are any.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "anomaly_guidance": {
+                  "description": "Beside it.",
+                  "type": "string"
+                },
+                "conflict_guidance": {
+                  "description": "What to do. Beside it.",
+                  "type": "string"
+                },
+                "conflicts": {
+                  "description": "Ids changed on both sides. Present only when there are any.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "describes": {
+                  "description": "What the set amounts to as a whole, derived from its memories. Null when it could not be derived.",
+                  "properties": {
+                    "clusters": {
+                      "items": {
+                        "properties": {
+                          "about": {
+                            "items": {
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "memories": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "about",
+                          "memories"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "derivation": {
+                      "type": "string"
+                    }
+                  },
+                  "type": [
+                    "object",
+                    "null"
+                  ]
+                },
+                "description_owed": {
+                  "description": "Present when the set could not be described at import.",
+                  "type": "string"
+                },
+                "identity_note": {
+                  "description": "Present when the set's identity needs saying.",
+                  "type": "string"
+                },
+                "kept_forgotten": {
+                  "description": "Ids forgotten here that the file still holds. Present only when there are any.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "kept_forgotten_guidance": {
+                  "description": "Beside it.",
+                  "type": "string"
+                },
+                "note": {
+                  "description": "Present only when something about the import needs saying.",
+                  "type": "string"
+                },
+                "outcomes": {
+                  "description": "How many records fell into each outcome. An outcome nothing fell into is absent.",
+                  "properties": {
+                    "anomaly": {
+                      "type": "integer"
+                    },
+                    "conflict": {
+                      "type": "integer"
+                    },
+                    "converged": {
+                      "type": "integer"
+                    },
+                    "kept_forgotten": {
+                      "type": "integer"
+                    },
+                    "kept_local": {
+                      "description": "Records changed only here.",
+                      "type": "integer"
+                    },
+                    "new_from_file": {
+                      "type": "integer"
+                    },
+                    "took_from_file": {
+                      "description": "Records changed only in the file.",
+                      "type": "integer"
+                    },
+                    "unchanged": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [],
+                  "type": "object"
+                },
+                "path_form": {
+                  "type": "string"
+                },
+                "read": {
+                  "type": "string"
+                },
+                "supersession_cycle_guidance": {
+                  "description": "Beside it.",
+                  "type": "string"
+                },
+                "supersession_cycles": {
+                  "description": "Present only when there are any.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "taken_backwards": {
+                  "description": "Present only when there are any.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "taken_backwards_guidance": {
+                  "description": "Beside it.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "read",
+                "outcomes"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "author": {
+                  "type": "string"
+                },
+                "minted": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "scope": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "minted"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "author": {
+                  "type": "string"
+                },
+                "identified": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "scope": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "identified"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "author": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "record": {
+                  "type": "string"
+                },
+                "scope": {
+                  "type": "string"
+                },
+                "superseded": {
+                  "type": "string"
+                },
+                "was": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "record"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "displaced": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "model": {
+                  "type": "string"
+                },
+                "scope": {
+                  "type": "string"
+                },
+                "unrepresentable": {
+                  "type": "integer"
+                },
+                "vectors_rebuilt": {
+                  "type": "integer"
+                },
+                "warning": {
+                  "description": "Present when the rebuild needs a warning.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "vectors_rebuilt"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "floor": {
+                  "description": "The new non-match floor, or null when there was not enough to set one.",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "floor_source": {
+                  "type": "string"
+                },
+                "labelled_queries": {
+                  "type": "integer"
+                },
+                "memories_asked": {
+                  "type": "integer"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "previous_floor": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "scope": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "floor"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "cleared": {
+                  "description": "The floor removed, or null if there was none.",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "note": {
+                  "type": "string"
+                },
+                "scope": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "cleared"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "copy_of": {
+                  "type": "string"
+                },
+                "forgotten": {
+                  "type": "integer"
+                },
+                "held_at": {
+                  "type": "string"
+                },
+                "loaded": {
+                  "type": "string"
+                },
+                "memories": {
+                  "type": "integer"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "read": {
+                  "type": "string"
+                },
+                "set_id": {
+                  "type": "string"
+                },
+                "took_ms": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "loaded"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "discarded_local_divergence": {
+                  "type": "string"
+                },
+                "forgotten": {
+                  "type": "integer"
+                },
+                "memories": {
+                  "type": "integer"
+                },
+                "no_safety_copy": {
+                  "type": "string"
+                },
+                "path_form": {
+                  "type": "string"
+                },
+                "read": {
+                  "type": "string"
+                },
+                "restored": {
+                  "type": "string"
+                },
+                "safety_copy": {
+                  "description": "Where the set's previous contents were written first, or null when none was written.",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "restored"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "absorbed": {
+                  "type": "string"
+                },
+                "already_held": {
+                  "type": "integer"
+                },
+                "forgotten": {
+                  "type": "integer"
+                },
+                "into": {
+                  "type": "string"
+                },
+                "memories": {
+                  "type": "integer"
+                },
+                "not_internalised": {
+                  "description": "Present only when there are any.",
+                  "items": {
+                    "properties": {
+                      "memory": {
+                        "type": "string"
+                      },
+                      "target": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "memory",
+                      "target"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "not_internalised_note": {
+                  "description": "Beside it.",
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "path_form": {
+                  "type": "string"
+                },
+                "read": {
+                  "type": "string"
+                },
+                "safety_copy": {
+                  "description": "Where the set's previous contents were written first, or null when none was written.",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "still_loaded": {
+                  "description": "Present when the absorbed set is still loaded, so its memories are in two sets.",
+                  "type": "string"
+                },
+                "superseded": {
+                  "items": {
+                    "properties": {
+                      "memory": {
+                        "type": "string"
+                      },
+                      "superseded_by": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "memory",
+                      "superseded_by"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "absorbed",
+                "into"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "database_removed": {
+                  "type": "string"
+                },
+                "dropped": {
+                  "type": "string"
+                },
+                "memories": {
+                  "type": "integer"
+                },
+                "no_safety_copy": {
+                  "type": "string"
+                },
+                "safety_copy": {
+                  "description": "Where the set's previous contents were written first, or null when none was written.",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "safety_copy_skipped": {
+                  "description": "Why writing one was skipped, for a read-only set.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "dropped"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "backed_up": {
+                  "type": "string"
+                },
+                "backups_held": {
+                  "type": "integer"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "records": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "backed_up",
+                "records",
+                "backups_held",
+                "note"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "audience": {
+                  "type": "string"
+                },
+                "awaiting_the_person": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "caution": {
+                  "type": "string"
+                },
+                "groups": {
+                  "items": {
+                    "properties": {
+                      "about": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "context": {
+                        "description": "Already reviewed, shown for context only.",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "keywords": {
+                              "items": {
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            "sentences": {
+                              "items": {
+                                "properties": {
+                                  "field": {
+                                    "type": "string"
+                                  },
+                                  "n": {
+                                    "type": "integer"
+                                  },
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "n",
+                                  "field",
+                                  "text"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "sentences",
+                            "keywords"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "memories": {
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "keywords": {
+                              "items": {
+                                "type": "string"
+                              },
+                              "type": "array"
+                            },
+                            "sentences": {
+                              "items": {
+                                "properties": {
+                                  "field": {
+                                    "type": "string"
+                                  },
+                                  "n": {
+                                    "type": "integer"
+                                  },
+                                  "text": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": [
+                                  "n",
+                                  "field",
+                                  "text"
+                                ],
+                                "type": "object"
+                              },
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "sentences",
+                            "keywords"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "about",
+                      "memories"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "others_keep_out": {
+                  "description": "What applies to a sentence about someone else. With `preferences`.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "pre_pass": {
+                  "items": {
+                    "properties": {
+                      "hits": {
+                        "items": {
+                          "properties": {
+                            "matched": {
+                              "type": "string"
+                            },
+                            "shape": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "shape",
+                            "matched"
+                          ],
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "hits"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "preferences": {
+                  "description": "On a review's first page in a session, and when they changed.",
+                  "type": "string"
+                },
+                "preferences_changed": {
+                  "description": "Present when the preferences changed since the last review.",
+                  "properties": {
+                    "ask": {
+                      "type": "string"
+                    },
+                    "exceptions_removed": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "groups": {
+                      "items": {
+                        "properties": {
+                          "about": {
+                            "items": {
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "group": {
+                            "type": "string"
+                          },
+                          "memories": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "group",
+                          "about",
+                          "memories"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "reopened": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "tightened": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [],
+                  "type": "object"
+                },
+                "project_keep_out": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "published_as": {
+                  "description": "The name this set publishes the person under, which mentions nothing. With `preferences`.",
+                  "type": "string"
+                },
+                "set": {
+                  "type": "string"
+                },
+                "shown": {
+                  "type": "integer"
+                },
+                "task": {
+                  "type": "string"
+                },
+                "to_review": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "set",
+                "kind",
+                "audience",
+                "to_review",
+                "shown",
+                "task",
+                "groups",
+                "caution"
+              ],
+              "type": "object"
+            },
+            {
+              "properties": {
+                "awaiting_the_person": {
+                  "type": "integer"
+                },
+                "cleared": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "finished": {
+                  "type": "boolean"
+                },
+                "flag_guidance": {
+                  "type": "string"
+                },
+                "flagged": {
+                  "items": {
+                    "properties": {
+                      "content": {
+                        "type": "string"
+                      },
+                      "context": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "reasons": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "why": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "reasons",
+                      "content",
+                      "why",
+                      "context"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "not_finished": {
+                  "type": "string"
+                },
+                "refused": {
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "why": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "why"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "remaining": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "cleared",
+                "flagged",
+                "remaining",
+                "awaiting_the_person",
+                "finished"
+              ],
+              "type": "object"
+            }
+          ],
+          "description": "What the action did; each action returns its own shape.",
+          "type": "object"
+        }
+      }
+    ]
+  }
+}

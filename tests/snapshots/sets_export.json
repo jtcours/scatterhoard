@@ -1,0 +1,48 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": {
+          "author": "jtcours",
+          "describes": {
+            "clusters": [
+              {
+                "about": [
+                  "Alpha-Routing",
+                  "MemoryView"
+                ],
+                "memories": 5
+              },
+              {
+                "about": [],
+                "memories": 3
+              },
+              {
+                "about": [],
+                "memories": 1
+              }
+            ],
+            "derivation": "clusters/2"
+          },
+          "forgotten": 0,
+          "identities": 1,
+          "memories": 10,
+          "path_form": "directory",
+          "prohibited_data_note": "Scanned for shapes -- known vendor key prefixes, digit runs passing Luhn, PEM armour -- and not for wording, so writing about credentials is fine and only something formatted like one is reported. It finds neither an unfamiliar key format nor a password, which has no shape to match, so clean means those shapes are absent rather than that the set holds no secret. The gate's other half is the review in export-review.md, which runs before an export rather than inside it.",
+          "prohibited_data_scanned": true,
+          "records": 11,
+          "replaced_file": {
+            "note": "nothing was at the destination before this export, so all 11 records written are new.",
+            "state": "none"
+          },
+          "written": "<directory>/scatterhoard_mem/scatterhoard.json"
+        },
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": "(present: identical to content[0].text, and checked against the output schema)"
+  }
+}

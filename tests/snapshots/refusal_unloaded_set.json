@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "no memory set is loaded for scope {\"shared\":\"coding-lessons\"}. Call `hoard_sets` with action \"status\" to see which sets this machine holds, or action \"create\" to bring a new shared set into being.",
+        "type": "text"
+      }
+    ],
+    "isError": true
+  }
+}

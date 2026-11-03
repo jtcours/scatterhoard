@@ -1,0 +1,46 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": {
+          "findable_by_meaning": true,
+          "id": "<id-1>",
+          "keyword_delta": [
+            {
+              "added": [
+                "added-key"
+              ],
+              "dropped": [
+                "dropped-key"
+              ],
+              "retained": [
+                "kept-key"
+              ],
+              "superseded": "<id-2>"
+            }
+          ],
+          "keyword_delta_note": "Stored. `dropped` names keywords the superseded memory carried and this one does not, so nothing answers to them here any more unless another memory happens to carry them. That is a legitimate act -- it is the only way to retire a keyword, since amendment is refused after export -- and it is reported because it is also what an incomplete re-typing looks like. If a dropped term should still find this memory, correct it now with hoard_correct's amend, which replaces the whole keyword array.",
+          "link_delta": [
+            {
+              "left_behind": [
+                {
+                  "label": "related_to",
+                  "target": "<id-3>"
+                }
+              ],
+              "restated": [],
+              "superseded": "<id-2>"
+            }
+          ],
+          "link_delta_note": "Stored. `left_behind` names links the superseded memory carries and this one does not restate. A link is the claim of the memory that wrote it, so these stay with the superseded memory rather than becoming this one's. That is a legitimate act -- it is how a link that no longer holds is dropped -- and it is reported because it is also what an incomplete re-typing looks like. If one still holds for this memory, correct it now with hoard_correct's amend, which replaces the whole link array.",
+          "summary": "the corrected claim"
+        },
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": "(present: identical to content[0].text, and checked against the output schema)"
+  }
+}

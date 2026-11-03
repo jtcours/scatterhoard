@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": {
+          "findable_by_meaning": false,
+          "id": "<id-1>",
+          "note": "This memory was stored but has no embedding, so hoard_recall will never find it by meaning. It is still reachable by exact keyword match and by hoard_lookup. Add keywords to it now if it needs to be findable, and tell the user Scatterhoard needs its model installed for this set.",
+          "summary": "a memory stored where nothing can embed it"
+        },
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": "(present: identical to content[0].text, and checked against the output schema)"
+  }
+}

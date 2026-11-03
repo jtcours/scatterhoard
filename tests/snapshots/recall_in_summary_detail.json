@@ -1,0 +1,50 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": {
+          "memories": [
+            {
+              "id": "<id-1>",
+              "summary": "alpha alpha alpha governs how requests are routed"
+            },
+            {
+              "id": "<id-2>",
+              "summary": "alpha alpha alpha bound the retry path"
+            },
+            {
+              "id": "<id-3>",
+              "summary": "alpha alpha alpha are routed before they are counted.…"
+            },
+            {
+              "id": "<id-4>",
+              "summary": "alpha alpha alpha and the retry path share one counter, which is what makes the two of them impossible to tune…"
+            },
+            {
+              "id": "<id-5>",
+              "summary": "alpha alpha appear together in the shard table"
+            },
+            {
+              "id": "<id-6>",
+              "summary": "alpha alpha are counted before they are routed"
+            },
+            {
+              "id": "<id-7>",
+              "summary": "alpha alpha alpha and beta share one transport"
+            },
+            {
+              "id": "<id-8>",
+              "summary": "the measurement that settled the routing rule"
+            }
+          ],
+          "semantic_search_available": true
+        },
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": "(present: identical to content[0].text, and checked against the output schema)"
+  }
+}

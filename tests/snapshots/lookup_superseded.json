@@ -1,0 +1,42 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": {
+          "memories": [
+            {
+              "confidence": 0.6,
+              "content": "beta beta describes the storage layout",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-2>",
+              "incoming": [
+                {
+                  "label": "supersedes",
+                  "source": "<id-3>"
+                }
+              ],
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "llm",
+              "scope": "shared:scatterhoard",
+              "superseded_by": [
+                "<id-3>"
+              ],
+              "why": "an early guess at the layout"
+            }
+          ]
+        },
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": "(present: identical to content[0].text, and checked against the output schema)"
+  }
+}

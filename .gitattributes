@@ -1,0 +1,17 @@
+# Field-aware merging for this repository's exported memory set.
+#
+# This file ships with the repository; the driver it names does not. Registering it is per clone, and
+# SETUP.md (step 7) gives the command -- use that one, not a shorter form of it.
+#
+# When the driver is not registered at all, `git` falls back to its own three-way merge, which is
+# correct and only coarser: more line conflicts than strictly necessary, never silent data loss. That
+# asymmetry is deliberate and is why the driver is a graceful enhancement rather than a dependency; see
+# documents/design/multi-set-sync.md.
+#
+# **Registered but missing is different, and is why the command in SETUP.md carries a fallback.** If
+# the registered binary cannot be found, `git` reports a conflict and leaves the file as the receiving
+# side had it, with no conflict markers and none of the other side's memories -- a file that looks
+# resolved, and loses the other branch's memories if committed as it stands.
+# Every memory file in a `scatterhoard_mem`, at any depth: a directory holds one `.json` per set, and
+# a set can live in a subdirectory of the repository as well as at its root.
+**/scatterhoard_mem/*.json merge=scatterhoard

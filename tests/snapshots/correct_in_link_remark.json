@@ -1,0 +1,28 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": {
+          "amended": [
+            "content"
+          ],
+          "id": "<id-1>",
+          "in_links": [
+            {
+              "label": "supports",
+              "source": "<id-2>"
+            }
+          ],
+          "in_links_note": "Amended. These memories point at this one, and each was written against the version you just replaced -- so a `supports`, `instance_of` or `contradicts` may no longer hold. Only you can tell: you have both texts in front of you and their authors are not here. Nothing was refused and nothing needs doing unless a label has stopped being true; where one has, amend the *source* memory's links, or supersede that memory if its own claim went with it. `supersedes` edges are left out, because they say this memory was replaced, which stays true however it reads.",
+          "semantic_search_available": true,
+          "summary": "the claim as it reads after the repair"
+        },
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": "(present: identical to content[0].text, and checked against the output schema)"
+  }
+}

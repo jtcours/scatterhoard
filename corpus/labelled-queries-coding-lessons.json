@@ -1,0 +1,384 @@
+{
+ "provenance": "labelled from ~/.claude/projects/*scatterhoard*/*.jsonl by corpus/label_queries.py: the recall named this set, or a memory it returned from this set was used later in the same session",
+ "store": "shared:coding-lessons",
+ "queries": [
+  {
+   "query": "test fixture with one of something the real configuration has many of, hiding a defect",
+   "first_seen": "2026-08-20T04:56:38.449Z",
+   "session": "4477c546",
+   "label": "scoped"
+  },
+  {
+   "query": "changing a value's representation breaks the code that recognises it, detectors and normalisers going stale",
+   "first_seen": "2026-08-20T16:50:01.421Z",
+   "session": "fcd72c5d",
+   "label": "scoped"
+  },
+  {
+   "query": "build artifact that is also a running service endpoint, cleaning the build directory breaks a client",
+   "first_seen": "2026-08-20T17:36:18.507Z",
+   "session": "fcd72c5d",
+   "label": "scoped"
+  },
+  {
+   "query": "what did the escape and refusal fix change about storing markup",
+   "first_seen": "2026-08-21T01:50:10.490Z",
+   "session": "fcd72c5d",
+   "label": "used"
+  },
+  {
+   "query": "questioning whether a problem is a fault to fix or a condition to report, dissolving the machinery built around it",
+   "first_seen": "2026-08-21T01:53:31.357Z",
+   "session": "fcd72c5d",
+   "label": "scoped"
+  },
+  {
+   "query": "a rule that skips work because it was already done elsewhere depends on the topology that defines elsewhere",
+   "first_seen": "2026-08-21T04:18:17.227Z",
+   "session": "7985a6b0",
+   "label": "used"
+  },
+  {
+   "query": "a rule documented on one implementation path but not the other, two write paths disagreeing",
+   "first_seen": "2026-08-21T05:21:02.457Z",
+   "session": "7985a6b0",
+   "label": "used"
+  },
+  {
+   "query": "report rather than resolve: surface a conflict to the model instead of software adjudicating it",
+   "first_seen": "2026-08-24T00:41:22.773Z",
+   "session": "53142ec7",
+   "label": "used"
+  },
+  {
+   "query": "a test that passes without exercising the guard; two code paths to the same behaviour; mutation testing revealed it",
+   "first_seen": "2026-08-24T05:07:12.661Z",
+   "session": "53142ec7",
+   "label": "used"
+  },
+  {
+   "query": "probing a layer below a guard reports the guard missing; verify the probe takes the real path",
+   "first_seen": "2026-08-25T01:21:51.983Z",
+   "session": "53142ec7",
+   "label": "used"
+  },
+  {
+   "query": "a check or instrument that reports success because it was only ever exercised on the passing case",
+   "first_seen": "2026-08-25T01:43:07.773Z",
+   "session": "e575cd9e",
+   "label": "scoped"
+  },
+  {
+   "query": "a list of examples inside a rule narrows the rule by implication and becomes a whitelist",
+   "first_seen": "2026-08-25T05:09:00.671Z",
+   "session": "e575cd9e",
+   "label": "scoped"
+  },
+  {
+   "query": "a mutation surviving shows a new guard is redundant; where to place a check — at each step or once at the point of use",
+   "first_seen": "2026-08-26T00:01:51.641Z",
+   "session": "d88d1bf9",
+   "label": "used"
+  },
+  {
+   "query": "counting recorded expectations is not measuring outcomes; a coverage figure read off a record rather than a run",
+   "first_seen": "2026-08-26T00:47:31.945Z",
+   "session": "d88d1bf9",
+   "label": "used"
+  },
+  {
+   "query": "a test pinning where a defect does not reach; the boundary of a known defect as a regression guard",
+   "first_seen": "2026-08-26T03:28:01.683Z",
+   "session": "d88d1bf9",
+   "label": "used"
+  },
+  {
+   "query": "a rule governing a reflexive action must be in always-loaded context rather than searchable memory",
+   "first_seen": "2026-08-26T04:00:33.737Z",
+   "session": "d88d1bf9",
+   "label": "used"
+  },
+  {
+   "query": "mutation testing anchor matches the wrong function when parallel code is added",
+   "first_seen": "2026-08-26T20:58:10.320Z",
+   "session": "7ac4cc3c",
+   "label": "used"
+  },
+  {
+   "query": "a test passes because an earlier guard refuses first, proving a different guard than the one it names",
+   "first_seen": "2026-08-26T20:58:27.419Z",
+   "session": "7ac4cc3c",
+   "label": "used"
+  },
+  {
+   "query": "a number recorded in a document drifts because nothing re-checks it, and is then believed",
+   "first_seen": "2026-08-30T05:03:55.875Z",
+   "session": "b796e354",
+   "label": "used"
+  },
+  {
+   "query": "branch descriptions in a oneOf tool schema are dropped when the schema is flattened, so only the top-level tool description reaches a client",
+   "first_seen": "2026-08-30T14:40:36.441Z",
+   "session": "2a820c6d",
+   "label": "used"
+  },
+  {
+   "query": "a warning or diagnostic that fires on every run cannot distinguish the condition it warns about, so it teaches nothing",
+   "first_seen": "2026-08-30T19:17:31.793Z",
+   "session": "2a820c6d",
+   "label": "used"
+  },
+  {
+   "query": "a cascading delete destroying records that are not derived data, and a mutation flipping from survives to caught as a signal that a change altered meaning elsewhere",
+   "first_seen": "2026-08-30T20:49:52.345Z",
+   "session": "2a820c6d",
+   "label": "used"
+  },
+  {
+   "query": "after a tool refuses an action, evaluating only the suggested substitute instead of re-deriving what you were actually trying to achieve",
+   "first_seen": "2026-08-30T22:06:53.042Z",
+   "session": "2a820c6d",
+   "label": "used"
+  },
+  {
+   "query": "a mutation survives because the guard it targets is unreachable for the inputs the tests use; two filters staged on the same predicate",
+   "first_seen": "2026-08-31T14:38:52.140Z",
+   "session": "732983a9",
+   "label": "used"
+  },
+  {
+   "query": "a guard tested only with values the system never actually produces; mutation caught but the domain was unreal",
+   "first_seen": "2026-08-31T18:23:55.381Z",
+   "session": "732983a9",
+   "label": "used"
+  },
+  {
+   "query": "adding an optional field to a serialised record changes every record's checksum unless it is omitted when absent",
+   "first_seen": "2026-08-31T20:26:42.184Z",
+   "session": "732983a9",
+   "label": "used"
+  },
+  {
+   "query": "a configuration fallback chain collapses several sources into one value and loses which source it came from",
+   "first_seen": "2026-09-01T05:39:48.257Z",
+   "session": "7e8bbfe0",
+   "label": "scoped"
+  },
+  {
+   "query": "summarising an earlier decision in condensed form silently drops the qualification that made it correct",
+   "first_seen": "2026-09-01T05:40:03.209Z",
+   "session": "7e8bbfe0",
+   "label": "scoped"
+  },
+  {
+   "query": "bulk-updating many test expectations after a change hides the ones that moved for a different reason",
+   "first_seen": "2026-09-02T01:35:44.968Z",
+   "session": "7e8bbfe0",
+   "label": "scoped"
+  },
+  {
+   "query": "a reported count should describe what an operation wrote rather than the total that exists afterwards",
+   "first_seen": "2026-09-02T04:23:53.574Z",
+   "session": "7e8bbfe0",
+   "label": "scoped"
+  },
+  {
+   "query": "mechanically updating many similar test assertions after a refactor conceals the ones that changed for another cause",
+   "first_seen": "2026-09-02T04:24:09.407Z",
+   "session": "7e8bbfe0",
+   "label": "scoped"
+  },
+  {
+   "query": "truncating a long diagnostic tool's output loses the detail that was the reason for running it",
+   "first_seen": "2026-09-02T04:24:23.818Z",
+   "session": "7e8bbfe0",
+   "label": "scoped"
+  },
+  {
+   "query": "copying a database file while a process holds it open produces a backup that is silently incomplete",
+   "first_seen": "2026-09-02T04:27:56.740Z",
+   "session": "7e8bbfe0",
+   "label": "scoped"
+  },
+  {
+   "query": "which direction a cross-set link may point between a personal set and a shared one",
+   "first_seen": "2026-09-02T19:04:42.170Z",
+   "session": "7e8bbfe0",
+   "label": "used"
+  },
+  {
+   "query": "a guard stops being tested because another layer supplies the same answer first",
+   "first_seen": "2026-09-02T19:55:44.136Z",
+   "session": "7e8bbfe0",
+   "label": "scoped"
+  },
+  {
+   "query": "a test helper that reaches around the public interface to build a state the interface cannot",
+   "first_seen": "2026-09-02T22:42:13.450Z",
+   "session": "7e8bbfe0",
+   "label": "scoped"
+  },
+  {
+   "query": "effort has limits so preventing mistakes belongs in tools and environment rather than in trying harder",
+   "first_seen": "2026-09-02T23:16:46.816Z",
+   "session": "7e8bbfe0",
+   "label": "used"
+  },
+  {
+   "query": "move closed issues and completed backlog items out of the markdown files into memory",
+   "first_seen": "2026-09-03T04:25:48.466Z",
+   "session": "1d6eedd4",
+   "label": "used"
+  },
+  {
+   "query": "a redundant guard placed at the wrong step of a walk, revealed by mutation testing leaving the suite green",
+   "first_seen": "2026-09-03T04:48:29.568Z",
+   "session": "1d6eedd4",
+   "label": "scoped"
+  },
+  {
+   "query": "a memory I know exists has vanished from search results and I cannot work out why",
+   "first_seen": "2026-09-03T04:50:01.533Z",
+   "session": "1d6eedd4",
+   "label": "used"
+  },
+  {
+   "query": "a guard that works produces no evidence it is working, so the pressure to remove it comes from its false alarms",
+   "first_seen": "2026-09-03T05:46:48.183Z",
+   "session": "1d6eedd4",
+   "label": "scoped"
+  },
+  {
+   "query": "after changing behaviour, recorded mutations that guarded the old behaviour can go stale or start surviving silently",
+   "first_seen": "2026-09-04T04:39:41.020Z",
+   "session": "1d6eedd4",
+   "label": "scoped"
+  },
+  {
+   "query": "measuring the shape of identifiers and concluding they mean the same thing without reading what they are attached to",
+   "first_seen": "2026-09-04T05:01:05.893Z",
+   "session": "1d6eedd4",
+   "label": "scoped"
+  },
+  {
+   "query": "re-deriving a measured constant from a spec reveals the shape its author assumed",
+   "first_seen": "2026-09-06T13:50:28.341Z",
+   "session": "da1409f9",
+   "label": "used"
+  },
+  {
+   "query": "a tool that rewrites files in the working tree makes concurrent edits unsafe",
+   "first_seen": "2026-09-06T14:13:32.704Z",
+   "session": "da1409f9",
+   "label": "used"
+  },
+  {
+   "query": "do the structural or encoding change before the bulk work, so faults are cheap to find",
+   "first_seen": "2026-09-07T13:35:14.755Z",
+   "session": "b191dfe6",
+   "label": "scoped"
+  },
+  {
+   "query": "a control keyword spelled like an ordinary subject word gets used as a subject; prefixes make marks recognisable",
+   "first_seen": "2026-09-07T15:54:30.869Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "when to tag a cross-project lesson with a language or project name; applicability versus provenance",
+   "first_seen": "2026-09-07T16:58:15.920Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "a mechanism filed under its weakest benefit disappears when that benefit is measured away",
+   "first_seen": "2026-09-07T21:58:24.164Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "a build that diverges from its plan records the divergence in the planning document rather than in the code",
+   "first_seen": "2026-09-07T22:19:01.503Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "stepping back to check whether a result makes sense at a higher level; meta-level observation of the process while working",
+   "first_seen": "2026-09-07T22:28:56.742Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "an artifact committed to the repository whose activation lives in per-clone configuration that is not committed",
+   "first_seen": "2026-09-07T22:40:48.212Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "writing so a later reader can reconstruct the understanding; the writer's context is not available at read time",
+   "first_seen": "2026-09-07T22:53:41.942Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "laying out a grid of every field against every operation to find the empty cells, which testing and reading cannot surface",
+   "first_seen": "2026-09-07T23:12:38.282Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "additions carry a written justification and removals carry none, so the text only ever grows",
+   "first_seen": "2026-09-07T23:13:58.013Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "concluding a state is unreachable by reading the code is the mirror of concluding a guard is absent from a probe that took the wrong path",
+   "first_seen": "2026-09-07T23:46:38.913Z",
+   "session": "28e2a654",
+   "label": "scoped"
+  },
+  {
+   "query": "put a rule where the work already passes rather than where a reader must know to look — documentation discoverability",
+   "first_seen": "2026-09-08T01:04:55.047Z",
+   "session": "d5d6801e",
+   "label": "scoped"
+  },
+  {
+   "query": "a verification that shares assumptions with the operation it checks cannot catch that assumption being wrong",
+   "first_seen": "2026-09-08T02:33:02.817Z",
+   "session": "d5d6801e",
+   "label": "scoped"
+  },
+  {
+   "query": "a control group that is secretly two populations makes small samples swing between conclusions",
+   "first_seen": "2026-09-08T23:35:02.819Z",
+   "session": "629f34a1",
+   "label": "scoped"
+  },
+  {
+   "query": "a test varied one input field but another field reaching the same function carried the control category, so the test passed through a different route",
+   "first_seen": "2026-09-11T04:08:33.875Z",
+   "session": "7776e75e",
+   "label": "scoped"
+  },
+  {
+   "query": "a batch call returning one Result fails every item when one item is bad, and a sweep that retries accumulated work then fails permanently",
+   "first_seen": "2026-09-11T05:27:30.072Z",
+   "session": "7776e75e",
+   "label": "scoped"
+  },
+  {
+   "query": "committing a record before a fallible derived step, then reporting failure, leaves the record stored behind an error that says it was not",
+   "first_seen": "2026-09-11T05:27:31.516Z",
+   "session": "7776e75e",
+   "label": "scoped"
+  },
+  {
+   "query": "when the absence of a derived row means work still to do, a permanent failure needs a positive record or it is retried forever",
+   "first_seen": "2026-09-11T05:27:32.608Z",
+   "session": "7776e75e",
+   "label": "scoped"
+  }
+ ]
+}

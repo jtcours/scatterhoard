@@ -1,0 +1,23 @@
+/target
+/checkpoints
+
+# Per-machine Claude Code settings: records absolute scratchpad paths from individual sessions.
+/.claude/settings.local.json
+
+# Per-machine MCP server registration: the binary path and the model snapshot hash are both
+# specific to this machine, so this cannot be shared the way a project .mcp.json normally is.
+/.mcp.json
+
+# Compiled Python from the mutation runner.
+__pycache__/
+.mutation-archive/
+
+# The mutation runner builds here, never in target/, so a pass cannot publish a server built
+# from mutated source to the path MCP clients spawn from. Cleared with `rm -rf target-mutation`.
+/target-mutation
+
+# Per-contributor steering overrides. CLAUDE.md is committed because it carries project facts a
+# collaborator needs; CLAUDE.local.md is the documented place for personal instructions and loads
+# after it, so a contributor overrides rather than fights the committed file.
+/CLAUDE.local.md
+/AGENTS.local.md

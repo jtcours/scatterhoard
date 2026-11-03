@@ -1,0 +1,178 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": {
+          "memories": [
+            {
+              "confidence": 0.95,
+              "content": "the storage layout was revised and now uses gamma",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-2>",
+              "links": [
+                {
+                  "label": "supersedes",
+                  "target": "<id-3>"
+                }
+              ],
+              "matched_similarity": 0.9113,
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "joint",
+              "replaces_matched": "<id-3>",
+              "scope": "shared:scatterhoard",
+              "why": "measured, where the earlier note was a guess"
+            },
+            {
+              "confidence": 0.8,
+              "content": "the measurement that settled the routing rule",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-4>",
+              "links": [
+                {
+                  "label": "supports",
+                  "target": "<id-5>"
+                }
+              ],
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "human",
+              "scope": "shared:scatterhoard",
+              "similarity": 0.7905,
+              "why": "kept so the rule can be re-argued rather than only obeyed"
+            },
+            {
+              "confidence": 0.5,
+              "content": "gamma is unrelated to everything else here",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-6>",
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "llm",
+              "scope": "shared:scatterhoard",
+              "similarity": 0.7905,
+              "why": "present so a query has something to score badly against"
+            },
+            {
+              "confidence": 0.7,
+              "content": "alpha alpha alpha and beta share one transport",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-7>",
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "llm",
+              "scope": "shared:scatterhoard",
+              "similarity": -0.6695,
+              "why": "noticed while tracing a request"
+            },
+            {
+              "confidence": 0.9,
+              "content": "alpha alpha alpha governs how requests are routed",
+              "context": "recorded while building the approval fixture",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-5>",
+              "incoming": [
+                {
+                  "label": "supports",
+                  "source": "<id-4>"
+                }
+              ],
+              "keywords": [
+                "Alpha-Routing",
+                "MemoryView"
+              ],
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "joint",
+              "scope": "shared:scatterhoard",
+              "similarity": -0.9756,
+              "why": "the routing rule was decided before the code existed"
+            },
+            {
+              "confidence": 0.7,
+              "content": "alpha alpha alpha bound the retry path",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-8>",
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "llm",
+              "scope": "shared:scatterhoard",
+              "similarity": -0.9756,
+              "why": "found while reading the router"
+            },
+            {
+              "confidence": 0.7,
+              "content": "alpha alpha appear together in the shard table",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-9>",
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "llm",
+              "scope": "shared:scatterhoard",
+              "similarity": -0.9942,
+              "why": "a second place the rule is felt"
+            },
+            {
+              "confidence": 0.7,
+              "content": "alpha alpha are counted before they are routed",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-10>",
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "llm",
+              "scope": "shared:scatterhoard",
+              "similarity": -0.9942,
+              "why": "the counter predates the rule"
+            }
+          ],
+          "semantic_search_available": true
+        },
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": "(present: identical to content[0].text, and checked against the output schema)"
+  }
+}

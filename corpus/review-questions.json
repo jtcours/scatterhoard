@@ -1,0 +1,629 @@
+{
+  "provenance": "Written 2026-10-22 for `scripts/local_model.py classify`, to test the export review's two questions on a small model before the judgement gate is built on them: who a memory is about, and which of the person's kept-out items it mentions in its set. Every person, detail and set below is invented for the test and describes no real person. `expect` is what a correct reader answers; the routing rule in `documents/design/export-review.md` turns it into flag or clear. Memories with a sensitive detail in a later sentence, and the softened \"medical appointment\", are the cases served text alone let through. Its `groups` section holds realistic review groups, added 2026-10-23. Its `p` memories, added 2026-10-25 for `classify --says`, test whether a sentence about a person reports or judges, an LLM counted as a person, and the keep-outs that apply to someone else.",
+  "sets": {
+    "shared:projector": {
+      "audience": "public"
+    },
+    "shared:theological-arguments": {
+      "audience": "private"
+    },
+    "local": {
+      "audience": "personal"
+    },
+    "shared:allotment-society": {
+      "audience": "never published"
+    }
+  },
+  "preferences_append": "- In the theological-arguments set, while it is not public: my religion.\n",
+  "memories": [
+    {
+      "id": "m01",
+      "set": "shared:projector",
+      "content": "We decided the export review runs as its own command, because reviewing during every export made exports too slow to use.",
+      "expect": {
+        "about": "project",
+        "mentions": []
+      }
+    },
+    {
+      "id": "m02",
+      "set": "shared:projector",
+      "content": "The parser rewrite slipped to November because Priya Raman was off for two weeks recovering from surgery. Parser changes are frozen until she is back.",
+      "expect": {
+        "about": "someone else",
+        "mentions": [
+          "my health"
+        ]
+      }
+    },
+    {
+      "id": "m03",
+      "set": "local",
+      "content": "The person has a hospital appointment for HIV treatment every Thursday, so no working sessions are scheduled then.",
+      "expect": {
+        "about": "the person",
+        "mentions": [
+          "my health"
+        ]
+      }
+    },
+    {
+      "id": "m04",
+      "set": "local",
+      "content": "No working sessions on Thursdays, because of a recurring medical appointment.",
+      "expect": {
+        "about": "the person",
+        "mentions": [
+          "my health"
+        ]
+      }
+    },
+    {
+      "id": "m05",
+      "set": "local",
+      "content": "The person works at Northwind Bank, so they can only test the export path at weekends.",
+      "expect": {
+        "about": "the person",
+        "mentions": []
+      }
+    },
+    {
+      "id": "m06",
+      "set": "shared:projector",
+      "content": "The export path can only be tested at weekends, because the person works at Northwind Bank during the week.",
+      "expect": {
+        "about": "the person",
+        "mentions": [
+          "my employer"
+        ]
+      }
+    },
+    {
+      "id": "m07",
+      "set": "shared:projector",
+      "content": "Decided to cap recall results at eight by default, since larger pages crowded the context. Review of the change waits until next month, because the person is away for their daughter's wedding.",
+      "expect": {
+        "about": "the person",
+        "mentions": [
+          "my family"
+        ]
+      }
+    },
+    {
+      "id": "m08",
+      "set": "shared:theological-arguments",
+      "content": "The person's reading of the Nicene Creed shaped how the set treats the filioque clause; they are a practising Orthodox Christian.",
+      "expect": {
+        "about": "the person",
+        "mentions": []
+      }
+    },
+    {
+      "id": "m09",
+      "set": "shared:projector",
+      "content": "Keyword lookup folds through toNFKC_Casefold, so full-width and composed forms match their ordinary forms.",
+      "expect": {
+        "about": "project",
+        "mentions": []
+      }
+    },
+    {
+      "id": "m10",
+      "set": "shared:projector",
+      "content": "The person prefers decisions to be put in prose rather than as multiple-choice prompts.",
+      "expect": {
+        "about": "the person",
+        "mentions": []
+      }
+    },
+    {
+      "id": "m11",
+      "set": "local",
+      "content": "The person prefers short replies and dislikes multiple-choice prompts.",
+      "expect": {
+        "about": "the person",
+        "mentions": []
+      }
+    },
+    {
+      "id": "m12",
+      "set": "shared:projector",
+      "content": "jbrown maintains the parser module; ask them before changing its public interface.",
+      "expect": {
+        "about": "someone else",
+        "mentions": [],
+        "says": "reports"
+      }
+    },
+    {
+      "id": "m13",
+      "set": "local",
+      "content": "The person's rent is due on the first of the month, and their landlord wants it by bank transfer.",
+      "expect": {
+        "about": "the person",
+        "mentions": [
+          "my finances"
+        ]
+      }
+    },
+    {
+      "id": "m14",
+      "set": "shared:projector",
+      "content": "Tests pass on macOS and Linux. Windows is untested because nobody on the project has a Windows machine.",
+      "expect": {
+        "about": "project",
+        "mentions": []
+      }
+    },
+    {
+      "id": "m15",
+      "set": "local",
+      "content": "The person lives in Lisbon and works from home on Fridays.",
+      "expect": {
+        "about": "the person",
+        "mentions": []
+      }
+    },
+    {
+      "id": "m16",
+      "set": "shared:projector",
+      "content": "The release notes moved to a separate file so the README stays short. The person wrote most of them while recovering from a migraine, so a second read is worthwhile.",
+      "expect": {
+        "about": "the person",
+        "mentions": [
+          "my health"
+        ]
+      }
+    },
+    {
+      "id": "p01",
+      "set": "shared:projector",
+      "content": "The small model twice reported a review it had not done. Its logs are in the run's output directory.",
+      "expect": {
+        "about": "someone else",
+        "says": "reports",
+        "mentions": []
+      }
+    },
+    {
+      "id": "p02",
+      "set": "shared:projector",
+      "content": "The small model was lazy about the review and cannot be trusted with anything careful.",
+      "expect": {
+        "about": "someone else",
+        "says": "judges",
+        "mentions": []
+      }
+    },
+    {
+      "id": "p03",
+      "set": "shared:projector",
+      "content": "The review needs a capable model.",
+      "expect": {
+        "about": "project",
+        "mentions": []
+      },
+      "why": "The person decided this after saying the tool had been adjusted repeatedly without useful results."
+    },
+    {
+      "id": "p04",
+      "set": "local",
+      "content": "Sam leaves early on Fridays. He mentioned his husband picks him up from the station.",
+      "expect": {
+        "about": "someone else",
+        "says": "reports",
+        "mentions": [
+          "my sexuality"
+        ]
+      }
+    },
+    {
+      "id": "p05",
+      "set": "local",
+      "content": "jbrown is careless with tests and rushes every review.",
+      "expect": {
+        "about": "someone else",
+        "says": "judges",
+        "mentions": []
+      }
+    },
+    {
+      "id": "p06",
+      "set": "local",
+      "content": "jbrown's last four pull requests each shipped with a failing test.",
+      "expect": {
+        "about": "someone else",
+        "says": "reports",
+        "mentions": []
+      }
+    },
+    {
+      "id": "p07",
+      "set": "shared:projector",
+      "content": "Priya Raman contributes to the parser in her spare time. She works at Northwind Bank during the week.",
+      "expect": {
+        "about": "someone else",
+        "says": "reports",
+        "mentions": [
+          "my employer"
+        ]
+      }
+    },
+    {
+      "id": "p08",
+      "set": "local",
+      "content": "Reviews with Dana are booked before lunch on Tuesdays, because she has chemotherapy in the afternoons.",
+      "expect": {
+        "about": "someone else",
+        "says": "reports",
+        "mentions": [
+          "my health"
+        ]
+      }
+    },
+    {
+      "id": "p09",
+      "set": "local",
+      "content": "The person thinks the tool is overengineered, but agreed to keep the per-sentence review.",
+      "expect": {
+        "about": "the person",
+        "says": "reports",
+        "mentions": []
+      }
+    },
+    {
+      "id": "p10",
+      "set": "local",
+      "content": "The person is impatient and tends to skip long replies.",
+      "expect": {
+        "about": "the person",
+        "says": "judges",
+        "mentions": []
+      }
+    },
+    {
+      "id": "p11",
+      "set": "local",
+      "content": "Sam works at Northwind Bank, so he can only pair on the parser after six.",
+      "expect": {
+        "about": "someone else",
+        "says": "reports",
+        "mentions": [
+          "my employer"
+        ]
+      }
+    }
+  ],
+  "groups": {
+    "provenance": "Added 2026-10-23. Realistic review groups: several ordinary memories on one subject, with one or two carrying a detail after an unremarkable opening, the shape the one-memory-at-a-time run missed every time. Like the rest of this file, every person and detail is invented. The last group, added the same day, puts details in `why` and `context`, which an export publishes as surely as content, and uses a set the person lists under *Sets I never publish*.",
+    "recall tuning": [
+      {
+        "id": "g01",
+        "set": "shared:projector",
+        "content": "Recall returns eight memories by default, because larger pages crowded the context of small models.",
+        "expect": {
+          "about": "project",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g02",
+        "set": "shared:projector",
+        "content": "The non-match floor is calibrated from a set's own labelled queries once twenty have accumulated.",
+        "expect": {
+          "about": "project",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g03",
+        "set": "shared:projector",
+        "content": "Decided to cap recall results at eight by default, since larger pages crowded the context. Review of the change waits until next month, because the person is away for their daughter's wedding.",
+        "expect": {
+          "about": "the person",
+          "mentions": [
+            "my family"
+          ]
+        }
+      },
+      {
+        "id": "g04",
+        "set": "shared:projector",
+        "content": "Summary detail returns one line per memory, about a fifth of the size of a full record.",
+        "expect": {
+          "about": "project",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g05",
+        "set": "shared:projector",
+        "content": "Keyword recall orders by match count and then by id, so a single keyword returns memories in the order they were written.",
+        "expect": {
+          "about": "project",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g06",
+        "set": "shared:projector",
+        "content": "An already_known list pages past memories the caller holds without removing them from the traversal.",
+        "expect": {
+          "about": "project",
+          "mentions": []
+        }
+      }
+    ],
+    "release process": [
+      {
+        "id": "g07",
+        "set": "shared:projector",
+        "content": "Release notes live in a separate file so the README stays short.",
+        "expect": {
+          "about": "project",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g08",
+        "set": "shared:projector",
+        "content": "Versions follow semantic versioning from 0.1.0, with a beta suffix until the format is stable.",
+        "expect": {
+          "about": "project",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g09",
+        "set": "shared:projector",
+        "content": "The changelog is written by hand at release time rather than generated from commits. The person drafted this release's entries while recovering from a migraine, so a second read is worthwhile.",
+        "expect": {
+          "about": "the person",
+          "mentions": [
+            "my health"
+          ]
+        }
+      },
+      {
+        "id": "g10",
+        "set": "shared:projector",
+        "content": "A release is tagged only after the full mutation pass reports nothing unexpected.",
+        "expect": {
+          "about": "project",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g11",
+        "set": "shared:projector",
+        "content": "Binary builds are not published yet; users build from source with cargo.",
+        "expect": {
+          "about": "project",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g12",
+        "set": "shared:projector",
+        "content": "The project pays for its continuous-integration minutes itself. The person covered last quarter's bill from their own savings after a sponsor withdrew.",
+        "expect": {
+          "about": "the person",
+          "mentions": [
+            "my finances"
+          ]
+        }
+      }
+    ],
+    "parser": [
+      {
+        "id": "g13",
+        "set": "shared:projector",
+        "content": "The parser accepts both tabs and spaces for indentation and normalises to spaces.",
+        "expect": {
+          "about": "project",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g14",
+        "set": "shared:projector",
+        "content": "jbrown maintains the parser module; ask them before changing its public interface.",
+        "expect": {
+          "about": "someone else",
+          "mentions": [],
+          "says": "reports"
+        }
+      },
+      {
+        "id": "g15",
+        "set": "shared:projector",
+        "content": "Error messages from the parser name the line and column, counted from one.",
+        "expect": {
+          "about": "project",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g16",
+        "set": "shared:projector",
+        "content": "The parser rewrite slipped to November. Priya Raman was off for two weeks recovering from surgery, and parser changes are frozen until she is back.",
+        "expect": {
+          "about": "someone else",
+          "mentions": [
+            "my health"
+          ]
+        }
+      },
+      {
+        "id": "g17",
+        "set": "shared:projector",
+        "content": "A fuzzing corpus of two thousand inputs runs before each parser release.",
+        "expect": {
+          "about": "project",
+          "mentions": []
+        }
+      }
+    ],
+    "the person's week": [
+      {
+        "id": "g18",
+        "set": "local",
+        "content": "The person prefers short replies and dislikes multiple-choice prompts.",
+        "expect": {
+          "about": "the person",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g19",
+        "set": "local",
+        "content": "The person works at Northwind Bank, so they can only test the export path at weekends.",
+        "expect": {
+          "about": "the person",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g20",
+        "set": "local",
+        "content": "The person lives in Lisbon and works from home on Fridays.",
+        "expect": {
+          "about": "the person",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g21",
+        "set": "local",
+        "content": "No working sessions on Thursdays, because of a recurring medical appointment.",
+        "expect": {
+          "about": "the person",
+          "mentions": [
+            "my health"
+          ]
+        }
+      },
+      {
+        "id": "g22",
+        "set": "local",
+        "content": "The person reviews pull requests in the morning, before other work.",
+        "expect": {
+          "about": "the person",
+          "mentions": []
+        }
+      },
+      {
+        "id": "g23",
+        "set": "local",
+        "content": "Sessions end by six on weekdays. The person leaves then to collect their husband from the mosque.",
+        "expect": {
+          "about": "the person",
+          "mentions": [
+            "my religion",
+            "my sexuality"
+          ]
+        }
+      },
+      {
+        "id": "g24",
+        "set": "local",
+        "content": "The person's rent is due on the first of the month, and their landlord wants it by bank transfer.",
+        "expect": {
+          "about": "the person",
+          "mentions": [
+            "my finances"
+          ]
+        }
+      },
+      {
+        "id": "g25",
+        "set": "local",
+        "content": "The person volunteers for a local election campaign on Saturday mornings, so weekend sessions start after noon.",
+        "expect": {
+          "about": "the person",
+          "mentions": [
+            "my politics"
+          ]
+        }
+      }
+    ],
+    "other fields and a never-published set": [
+      {
+        "id": "f01",
+        "set": "shared:projector",
+        "content": "Recall pages default to eight memories.",
+        "expect": {
+          "about": "the person",
+          "mentions": [
+            "my health"
+          ]
+        },
+        "why": "Chosen while the person was off work after their surgery, so it was never benchmarked."
+      },
+      {
+        "id": "f02",
+        "set": "local",
+        "content": "Thursday sessions are skipped.",
+        "expect": {
+          "about": "the person",
+          "mentions": [
+            "my health"
+          ]
+        },
+        "why": "The person has HIV treatment on Thursdays."
+      },
+      {
+        "id": "f03",
+        "set": "shared:projector",
+        "content": "The parser normalises tabs to spaces.",
+        "expect": {
+          "about": "project",
+          "mentions": []
+        },
+        "why": "Mixed indentation broke the line counts in error messages."
+      },
+      {
+        "id": "f04",
+        "set": "shared:allotment-society",
+        "content": "The person chairs the society's committee and drafted its new rules.",
+        "expect": {
+          "about": "the person",
+          "mentions": []
+        }
+      },
+      {
+        "id": "f05",
+        "set": "shared:allotment-society",
+        "content": "The committee meets at the person's flat on Elm Road.",
+        "expect": {
+          "about": "the person",
+          "mentions": []
+        }
+      },
+      {
+        "id": "f06",
+        "set": "shared:allotment-society",
+        "content": "Minutes from the last meeting are delayed because the person is recovering from a migraine.",
+        "expect": {
+          "about": "the person",
+          "mentions": [
+            "my health"
+          ]
+        }
+      },
+      {
+        "id": "f07",
+        "set": "shared:projector",
+        "content": "Continuous integration moved to self-hosted runners.",
+        "expect": {
+          "about": "the person",
+          "mentions": [
+            "my finances"
+          ]
+        },
+        "context": "Discussing costs after the person's divorce settlement left them short of money."
+      }
+    ]
+  },
+  "never_publish_append": "\n## Sets I never publish\n- allotment-society\n"
+}

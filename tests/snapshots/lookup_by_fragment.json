@@ -1,0 +1,39 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": {
+          "memories": [
+            {
+              "confidence": 0.8,
+              "content": "the measurement that settled the routing rule",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-2>",
+              "links": [
+                {
+                  "label": "supports",
+                  "target": "<id-3>"
+                }
+              ],
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "human",
+              "scope": "shared:scatterhoard",
+              "why": "kept so the rule can be re-argued rather than only obeyed"
+            }
+          ]
+        },
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": "(present: identical to content[0].text, and checked against the output schema)"
+  }
+}

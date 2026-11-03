@@ -1,0 +1,241 @@
+{
+ "provenance": "Real hoard_recall calls issued during development, recovered from session transcripts. Only calls made before 2026-08-15 are included -- the traversal corpus was built then -- so none of these could have been influenced by it. Relevance labels are NOT here.",
+ "cutoff": "2026-08-15",
+ "sessions_scanned": 37,
+ "queries": [
+  {
+   "query": "Scatterhoard design decisions and project state",
+   "first_seen": "2026-08-03T04:59:49.209Z",
+   "session": "07a2479d"
+  },
+  {
+   "query": "how are similarity scores computed across memory sets",
+   "first_seen": "2026-08-03T05:00:18.276Z",
+   "session": "07a2479d"
+  },
+  {
+   "query": "what happens to similarity scores in a store with very few memories",
+   "first_seen": "2026-08-03T05:01:26.705Z",
+   "session": "07a2479d"
+  },
+  {
+   "query": "lone vector is its own centroid so a single memory scores 0.0",
+   "first_seen": "2026-08-03T05:02:21.074Z",
+   "session": "07a2479d"
+  },
+  {
+   "query": "protocol channel discipline",
+   "first_seen": "2026-08-03T05:02:35.189Z",
+   "session": "07a2479d"
+  },
+  {
+   "query": "how should reduced detail on the wire be implemented",
+   "first_seen": "2026-08-03T23:43:58.111Z",
+   "session": "1f97293d"
+  },
+  {
+   "query": "scatterhoard design decisions and constraints",
+   "first_seen": "2026-08-03T23:44:51.354Z",
+   "session": "1f97293d"
+  },
+  {
+   "query": "reduced detail on the wire",
+   "first_seen": "2026-08-03T23:45:07.258Z",
+   "session": "1f97293d"
+  },
+  {
+   "query": "MemoryView",
+   "first_seen": "2026-08-04T00:40:46.865Z",
+   "session": "1f97293d"
+  },
+  {
+   "query": "how case folding of keywords works",
+   "first_seen": "2026-08-05T03:58:17.043Z",
+   "session": "35e08298"
+  },
+  {
+   "query": "how are keyword lookups made case-insensitive without altering what was stored",
+   "first_seen": "2026-08-05T03:58:17.577Z",
+   "session": "35e08298"
+  },
+  {
+   "query": "mutation testing",
+   "first_seen": "2026-08-05T03:59:25.506Z",
+   "session": "35e08298"
+  },
+  {
+   "query": "dirty flag, reconciliation base per target, drop and restore safety copy",
+   "first_seen": "2026-08-06T03:26:49.287Z",
+   "session": "4e142e81"
+  },
+  {
+   "query": "why the convention catalog is deliberately kept small",
+   "first_seen": "2026-08-10T03:14:08.600Z",
+   "session": "224eb7aa"
+  },
+  {
+   "query": "two servers disagreeing about the embedding model",
+   "first_seen": "2026-08-10T03:16:12.135Z",
+   "session": "224eb7aa"
+  },
+  {
+   "query": "reconciliation base migration",
+   "first_seen": "2026-08-12T03:53:30.564Z",
+   "session": "d086964c"
+  },
+  {
+   "query": "attribution",
+   "first_seen": "2026-08-12T03:54:18.139Z",
+   "session": "d086964c"
+  },
+  {
+   "query": "reconciliation",
+   "first_seen": "2026-08-12T03:57:37.017Z",
+   "session": "d086964c"
+  },
+  {
+   "query": "store registry design",
+   "first_seen": "2026-08-12T04:30:48.555Z",
+   "session": "d086964c"
+  },
+  {
+   "query": "store registry in-tree",
+   "first_seen": "2026-08-12T14:10:52.400Z",
+   "session": "d086964c"
+  },
+  {
+   "query": "how keywords should be chosen and spelled when storing a memory",
+   "first_seen": "2026-08-13T04:42:09.769Z",
+   "session": "aaab13e3"
+  },
+  {
+   "query": "the Golden Rule, memories about people, charitable judgement versus accurate technical criticism",
+   "first_seen": "2026-08-14T01:34:56.272Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "tombstones, forgotten memories, counting records in a set versus live memories",
+   "first_seen": "2026-08-14T02:10:43.641Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "near-duplicate detection before storing, surfacing neighbours versus warning, similarity thresholds",
+   "first_seen": "2026-08-14T04:39:50.567Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "a convention that names an operation the catalog does not define, withholding convention text until tools exist",
+   "first_seen": "2026-08-14T04:39:50.886Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "confidence field calibration, what a low confidence number means, recalibration versus a new belief",
+   "first_seen": "2026-08-14T04:47:54.592Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "served convention text read by strangers, examples that assert facts about the reader's own store",
+   "first_seen": "2026-08-14T05:48:53.046Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "malformed tool call remark, warning rather than refusing, surfacing damage in the response",
+   "first_seen": "2026-08-14T05:48:53.138Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "graph traversal from seed memories, link labels, decay by distance, fan-out",
+   "first_seen": "2026-08-14T23:59:10.863Z",
+   "session": "92920e5f"
+  }
+ ],
+ "keyword_searches": [
+  {
+   "keywords": [
+    "centroid",
+    "cold-start"
+   ],
+   "first_seen": "2026-08-03T05:02:34.664Z",
+   "session": "07a2479d"
+  },
+  {
+   "keywords": [
+    "MemoryView"
+   ],
+   "first_seen": "2026-08-03T23:44:20.457Z",
+   "session": "1f97293d"
+  },
+  {
+   "keywords": [
+    "memoryview"
+   ],
+   "first_seen": "2026-08-03T23:44:20.463Z",
+   "session": "1f97293d"
+  },
+  {
+   "keywords": [
+    "keyword::folded",
+    "sqlite"
+   ],
+   "first_seen": "2026-08-05T03:58:04.618Z",
+   "session": "35e08298"
+  },
+  {
+   "keywords": [
+    "scope_key"
+   ],
+   "first_seen": "2026-08-05T03:58:52.783Z",
+   "session": "35e08298"
+  },
+  {
+   "keywords": [
+    "\u00fcbersicht",
+    "strasse"
+   ],
+   "first_seen": "2026-08-05T04:01:57.851Z",
+   "session": "35e08298"
+  },
+  {
+   "keywords": [
+    "store-registry"
+   ],
+   "first_seen": "2026-08-06T23:45:39.954Z",
+   "session": "4e142e81"
+  },
+  {
+   "keywords": [
+    "reconciliation-base"
+   ],
+   "first_seen": "2026-08-12T03:57:45.542Z",
+   "session": "d086964c"
+  },
+  {
+   "keywords": [
+    "in-tree-store"
+   ],
+   "first_seen": "2026-08-12T14:11:30.041Z",
+   "session": "d086964c"
+  },
+  {
+   "keywords": [
+    "hoard-scope-topics"
+   ],
+   "first_seen": "2026-08-13T04:00:29.448Z",
+   "session": "d086964c"
+  },
+  {
+   "keywords": [
+    "budget"
+   ],
+   "first_seen": "2026-08-13T04:38:59.410Z",
+   "session": "aaab13e3"
+  },
+  {
+   "keywords": [
+    "golden-rule"
+   ],
+   "first_seen": "2026-08-14T01:35:10.610Z",
+   "session": "9c39780c"
+  }
+ ]
+}

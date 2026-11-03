@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": "this server has no data directory, so it cannot write a new set's database. That is startup wiring, not something a caller can supply.",
+        "type": "text"
+      }
+    ],
+    "isError": true
+  }
+}

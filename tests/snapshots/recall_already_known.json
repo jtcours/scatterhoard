@@ -1,0 +1,76 @@
+{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": {
+    "content": [
+      {
+        "text": {
+          "memories": [
+            {
+              "confidence": 0.7,
+              "content": "alpha alpha are counted before they are routed",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-2>",
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "llm",
+              "scope": "shared:scatterhoard",
+              "similarity": 0.9463,
+              "why": "the counter predates the rule"
+            },
+            {
+              "confidence": 0.7,
+              "content": "alpha alpha alpha and beta share one transport",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-3>",
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "llm",
+              "scope": "shared:scatterhoard",
+              "similarity": 0.8162,
+              "why": "noticed while tracing a request"
+            },
+            {
+              "confidence": 0.8,
+              "content": "the measurement that settled the routing rule",
+              "created": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "id": "<id-4>",
+              "inherited": 0.7,
+              "links": [
+                {
+                  "label": "supports",
+                  "target": "<id-5>"
+                }
+              ],
+              "modified": {
+                "at": "<timestamp>",
+                "by": "<id-1>"
+              },
+              "origin": "human",
+              "scope": "shared:scatterhoard",
+              "similarity": -0.9056,
+              "why": "kept so the rule can be re-argued rather than only obeyed"
+            }
+          ],
+          "semantic_search_available": true
+        },
+        "type": "text"
+      }
+    ],
+    "isError": false,
+    "structuredContent": "(present: identical to content[0].text, and checked against the output schema)"
+  }
+}

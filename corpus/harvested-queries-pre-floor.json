@@ -1,0 +1,1153 @@
+{
+ "provenance": "Real hoard_recall calls issued during development, recovered from session transcripts. Only calls made before 2026-09-07 are included -- the non-match floor was designed 2026-09-09 and the sessions studying it began 2026-09-07 -- so none of these could have been influenced by it. Relevance labels are NOT here.",
+ "cutoff": "2026-09-07",
+ "sessions_scanned": 37,
+ "queries": [
+  {
+   "query": "Scatterhoard design decisions and project state",
+   "first_seen": "2026-08-03T04:59:49.209Z",
+   "session": "07a2479d"
+  },
+  {
+   "query": "how are similarity scores computed across memory sets",
+   "first_seen": "2026-08-03T05:00:18.276Z",
+   "session": "07a2479d"
+  },
+  {
+   "query": "what happens to similarity scores in a store with very few memories",
+   "first_seen": "2026-08-03T05:01:26.705Z",
+   "session": "07a2479d"
+  },
+  {
+   "query": "lone vector is its own centroid so a single memory scores 0.0",
+   "first_seen": "2026-08-03T05:02:21.074Z",
+   "session": "07a2479d"
+  },
+  {
+   "query": "protocol channel discipline",
+   "first_seen": "2026-08-03T05:02:35.189Z",
+   "session": "07a2479d"
+  },
+  {
+   "query": "how should reduced detail on the wire be implemented",
+   "first_seen": "2026-08-03T23:43:58.111Z",
+   "session": "1f97293d"
+  },
+  {
+   "query": "scatterhoard design decisions and constraints",
+   "first_seen": "2026-08-03T23:44:51.354Z",
+   "session": "1f97293d"
+  },
+  {
+   "query": "reduced detail on the wire",
+   "first_seen": "2026-08-03T23:45:07.258Z",
+   "session": "1f97293d"
+  },
+  {
+   "query": "MemoryView",
+   "first_seen": "2026-08-04T00:40:46.865Z",
+   "session": "1f97293d"
+  },
+  {
+   "query": "how case folding of keywords works",
+   "first_seen": "2026-08-05T03:58:17.043Z",
+   "session": "35e08298"
+  },
+  {
+   "query": "how are keyword lookups made case-insensitive without altering what was stored",
+   "first_seen": "2026-08-05T03:58:17.577Z",
+   "session": "35e08298"
+  },
+  {
+   "query": "mutation testing",
+   "first_seen": "2026-08-05T03:59:25.506Z",
+   "session": "35e08298"
+  },
+  {
+   "query": "dirty flag, reconciliation base per target, drop and restore safety copy",
+   "first_seen": "2026-08-06T03:26:49.287Z",
+   "session": "4e142e81"
+  },
+  {
+   "query": "why the convention catalog is deliberately kept small",
+   "first_seen": "2026-08-10T03:14:08.600Z",
+   "session": "224eb7aa"
+  },
+  {
+   "query": "two servers disagreeing about the embedding model",
+   "first_seen": "2026-08-10T03:16:12.135Z",
+   "session": "224eb7aa"
+  },
+  {
+   "query": "reconciliation base migration",
+   "first_seen": "2026-08-12T03:53:30.564Z",
+   "session": "d086964c"
+  },
+  {
+   "query": "attribution",
+   "first_seen": "2026-08-12T03:54:18.139Z",
+   "session": "d086964c"
+  },
+  {
+   "query": "reconciliation",
+   "first_seen": "2026-08-12T03:57:37.017Z",
+   "session": "d086964c"
+  },
+  {
+   "query": "store registry design",
+   "first_seen": "2026-08-12T04:30:48.555Z",
+   "session": "d086964c"
+  },
+  {
+   "query": "store registry in-tree",
+   "first_seen": "2026-08-12T14:10:52.400Z",
+   "session": "d086964c"
+  },
+  {
+   "query": "how keywords should be chosen and spelled when storing a memory",
+   "first_seen": "2026-08-13T04:42:09.769Z",
+   "session": "aaab13e3"
+  },
+  {
+   "query": "the Golden Rule, memories about people, charitable judgement versus accurate technical criticism",
+   "first_seen": "2026-08-14T01:34:56.272Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "tombstones, forgotten memories, counting records in a set versus live memories",
+   "first_seen": "2026-08-14T02:10:43.641Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "near-duplicate detection before storing, surfacing neighbours versus warning, similarity thresholds",
+   "first_seen": "2026-08-14T04:39:50.567Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "a convention that names an operation the catalog does not define, withholding convention text until tools exist",
+   "first_seen": "2026-08-14T04:39:50.886Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "confidence field calibration, what a low confidence number means, recalibration versus a new belief",
+   "first_seen": "2026-08-14T04:47:54.592Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "served convention text read by strangers, examples that assert facts about the reader's own store",
+   "first_seen": "2026-08-14T05:48:53.046Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "malformed tool call remark, warning rather than refusing, surfacing damage in the response",
+   "first_seen": "2026-08-14T05:48:53.138Z",
+   "session": "9c39780c"
+  },
+  {
+   "query": "graph traversal from seed memories, link labels, decay by distance, fan-out",
+   "first_seen": "2026-08-14T23:59:10.863Z",
+   "session": "92920e5f"
+  },
+  {
+   "query": "link labels written in practice, which labels the model actually uses when storing memories",
+   "first_seen": "2026-08-15T03:58:18.476Z",
+   "session": "92920e5f"
+  },
+  {
+   "query": "lessons about how to write code, testing, debugging, tools, process",
+   "first_seen": "2026-08-15T23:08:55.187Z",
+   "session": "92920e5f"
+  },
+  {
+   "query": "what happens when a memory is forgotten",
+   "first_seen": "2026-08-16T02:24:26.999Z",
+   "session": "92920e5f"
+  },
+  {
+   "query": "how should a memory set be exported and committed",
+   "first_seen": "2026-08-16T04:13:05.580Z",
+   "session": "f30f361c"
+  },
+  {
+   "query": "how does recall decide how many memories to return",
+   "first_seen": "2026-08-19T17:29:14.286Z",
+   "session": "4d156871"
+  },
+  {
+   "query": "malformed tool call damage",
+   "first_seen": "2026-08-19T17:29:40.366Z",
+   "session": "4d156871"
+  },
+  {
+   "query": "why keep stores central instead of inside the checkout",
+   "first_seen": "2026-08-19T21:08:45.645Z",
+   "session": "4d156871"
+  },
+  {
+   "query": "how large must a corpus be before traversal beats simply raising the limit",
+   "first_seen": "2026-08-19T21:09:00.112Z",
+   "session": "4d156871"
+  },
+  {
+   "query": "tool-call markup damage, escaping angle brackets when writing about tags",
+   "first_seen": "2026-08-20T04:36:28.012Z",
+   "session": "4477c546"
+  },
+  {
+   "query": "what happens when a tool call arrives with a mis-closed parameter",
+   "first_seen": "2026-08-20T04:37:47.466Z",
+   "session": "4477c546"
+  },
+  {
+   "query": "test fixture with one of something the real configuration has many of, hiding a defect",
+   "first_seen": "2026-08-20T04:56:38.449Z",
+   "session": "4477c546"
+  },
+  {
+   "query": "changing a value's representation breaks the code that recognises it, detectors and normalisers going stale",
+   "first_seen": "2026-08-20T16:50:01.421Z",
+   "session": "fcd72c5d"
+  },
+  {
+   "query": "keyword match count comparable across memory sets",
+   "first_seen": "2026-08-20T17:35:57.273Z",
+   "session": "fcd72c5d"
+  },
+  {
+   "query": "build artifact that is also a running service endpoint, cleaning the build directory breaks a client",
+   "first_seen": "2026-08-20T17:36:18.507Z",
+   "session": "fcd72c5d"
+  },
+  {
+   "query": "why the embedding model identity must be recorded when vectors are not exported",
+   "first_seen": "2026-08-20T22:59:24.890Z",
+   "session": "fcd72c5d"
+  },
+  {
+   "query": "what happens when two servers disagree about the embedding model",
+   "first_seen": "2026-08-21T01:49:08.891Z",
+   "session": "fcd72c5d"
+  },
+  {
+   "query": "graph traversal decay and seeds",
+   "first_seen": "2026-08-21T01:49:15.362Z",
+   "session": "fcd72c5d"
+  },
+  {
+   "query": "what did the escape and refusal fix change about storing markup",
+   "first_seen": "2026-08-21T01:50:10.490Z",
+   "session": "fcd72c5d"
+  },
+  {
+   "query": "questioning whether a problem is a fault to fix or a condition to report, dissolving the machinery built around it",
+   "first_seen": "2026-08-21T01:53:31.357Z",
+   "session": "fcd72c5d"
+  },
+  {
+   "query": "export review gate scope, which memories get reviewed before commit, imported memories and provenance",
+   "first_seen": "2026-08-21T04:09:37.574Z",
+   "session": "7985a6b0"
+  },
+  {
+   "query": "integrity of an import file, forging attribution fields versus forging content, checksum not cryptographic",
+   "first_seen": "2026-08-21T04:18:12.775Z",
+   "session": "7985a6b0"
+  },
+  {
+   "query": "a rule that skips work because it was already done elsewhere depends on the topology that defines elsewhere",
+   "first_seen": "2026-08-21T04:18:17.227Z",
+   "session": "7985a6b0"
+  },
+  {
+   "query": "tuning conventions by observing behaviour over sessions, personal memory overriding convention-governed behaviour",
+   "first_seen": "2026-08-21T05:03:28.639Z",
+   "session": "7985a6b0"
+  },
+  {
+   "query": "a rule documented on one implementation path but not the other, two write paths disagreeing",
+   "first_seen": "2026-08-21T05:21:02.457Z",
+   "session": "7985a6b0"
+  },
+  {
+   "query": "a test that builds its own request can pass while the real interface cannot reach the code under test",
+   "first_seen": "2026-08-21T21:02:13.441Z",
+   "session": "7985a6b0"
+  },
+  {
+   "query": "a name that describes the current implementation rather than the property it guarantees",
+   "first_seen": "2026-08-23T19:36:02.672Z",
+   "session": "7985a6b0"
+  },
+  {
+   "query": "cross-set edge suppression: an edge in one shared set changing the standing of a memory in another",
+   "first_seen": "2026-08-24T00:41:13.876Z",
+   "session": "53142ec7"
+  },
+  {
+   "query": "report rather than resolve: surface a conflict to the model instead of software adjudicating it",
+   "first_seen": "2026-08-24T00:41:22.773Z",
+   "session": "53142ec7"
+  },
+  {
+   "query": "why local sets differ from shared sets; local memories may override or suppress project memories",
+   "first_seen": "2026-08-24T00:50:12.938Z",
+   "session": "53142ec7"
+  },
+  {
+   "query": "local set is unique rather than a class; cross-set edges report rather than resolve; trust gradient withdrawn",
+   "first_seen": "2026-08-24T01:51:15.402Z",
+   "session": "53142ec7"
+  },
+  {
+   "query": "a test that passes without exercising the guard; two code paths to the same behaviour; mutation testing revealed it",
+   "first_seen": "2026-08-24T05:07:12.661Z",
+   "session": "53142ec7"
+  },
+  {
+   "query": "a guard that filters on how something is written can be bypassed by writing it another way",
+   "first_seen": "2026-08-25T01:21:51.633Z",
+   "session": "53142ec7"
+  },
+  {
+   "query": "probing a layer below a guard reports the guard missing; verify the probe takes the real path",
+   "first_seen": "2026-08-25T01:21:51.983Z",
+   "session": "53142ec7"
+  },
+  {
+   "query": "a counting or aggregating command that only reports correctly when the values are zero",
+   "first_seen": "2026-08-25T01:43:04.316Z",
+   "session": "e575cd9e"
+  },
+  {
+   "query": "a check or instrument that reports success because it was only ever exercised on the passing case",
+   "first_seen": "2026-08-25T01:43:07.773Z",
+   "session": "e575cd9e"
+  },
+  {
+   "query": "writing a test that observes traversal inheritance requires keeping the memory out of the seed set",
+   "first_seen": "2026-08-25T01:43:14.682Z",
+   "session": "e575cd9e"
+  },
+  {
+   "query": "a set's charter description decides what kinds of memory get stored into it",
+   "first_seen": "2026-08-25T04:38:26.384Z",
+   "session": "e575cd9e"
+  },
+  {
+   "query": "a list of examples inside a rule narrows the rule by implication and becomes a whitelist",
+   "first_seen": "2026-08-25T05:09:00.671Z",
+   "session": "e575cd9e"
+  },
+  {
+   "query": "a session records what it was told more readily than what it decided itself",
+   "first_seen": "2026-08-25T05:44:04.779Z",
+   "session": "e575cd9e"
+  },
+  {
+   "query": "catalog character budget, whether the conventions carry avoidable length or the budget is too small",
+   "first_seen": "2026-08-25T13:49:05.859Z",
+   "session": "94ae9574"
+  },
+  {
+   "query": "two different ways of counting the catalog size, ids counted or not, a figure that disagrees with the enforced budget",
+   "first_seen": "2026-08-25T23:21:06.730Z",
+   "session": "94ae9574"
+  },
+  {
+   "query": "prose style of served instruction text, sentence length, wordiness, how convention wording should be shaped",
+   "first_seen": "2026-08-25T23:21:07.211Z",
+   "session": "94ae9574"
+  },
+  {
+   "query": "write-surface sweep of hand-edited memory files: id collision, absent supersession tip, cross-set dispute",
+   "first_seen": "2026-08-25T23:48:20.929Z",
+   "session": "d88d1bf9"
+  },
+  {
+   "query": "a mutation surviving shows a new guard is redundant; where to place a check \u2014 at each step or once at the point of use",
+   "first_seen": "2026-08-26T00:01:51.641Z",
+   "session": "d88d1bf9"
+  },
+  {
+   "query": "counting recorded expectations is not measuring outcomes; a coverage figure read off a record rather than a run",
+   "first_seen": "2026-08-26T00:47:31.945Z",
+   "session": "d88d1bf9"
+  },
+  {
+   "query": "a test pinning where a defect does not reach; the boundary of a known defect as a regression guard",
+   "first_seen": "2026-08-26T03:28:01.683Z",
+   "session": "d88d1bf9"
+  },
+  {
+   "query": "how the human partner wants questions and choices presented; multiple choice; asking versus recommending",
+   "first_seen": "2026-08-26T03:58:17.249Z",
+   "session": "d88d1bf9"
+  },
+  {
+   "query": "a rule governing a reflexive action must be in always-loaded context rather than searchable memory",
+   "first_seen": "2026-08-26T04:00:33.737Z",
+   "session": "d88d1bf9"
+  },
+  {
+   "query": "standing request to record how recalled memories land, occasions rather than characterisations",
+   "first_seen": "2026-08-26T05:02:42.406Z",
+   "session": "d88d1bf9"
+  },
+  {
+   "query": "dropping a memory set and restoring a set from a file, safety copy before a destructive operation",
+   "first_seen": "2026-08-26T05:13:53.324Z",
+   "session": "7ac4cc3c"
+  },
+  {
+   "query": "mutation testing anchor matches the wrong function when parallel code is added",
+   "first_seen": "2026-08-26T20:58:10.320Z",
+   "session": "7ac4cc3c"
+  },
+  {
+   "query": "a test passes because an earlier guard refuses first, proving a different guard than the one it names",
+   "first_seen": "2026-08-26T20:58:27.419Z",
+   "session": "7ac4cc3c"
+  },
+  {
+   "query": "a timeout kills the process it launched but not the children holding its pipe",
+   "first_seen": "2026-08-27T00:32:52.663Z",
+   "session": "7ac4cc3c"
+  },
+  {
+   "query": "a record built for one purpose acquires a second meaning and a second set of requirements",
+   "first_seen": "2026-08-28T04:39:22.514Z",
+   "session": "7ac4cc3c"
+  },
+  {
+   "query": "amendment versus supersession, checksum, reconciliation base, detecting concurrent edits between two sets",
+   "first_seen": "2026-08-29T12:54:02.333Z",
+   "session": "b796e354"
+  },
+  {
+   "query": "how often corrections happen, amendment versus supersession frequency measured in the live sets",
+   "first_seen": "2026-08-30T03:45:50.116Z",
+   "session": "b796e354"
+  },
+  {
+   "query": "a number recorded in a document drifts because nothing re-checks it, and is then believed",
+   "first_seen": "2026-08-30T05:03:55.875Z",
+   "session": "b796e354"
+  },
+  {
+   "query": "design documents growing too large to navigate, moving project history into the memory store",
+   "first_seen": "2026-08-30T05:20:30.393Z",
+   "session": "b796e354"
+  },
+  {
+   "query": "time zone conversion, working across regions, tooling the user wants built",
+   "first_seen": "2026-08-30T05:34:11.941Z",
+   "session": "b796e354"
+  },
+  {
+   "query": "branch descriptions in a oneOf tool schema are dropped when the schema is flattened, so only the top-level tool description reaches a client",
+   "first_seen": "2026-08-30T14:40:36.441Z",
+   "session": "2a820c6d"
+  },
+  {
+   "query": "a warning or diagnostic that fires on every run cannot distinguish the condition it warns about, so it teaches nothing",
+   "first_seen": "2026-08-30T19:17:31.793Z",
+   "session": "2a820c6d"
+  },
+  {
+   "query": "a cascading delete destroying records that are not derived data, and a mutation flipping from survives to caught as a signal that a change altered meaning elsewhere",
+   "first_seen": "2026-08-30T20:49:52.345Z",
+   "session": "2a820c6d"
+  },
+  {
+   "query": "after a tool refuses an action, evaluating only the suggested substitute instead of re-deriving what you were actually trying to achieve",
+   "first_seen": "2026-08-30T22:06:53.042Z",
+   "session": "2a820c6d"
+  },
+  {
+   "query": "measuring whether a convention or guideline actually changes behaviour, by looking at an observable in the artifacts it produces before and after",
+   "first_seen": "2026-08-30T22:41:26.460Z",
+   "session": "2a820c6d"
+  },
+  {
+   "query": "a transformation that is deterministic given its inputs cannot cause replicas to diverge, but one that depends on a per-call argument can",
+   "first_seen": "2026-08-31T05:16:24.848Z",
+   "session": "2a820c6d"
+  },
+  {
+   "query": "a mutation survives because the guard it targets is unreachable for the inputs the tests use; two filters staged on the same predicate",
+   "first_seen": "2026-08-31T14:38:52.140Z",
+   "session": "732983a9"
+  },
+  {
+   "query": "set UUID hard cut, minting UUIDs manually into existing sets rather than on next export",
+   "first_seen": "2026-08-31T17:59:51.707Z",
+   "session": "732983a9"
+  },
+  {
+   "query": "a guard tested only with values the system never actually produces; mutation caught but the domain was unreal",
+   "first_seen": "2026-08-31T18:23:55.381Z",
+   "session": "732983a9"
+  },
+  {
+   "query": "adding an optional field to a serialised record changes every record's checksum unless it is omitted when absent",
+   "first_seen": "2026-08-31T20:26:42.184Z",
+   "session": "732983a9"
+  },
+  {
+   "query": "a backup taken before a data migration becomes actively harmful to restore rather than merely out of date",
+   "first_seen": "2026-09-01T00:09:26.964Z",
+   "session": "732983a9"
+  },
+  {
+   "query": "a configuration fallback chain collapses several sources into one value and loses which source it came from",
+   "first_seen": "2026-09-01T05:39:48.257Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "query": "summarising an earlier decision in condensed form silently drops the qualification that made it correct",
+   "first_seen": "2026-09-01T05:40:03.209Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "query": "bulk-updating many test expectations after a change hides the ones that moved for a different reason",
+   "first_seen": "2026-09-02T01:35:44.968Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "query": "how attribution and author identity should be handled in memory sets",
+   "first_seen": "2026-09-02T04:23:44.779Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "query": "a reported count should describe what an operation wrote rather than the total that exists afterwards",
+   "first_seen": "2026-09-02T04:23:53.574Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "query": "mechanically updating many similar test assertions after a refactor conceals the ones that changed for another cause",
+   "first_seen": "2026-09-02T04:24:09.407Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "query": "truncating a long diagnostic tool's output loses the detail that was the reason for running it",
+   "first_seen": "2026-09-02T04:24:23.818Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "query": "copying a database file while a process holds it open produces a backup that is silently incomplete",
+   "first_seen": "2026-09-02T04:27:56.740Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "query": "what kinds of question are effective at surfacing defects during review or design discussion",
+   "first_seen": "2026-09-02T14:43:46.004Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "query": "which direction a cross-set link may point between a personal set and a shared one",
+   "first_seen": "2026-09-02T19:04:42.170Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "query": "a guard stops being tested because another layer supplies the same answer first",
+   "first_seen": "2026-09-02T19:55:44.136Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "query": "a test helper that reaches around the public interface to build a state the interface cannot",
+   "first_seen": "2026-09-02T22:42:13.450Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "query": "effort has limits so preventing mistakes belongs in tools and environment rather than in trying harder",
+   "first_seen": "2026-09-02T23:16:46.816Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "query": "move closed issues and completed backlog items out of the markdown files into memory",
+   "first_seen": "2026-09-03T04:25:48.466Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "query": "how the graph traversal walk from seed memories was designed, what was tried and rejected, and why it works the way it does",
+   "first_seen": "2026-09-03T04:32:09.579Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "query": "a memory I know exists has vanished from search results and I cannot work out why",
+   "first_seen": "2026-09-03T04:37:16.998Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "query": "the default result limit was measured and found too low, F1 peaks, the cut is a window rather than a fixed count",
+   "first_seen": "2026-09-03T04:47:39.170Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "query": "a redundant guard placed at the wrong step of a walk, revealed by mutation testing leaving the suite green",
+   "first_seen": "2026-09-03T04:48:29.568Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "query": "choosing a conservative bound instead of a tuned weight when no data exists to tune it",
+   "first_seen": "2026-09-03T04:48:29.664Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "query": "why is the recall limit a window rather than a fixed number of results, and what was the old default",
+   "first_seen": "2026-09-03T04:50:48.837Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "query": "a guard that works produces no evidence it is working, so the pressure to remove it comes from its false alarms",
+   "first_seen": "2026-09-03T05:46:48.183Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "query": "record the losing argument or the objection alongside a decision so it can be revisited rather than merely obeyed",
+   "first_seen": "2026-09-03T05:53:20.651Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "query": "triggering a recall from a file path or symbol name the model is about to touch, rather than from a question",
+   "first_seen": "2026-09-03T23:50:25.773Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "query": "a keyword on a superseded memory still matches searches, so keywords cannot be retired by superseding",
+   "first_seen": "2026-09-04T00:39:10.214Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "query": "after changing behaviour, recorded mutations that guarded the old behaviour can go stale or start surviving silently",
+   "first_seen": "2026-09-04T04:39:41.020Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "query": "measuring the shape of identifiers and concluding they mean the same thing without reading what they are attached to",
+   "first_seen": "2026-09-04T05:01:05.893Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "query": "what to write in a memory's context field \u2014 when and in response to what it came up",
+   "first_seen": "2026-09-05T03:45:15.553Z",
+   "session": "c702a9b9"
+  },
+  {
+   "query": "context field pointing at a file that no longer exists; context rots because nothing re-reads it",
+   "first_seen": "2026-09-05T03:47:26.090Z",
+   "session": "c702a9b9"
+  },
+  {
+   "query": "where guidance about filling a tool parameter belongs: schema description versus the convention catalog",
+   "first_seen": "2026-09-05T04:29:03.847Z",
+   "session": "c702a9b9"
+  },
+  {
+   "query": "one memory superseding two memories at once, merging two records into a single replacement",
+   "first_seen": "2026-09-05T04:34:18.582Z",
+   "session": "c702a9b9"
+  },
+  {
+   "query": "recording the strongest case against a claim so accumulation is not confirmation bias",
+   "first_seen": "2026-09-05T06:00:40.980Z",
+   "session": "c702a9b9"
+  },
+  {
+   "query": "reserving unconditional context for what a reader would never think to search for; push versus pull",
+   "first_seen": "2026-09-05T06:32:22.268Z",
+   "session": "c702a9b9"
+  },
+  {
+   "query": "extracting text from a scanned PDF with no text layer on macOS; no poppler or pdftotext installed",
+   "first_seen": "2026-09-06T01:06:31.854Z",
+   "session": "c9aa46f9"
+  },
+  {
+   "query": "claiming to have performed an action that was never actually carried out; narrating a tool call without making it",
+   "first_seen": "2026-09-06T04:37:03.177Z",
+   "session": "c9aa46f9"
+  },
+  {
+   "query": "a response field I had not noticed or paid attention to until it was pointed out",
+   "first_seen": "2026-09-06T05:42:55.063Z",
+   "session": "c702a9b9"
+  },
+  {
+   "query": "a field in a tool response that gets ignored because it never changes",
+   "first_seen": "2026-09-06T05:47:26.236Z",
+   "session": "c702a9b9"
+  },
+  {
+   "query": "finding a convention's defects by performing it rather than by reading it",
+   "first_seen": "2026-09-06T05:56:13.527Z",
+   "session": "c702a9b9"
+  },
+  {
+   "query": "the summary output mode: a derived index line capped at 120 characters, cut at a sentence or a word",
+   "first_seen": "2026-09-06T13:50:26.316Z",
+   "session": "da1409f9"
+  },
+  {
+   "query": "re-deriving a measured constant from a spec reveals the shape its author assumed",
+   "first_seen": "2026-09-06T13:50:28.341Z",
+   "session": "da1409f9"
+  },
+  {
+   "query": "a tool that rewrites files in the working tree makes concurrent edits unsafe",
+   "first_seen": "2026-09-06T14:13:32.704Z",
+   "session": "da1409f9"
+  },
+  {
+   "query": "hold on re-tuning the conventions until performance under them has been evaluated",
+   "first_seen": "2026-09-06T20:34:27.323Z",
+   "session": "da1409f9"
+  },
+  {
+   "query": "a reduced projection silently breaks rules that read the fields it drops",
+   "first_seen": "2026-09-06T20:51:48.661Z",
+   "session": "da1409f9"
+  },
+  {
+   "query": "trusting a stored claim about behaviour over the tool output contradicting it",
+   "first_seen": "2026-09-06T23:38:17.934Z",
+   "session": "da1409f9"
+  }
+ ],
+ "keyword_searches": [
+  {
+   "keywords": [
+    "centroid",
+    "cold-start"
+   ],
+   "first_seen": "2026-08-03T05:02:34.664Z",
+   "session": "07a2479d"
+  },
+  {
+   "keywords": [
+    "MemoryView"
+   ],
+   "first_seen": "2026-08-03T23:44:20.457Z",
+   "session": "1f97293d"
+  },
+  {
+   "keywords": [
+    "memoryview"
+   ],
+   "first_seen": "2026-08-03T23:44:20.463Z",
+   "session": "1f97293d"
+  },
+  {
+   "keywords": [
+    "keyword::folded",
+    "sqlite"
+   ],
+   "first_seen": "2026-08-05T03:58:04.618Z",
+   "session": "35e08298"
+  },
+  {
+   "keywords": [
+    "scope_key"
+   ],
+   "first_seen": "2026-08-05T03:58:52.783Z",
+   "session": "35e08298"
+  },
+  {
+   "keywords": [
+    "\u00fcbersicht",
+    "strasse"
+   ],
+   "first_seen": "2026-08-05T04:01:57.851Z",
+   "session": "35e08298"
+  },
+  {
+   "keywords": [
+    "store-registry"
+   ],
+   "first_seen": "2026-08-06T23:45:39.954Z",
+   "session": "4e142e81"
+  },
+  {
+   "keywords": [
+    "reconciliation-base"
+   ],
+   "first_seen": "2026-08-12T03:57:45.542Z",
+   "session": "d086964c"
+  },
+  {
+   "keywords": [
+    "in-tree-store"
+   ],
+   "first_seen": "2026-08-12T14:11:30.041Z",
+   "session": "d086964c"
+  },
+  {
+   "keywords": [
+    "hoard-scope-topics"
+   ],
+   "first_seen": "2026-08-13T04:00:29.448Z",
+   "session": "d086964c"
+  },
+  {
+   "keywords": [
+    "budget"
+   ],
+   "first_seen": "2026-08-13T04:38:59.410Z",
+   "session": "aaab13e3"
+  },
+  {
+   "keywords": [
+    "golden-rule"
+   ],
+   "first_seen": "2026-08-14T01:35:10.610Z",
+   "session": "9c39780c"
+  },
+  {
+   "keywords": [
+    "links",
+    "link-label",
+    "traversal",
+    "graph",
+    "in-degree",
+    "corpus"
+   ],
+   "first_seen": "2026-08-15T03:58:20.625Z",
+   "session": "92920e5f"
+  },
+  {
+   "keywords": [
+    "reproducibility",
+    "determinism",
+    "seed",
+    "identifiers",
+    "generator"
+   ],
+   "first_seen": "2026-08-16T03:53:01.345Z",
+   "session": "92920e5f"
+  },
+  {
+   "keywords": [
+    "embeddings",
+    "model-identity",
+    "reembed",
+    "vectors"
+   ],
+   "first_seen": "2026-08-20T22:59:32.081Z",
+   "session": "fcd72c5d"
+  },
+  {
+   "keywords": [
+    "export-review-gate",
+    "arrival-provenance",
+    "set-name-binding",
+    "bases"
+   ],
+   "first_seen": "2026-08-21T04:09:39.541Z",
+   "session": "7985a6b0"
+  },
+  {
+   "keywords": [
+    "import",
+    "trust-boundary",
+    "attribution",
+    "provenance",
+    "export-review-gate"
+   ],
+   "first_seen": "2026-08-21T04:18:15.204Z",
+   "session": "7985a6b0"
+  },
+  {
+   "keywords": [
+    "threat-model",
+    "security",
+    "git",
+    "recovery",
+    "set-name-binding",
+    "checksum"
+   ],
+   "first_seen": "2026-08-21T04:18:22.042Z",
+   "session": "7985a6b0"
+  },
+  {
+   "keywords": [
+    "conventions",
+    "convention-drafting",
+    "convention-tuning",
+    "capture-before-ending",
+    "baseline"
+   ],
+   "first_seen": "2026-08-21T05:03:38.012Z",
+   "session": "7985a6b0"
+  },
+  {
+   "keywords": [
+    "cross-set-references",
+    "supersedes",
+    "rival-set",
+    "a-set-can-suppress-another-sets-memory"
+   ],
+   "first_seen": "2026-08-24T00:41:17.333Z",
+   "session": "53142ec7"
+  },
+  {
+   "keywords": [
+    "cross-set",
+    "suppression",
+    "report-rather-than-resolve",
+    "CONTRADICTS"
+   ],
+   "first_seen": "2026-08-24T00:41:19.387Z",
+   "session": "53142ec7"
+  },
+  {
+   "keywords": [
+    "mutation-testing"
+   ],
+   "first_seen": "2026-08-24T05:22:59.087Z",
+   "session": "53142ec7"
+  },
+  {
+   "keywords": [
+    "catalog-budget",
+    "budget",
+    "MAX_CATALOG_CHARS",
+    "conventions"
+   ],
+   "first_seen": "2026-08-25T04:37:33.327Z",
+   "session": "e575cd9e"
+  },
+  {
+   "keywords": [
+    "related_to",
+    "link-labels",
+    "link-label-choice"
+   ],
+   "first_seen": "2026-08-25T05:33:32.255Z",
+   "session": "e575cd9e"
+  },
+  {
+   "keywords": [
+    "catalog-budget",
+    "MAX_CATALOG_CHARS",
+    "reinforcement",
+    "conventions"
+   ],
+   "first_seen": "2026-08-25T13:49:06.433Z",
+   "session": "94ae9574"
+  },
+  {
+   "keywords": [
+    "llm-assisted-coding",
+    "prompt",
+    "writing",
+    "instructions",
+    "prose"
+   ],
+   "first_seen": "2026-08-25T23:21:26.460Z",
+   "session": "94ae9574"
+  },
+  {
+   "keywords": [
+    "mutation-testing",
+    "guards",
+    "redundant-guard",
+    "fix-placement"
+   ],
+   "first_seen": "2026-08-26T00:01:52.238Z",
+   "session": "d88d1bf9"
+  },
+  {
+   "keywords": [
+    "recall-gloss-convention",
+    "observation"
+   ],
+   "first_seen": "2026-08-26T05:09:16.520Z",
+   "session": "d88d1bf9"
+  },
+  {
+   "keywords": [
+    "corrections",
+    "amend",
+    "supersession",
+    "measurement",
+    "corpus-measurement"
+   ],
+   "first_seen": "2026-08-30T03:45:53.487Z",
+   "session": "b796e354"
+  },
+  {
+   "keywords": [
+    "with_flat_view",
+    "tool-surface",
+    "schema",
+    "description"
+   ],
+   "first_seen": "2026-08-30T14:41:01.561Z",
+   "session": "2a820c6d"
+  },
+  {
+   "keywords": [
+    "set-uuid",
+    "uuid",
+    "set-identity",
+    "hard-cut",
+    "file-format"
+   ],
+   "first_seen": "2026-08-31T17:59:55.761Z",
+   "session": "732983a9"
+  },
+  {
+   "keywords": [
+    "provenance",
+    "configuration",
+    "defaults",
+    "fallback"
+   ],
+   "first_seen": "2026-09-01T05:39:52.864Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "keywords": [
+    "hoard-author"
+   ],
+   "first_seen": "2026-09-02T04:23:37.980Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "keywords": [
+    "seed-memory"
+   ],
+   "first_seen": "2026-09-02T18:41:56.262Z",
+   "session": "7e8bbfe0"
+  },
+  {
+   "keywords": [
+    "ISSUES.md",
+    "BACKLOG.md",
+    "closed-issues",
+    "archive",
+    "pruning"
+   ],
+   "first_seen": "2026-09-03T04:25:56.278Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "keywords": [
+    "rejected-alternative"
+   ],
+   "first_seen": "2026-09-03T04:32:00.767Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "keywords": [
+    "max-catalog-chars"
+   ],
+   "first_seen": "2026-09-04T00:38:04.603Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "keywords": [
+    "remark-not-refuse"
+   ],
+   "first_seen": "2026-09-04T00:38:05.206Z",
+   "session": "1d6eedd4"
+  },
+  {
+   "keywords": [
+    "context",
+    "context-field",
+    "hoard_memorize",
+    "provenance"
+   ],
+   "first_seen": "2026-09-05T03:45:18.535Z",
+   "session": "c702a9b9"
+  },
+  {
+   "keywords": [
+    "context-field",
+    "tool-surface",
+    "instruction-text",
+    "recall-gloss-convention"
+   ],
+   "first_seen": "2026-09-05T04:29:04.287Z",
+   "session": "c702a9b9"
+  },
+  {
+   "keywords": [
+    "hoard-watch",
+    "investigation-pipeline",
+    "seed-memory",
+    "context-budget"
+   ],
+   "first_seen": "2026-09-05T06:32:22.436Z",
+   "session": "c702a9b9"
+  },
+  {
+   "keywords": [
+    "defect-finding",
+    "questions",
+    "review"
+   ],
+   "first_seen": "2026-09-05T06:51:18.222Z",
+   "session": "c702a9b9"
+  },
+  {
+   "keywords": [
+    "hoard-watch"
+   ],
+   "first_seen": "2026-09-05T06:52:20.645Z",
+   "session": "c702a9b9"
+  },
+  {
+   "keywords": [
+    "hoard-watch",
+    "hoard-signpost",
+    "hoard-collect",
+    "hoard-investigation"
+   ],
+   "first_seen": "2026-09-05T06:52:59.882Z",
+   "session": "c702a9b9"
+  },
+  {
+   "keywords": [
+    "hoard-signpost",
+    "hoard-collect",
+    "hoard-investigation"
+   ],
+   "first_seen": "2026-09-06T21:03:20.917Z",
+   "session": "da1409f9"
+  },
+  {
+   "keywords": [
+    "hoard-scope-topics",
+    "hoard-author"
+   ],
+   "first_seen": "2026-09-06T22:23:14.435Z",
+   "session": "da1409f9"
+  },
+  {
+   "keywords": [
+    "max-catalog-chars",
+    "remark-not-refuse"
+   ],
+   "first_seen": "2026-09-06T23:35:32.024Z",
+   "session": "da1409f9"
+  },
+  {
+   "keywords": [
+    "hoard-watch",
+    "hoard-scope-topics",
+    "hoard-author"
+   ],
+   "first_seen": "2026-09-06T23:47:25.996Z",
+   "session": "da1409f9"
+  },
+  {
+   "keywords": [
+    "hoard-collect"
+   ],
+   "first_seen": "2026-09-06T23:47:31.432Z",
+   "session": "da1409f9"
+  }
+ ]
+}

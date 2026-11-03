@@ -1,0 +1,144 @@
+//! Spike: measure embedder seed quality on a labelled corpus of realistic Scatterhoard memories.
+//!
+//! Not production code. Lives in the scratchpad deliberately.
+
+use std::time::Instant;
+
+use model2vec_rs::model::StaticModel;
+use serde::Deserialize;
+
+#[derive(Deserialize)]
+struct Corpus {
+    memories: Vec<Memory>,
+    queries: Vec<Query>,
+}
+
+#[derive(Deserialize)]
+struct Memory {
+    id: String,
+    content: String,
+    why: String,
+    keywords: Vec<String>,
+}
+
+#[derive(Deserialize)]
+struct Query {
+    q: String,
+    relevant: Vec<String>,
+}
+
+/// Embedding input per documents/design/recall-mechanisms.md: content + why + keywords.
+fn embedding_input(m: &Memory) -> String {
+    format!("{} {} {}", m.content, m.why, m.keywords.join(" "))
+}
+
+fn cosine(a: &[f32], b: &[f32]) -> f32 {
+    let dot: f32 = a.iter().zip(b).map(|(x, y)| x * y).sum();
+    let na: f32 = a.iter().map(|x| x * x).sum::<f32>().sqrt();
+    let nb: f32 = b.iter().map(|x| x * x).sum::<f32>().sqrt();
+    if na == 0.0 || nb == 0.0 { 0.0 } else { dot / (na * nb) }
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let model_id = std::env::args()
+        .nth(1)
+        .unwrap_or_else(|| "minishlab/potion-base-8M".to_string());
+
+    eprintln!("loading {model_id} ...");
+    let model = StaticModel::from_pretrained(&model_id, None, None, None)?;
+
+    let corpus: Corpus = serde_json::from_str(&std::fs::read_to_string("corpus.json")?)?;
+    eprintln!(
+        "corpus: {} memories, {} queries",
+        corpus.memories.len(),
+        corpus.queries.len()
+    );
+
+    let inputs: Vec<String> = corpus.memories.iter().map(embedding_input).collect();
+
+    let t0 = Instant::now();
+    let mem_vecs = model.encode(&inputs);
+    let embed_time = t0.elapsed();
+
+    let dims = mem_vecs.first().map(|v| v.len()).unwrap_or(0);
+    println!("model: {model_id}");
+    println!("dimensions: {dims}");
+    println!(
+        "embedded {} memories in {:.1?} ({:.0}/sec)",
+        inputs.len(),
+        embed_time,
+        inputs.len() as f64 / embed_time.as_secs_f64()
+    );
+
+    let query_texts: Vec<String> = corpus.queries.iter().map(|q| q.q.clone()).collect();
+    let q_vecs = model.encode(&query_texts);
+
+    let ks = [1usize, 3, 5, 10];
+    // recall@k = fraction of each query's relevant memories that appear in the top k
+    let mut totals = vec![0.0f64; ks.len()];
+    // hit@k = did we get at least one relevant memory in the top k
+    let mut hits = vec![0usize; ks.len()];
+    let mut misses: Vec<String> = Vec::new();
+
+    for (qi, query) in corpus.queries.iter().enumerate() {
+        let mut scored: Vec<(f32, &str)> = corpus
+            .memories
+            .iter()
+            .enumerate()
+            .map(|(mi, m)| (cosine(&q_vecs[qi], &mem_vecs[mi]), m.id.as_str()))
+            .collect();
+        scored.sort_by(|a, b| b.0.partial_cmp(&a.0).unwrap());
+
+        for (ki, &k) in ks.iter().enumerate() {
+            let top: Vec<&str> = scored.iter().take(k).map(|(_, id)| *id).collect();
+            let found = query
+                .relevant
+                .iter()
+                .filter(|r| top.contains(&r.as_str()))
+                .count();
+            totals[ki] += found as f64 / query.relevant.len() as f64;
+            if found > 0 {
+                hits[ki] += 1;
+            }
+        }
+
+        // Record anything the design would actually rely on graph traversal to rescue.
+        let top5: Vec<&str> = scored.iter().take(5).map(|(_, id)| *id).collect();
+        let missed: Vec<&String> = query
+            .relevant
+            .iter()
+            .filter(|r| !top5.contains(&r.as_str()))
+            .collect();
+        if !missed.is_empty() {
+            misses.push(format!(
+                "  \"{}\"\n    missed at k=5: {:?}\n    top5: {:?}",
+                query.q,
+                missed.iter().map(|s| s.as_str()).collect::<Vec<_>>(),
+                top5
+            ));
+        }
+    }
+
+    let n = corpus.queries.len() as f64;
+    println!("\n{:<6} {:>10} {:>10}", "k", "recall@k", "hit@k");
+    for (ki, &k) in ks.iter().enumerate() {
+        println!(
+            "{:<6} {:>9.1}% {:>9.1}%",
+            k,
+            100.0 * totals[ki] / n,
+            100.0 * hits[ki] as f64 / n
+        );
+    }
+
+    if !misses.is_empty() {
+        println!(
+            "\nqueries with relevant memories outside top-5 ({}):",
+            misses.len()
+        );
+        for m in &misses {
+            println!("{m}");
+        }
+    }
+
+    Ok(())
+}

@@ -1,0 +1,571 @@
+{
+ "policies": "I judged each query by asking whether a session that issued it would want the memory back, not by vocabulary overlap: several memories use a query's exact words while answering a different question (e.g. keyword-spelling memories against a case-folding query), and several answer without sharing any word (the cold-start centroid observation against a query about small stores). Multi-topic queries -- whether joined by 'and' or by commas -- were read as unions, so a query naming dirty flags, per-target bases and the drop/restore safety copy collects everything on each leg rather than only memories spanning all three; the same for the Golden Rule query and the traversal query. Bare-noun queries ('attribution', 'reconciliation', 'store registry design') were read as topic sweeps and labelled generously across the topic's core mechanics, with adjacent-but-derived material pushed to borderline. A bare identifier ('MemoryView') was read as a request for the memory that decides that thing, not for everything the thing touches. Where a query was readable two ways I took the reading the wording most directly supports and then let borderline carry the other reading's material rather than merging them. The relevant/borderline line: relevant means the memory states, decides, or measures something the query asks for, and I would defend it in a review; borderline means the memory is one hop away -- it supplies the mechanism a relevant memory uses, applies the same rule to a neighbouring field, records a consequence of the answer, or is the same shape of problem in a different subsystem. Memories that merely share a keyword with the query and answer nothing it asked went in neither list.",
+ "queries": [
+  {
+   "q": "how are similarity scores computed across memory sets",
+   "reading": "Read as: how is a similarity score made comparable when a query searches several stores at once. Relevant is the union-centroid machinery and the same-model precondition; the general centroid decision and single-store cosine mechanics sit borderline because they do not address the cross-set part.",
+   "relevant": [
+    "019fe66e-0dc0-7bff-a55a-54391ae4f8cb",
+    "019fe672-a1a0-7209-ade1-d1626f7e1847",
+    "01a00566-8540-782d-ba95-a176b9ca4623",
+    "019fe5cd-d620-76a2-b750-8f8fe02a33bc"
+   ],
+   "borderline": [
+    "019fe70e-4560-7a97-8dff-8becbd755383",
+    "019fe5d2-6a00-77d6-919c-856cdbf38adb",
+    "019fff7f-e680-7b6c-bced-6441b57eb319",
+    "01a0051d-4740-7a7e-85fd-b4140cbbbea8",
+    "01a00670-0600-731b-8386-bd8f5fe50a18"
+   ]
+  },
+  {
+   "q": "what happens to similarity scores in a store with very few memories",
+   "reading": "Read as: what does the scoring do when the corpus is tiny. The observed one-memory-scores-zero case answers it directly; the centroid decision, the small-corpus caveat on local scaling, and the cold-start threshold note are borderline because they bear on it without being about few memories.",
+   "relevant": [
+    "01a00670-0600-731b-8386-bd8f5fe50a18"
+   ],
+   "borderline": [
+    "019fe70e-4560-7a97-8dff-8becbd755383",
+    "019fe717-6d20-7227-8773-1fb9973acd7b",
+    "019ffb76-4520-717a-9673-d68f14582965"
+   ]
+  },
+  {
+   "q": "lone vector is its own centroid so a single memory scores 0.0",
+   "reading": "Read as a statement of the cold-start artifact, wanting both the observation and the mechanism that produces it. The observation and the mean-subtraction decision are relevant; union-centroid and threshold memories are borderline as the same arithmetic in a different setting.",
+   "relevant": [
+    "01a00670-0600-731b-8386-bd8f5fe50a18",
+    "019fe70e-4560-7a97-8dff-8becbd755383"
+   ],
+   "borderline": [
+    "019fe66e-0dc0-7bff-a55a-54391ae4f8cb",
+    "019fe672-a1a0-7209-ade1-d1626f7e1847",
+    "019ffb76-4520-717a-9673-d68f14582965"
+   ]
+  },
+  {
+   "q": "MemoryView",
+   "reading": "Read as a bare type name: the memory that decided a single shared view type carries a memory's complete field set to every tool. Kept narrow -- memories that merely describe what recall returns are borderline, not answers about the type itself.",
+   "relevant": [
+    "019fc89f-2220-70e2-83d3-b3a11f25f496"
+   ],
+   "borderline": [
+    "019ffff2-5760-7cc7-b261-795891c3ea4d"
+   ]
+  },
+  {
+   "q": "how case folding of keywords works",
+   "reading": "Read as: what does the system do about keyword case. Only the spelling convention actually states the folded-form-beside-the-written-form arrangement; the set-name rule (explicitly not case-folded) and the spelling-drift memory are borderline as the adjacent cases a reader would also want.",
+   "relevant": [
+    "019ff5e1-21c0-7404-95ac-851478b99ba8"
+   ],
+   "borderline": [
+    "019fcc1b-c5c0-7ce0-974d-c7b0829e24f9",
+    "019ff5dc-8de0-7a96-9482-8a82175cb16f"
+   ]
+  },
+  {
+   "q": "how are keyword lookups made case-insensitive without altering what was stored",
+   "reading": "Same subject as the previous query with the design constraint spelled out; the separate-column answer is the one memory that satisfies both halves. The set-name rule is borderline because it is the deliberate counter-case, not an answer.",
+   "relevant": [
+    "019ff5e1-21c0-7404-95ac-851478b99ba8"
+   ],
+   "borderline": [
+    "019fcc1b-c5c0-7ce0-974d-c7b0829e24f9"
+   ]
+  },
+  {
+   "q": "mutation testing",
+   "reading": "Read as: where does this project use mutation testing. Relevant are the four memories that record a mutation as the thing holding a guard, or that classify the mutation script as a development-only tool. Left borderline empty: memories about tests in general are not about mutation testing.",
+   "relevant": [
+    "019ffac7-6780-71c3-92ad-ea96497c6c3f",
+    "019febb4-74e0-70f6-bb78-70999d67e65c",
+    "01a0054f-a1e0-713e-912f-968b6fc3127c",
+    "019fd663-e9e0-7ae5-bfd7-1a84af022047"
+   ],
+   "borderline": []
+  },
+  {
+   "q": "dirty flag, reconciliation base per target, drop and restore safety copy",
+   "reading": "Three named topics, labelled as a union: the dirty flag and its removal from the destructive path; the reconciliation base keyed by record and target; and the unconditional safety copy on drop and restore. Base-migration and store-registry consequences are borderline -- they follow from the per-target base rather than describing it.",
+   "relevant": [
+    "019fd199-1b60-7335-a922-88f2bf7a46c0",
+    "019fcc77-5340-7f31-bc87-4f63f06ced75",
+    "019fcc7b-e720-7949-9a28-e127622f209a",
+    "019fd174-7c60-70cb-99e3-25ab8916d8b7",
+    "019fd186-cbe0-7084-bc47-04d74688ef29",
+    "019fd18b-5fc0-7503-b925-60b511b08e54",
+    "019fd18f-f3a0-74a0-9e69-77bd5c481df6",
+    "019fd179-1040-7a6b-9983-fbc345c6f089",
+    "019ffba7-b560-70b5-b064-91aebabf40a3",
+    "019fd194-8780-745c-b6ad-1d1daa2156c9",
+    "019fcc4e-2060-72d6-97a9-c9d39808b0e7",
+    "019ff0ed-2060-754c-95aa-1d708d18abc7",
+    "019fcc49-8c80-7baa-833e-e3de77eec57d",
+    "019fcc72-bf60-7e05-9a21-aa3e8abe8cbb",
+    "019ff0e8-8c80-761c-8027-39103d8a464e",
+    "019fd1a6-d700-7541-8a96-b980ffc8204d",
+    "019fd1ab-6ae0-7dc4-aa97-9b9b909e56ad",
+    "019fcc69-97a0-74c3-a3a0-dd41793ec87e",
+    "019ff0f1-b440-759f-80c7-baaac5223c76",
+    "019fd166-c0c0-73a3-a07b-679dc5f5de0d",
+    "019fd16b-54a0-7c9f-89d4-749f10b561b0",
+    "019fd16f-e880-7959-a78c-cf062cb21e6f",
+    "019fd17d-a420-77de-91ca-69c6212fd624",
+    "019fd182-3800-7783-bbf2-8bf9c74a5217",
+    "019fd162-2ce0-7492-b1db-1492e9fca261",
+    "019ffbac-4940-7e33-8717-b9ddcc02ee40"
+   ],
+   "borderline": [
+    "019fd651-9a60-7175-bcec-7830fa985da6",
+    "019fcc52-b440-741f-85ba-02a4bf6f7bc5",
+    "019fd64d-0680-76ae-9092-8c79e7da9640",
+    "019ff0f6-4820-7fda-ba54-6eda93396dcc",
+    "019ff0fa-dc00-7836-a59e-63c44cede983",
+    "019ff0ff-6fe0-73e7-90f2-1f2eadb4785d",
+    "019fd1a2-4320-76ae-b730-16189701911e",
+    "019fd19d-af40-71dd-b873-cc6200a5ca09",
+    "019fd14b-4980-7f1f-89c1-079640b6c8e0",
+    "019fd15e-8360-7a03-9bbe-43ef28e8fce7",
+    "019fd65b-ac80-73ce-84b4-c76716cf2465",
+    "019fcc97-5e60-7e8f-9503-f1b68550c6b5"
+   ]
+  },
+  {
+   "q": "why the convention catalog is deliberately kept small",
+   "reading": "Read as: what is the reasoning for the small catalog. Relevant are the scope-limiting decision, the context-cost framing, the character budget and its raises, and the built-in inclusion criterion. Memories that merely invoke the constraint while deciding something else are borderline.",
+   "relevant": [
+    "019fc891-6680-744b-8f55-02a4d57d07bb",
+    "019fc6da-dce0-7ad5-befb-7e68cfbc2923",
+    "019ff721-9100-76b5-b855-1e365a68ea1e",
+    "019ffc4c-80e0-7586-9ab4-7af3b8d56c29",
+    "019ffc51-14c0-71e1-ae18-1bd1ae6ecdbe",
+    "019fe7ae-7d00-7e13-8b35-5b3e330440f1",
+    "019fe780-b640-7f4e-ad20-3a4fad047f33",
+    "019fe77c-2260-7892-990f-d399d8764f64"
+   ],
+   "borderline": [
+    "019fe785-4a20-7eca-bee8-939e7604b9cf",
+    "019ffbb5-7100-7f86-b729-d092662ccfe7",
+    "019ffbdf-8e40-7bb7-8a42-ffd216fdebb7",
+    "019fc1ea-8500-7834-88f3-22bca8415492",
+    "019ffb39-d860-77c0-a8f7-a6aa2a7396a6",
+    "01a006d4-bb40-7736-9ad7-5ea9ebda4df8"
+   ]
+  },
+  {
+   "q": "two servers disagreeing about the embedding model",
+   "reading": "Read as the two-server model-mismatch problem: the observed loop, the oscillation analysis, and every rule written to answer it. Single-process embedding-state memories (mixture, provenance, blocked writes) are borderline because they describe the condition rather than the disagreement.",
+   "relevant": [
+    "019fe5f7-0900-7757-891a-86f645115c54",
+    "019fe5fb-9ce0-7c06-b4e0-61a85c7bc469",
+    "019fe612-8040-7543-92d6-3d4a0b88de6f",
+    "019fe617-1420-7bf7-99f3-43625e74aa9f",
+    "019fe60d-ec60-71aa-8e93-3b582e9dfbea",
+    "019fe609-5880-7c81-b44d-83fb8f1378d7",
+    "019fe604-c4a0-7f04-a6d1-56ab6caa9f34",
+    "019fe600-30c0-76db-86d5-61c0a8cfa44c",
+    "019fe5e4-b980-725b-9ca5-5ea1621a0ff0",
+    "019feba6-b940-7f03-b0cd-d39d39d203c2",
+    "019fe5db-91c0-7576-bc32-c3d4160dd20c",
+    "019fe5c9-4240-77d5-b708-829134439c25"
+   ],
+   "borderline": [
+    "019fe5cd-d620-76a2-b750-8f8fe02a33bc",
+    "019fe5d2-6a00-77d6-919c-856cdbf38adb",
+    "019fe5e0-25a0-701a-9696-04dd78933740",
+    "019fe5e9-4d60-7f22-addf-604be60048d4",
+    "019fe5d6-fde0-7802-b92d-23a1c0cbce83",
+    "019fe5c4-ae60-7e95-a0ae-0d9b279ed42c",
+    "019fe62d-f780-7854-b733-53df7707977e",
+    "019fe632-8b60-70c4-b1f6-8931b28314d4",
+    "019ffac7-6780-71c3-92ad-ea96497c6c3f"
+   ]
+  },
+  {
+   "q": "reconciliation base migration",
+   "reading": "Read narrowly as the migration of stored reconciliation bases. Relevant are the never-keep-what-you-cannot-prove rule, the never-merge-across-targets rule, the canonicalisation route, the cost of dropping, the urgency assessment, and the false-base invariant that motivates all of them. Base definition and the designs that would obsolete the per-target base are borderline.",
+   "relevant": [
+    "019ff0e8-8c80-761c-8027-39103d8a464e",
+    "019ff0f1-b440-759f-80c7-baaac5223c76",
+    "019ff0f6-4820-7fda-ba54-6eda93396dcc",
+    "019ff0fa-dc00-7836-a59e-63c44cede983",
+    "019ff0ff-6fe0-73e7-90f2-1f2eadb4785d",
+    "019ff0ed-2060-754c-95aa-1d708d18abc7"
+   ],
+   "borderline": [
+    "019fcc60-6fe0-74b7-8f46-b8ef36a2b193",
+    "019fcc49-8c80-7baa-833e-e3de77eec57d",
+    "019fcc4e-2060-72d6-97a9-c9d39808b0e7",
+    "019fd651-9a60-7175-bcec-7830fa985da6",
+    "019ffba7-b560-70b5-b064-91aebabf40a3"
+   ]
+  },
+  {
+   "q": "attribution",
+   "reading": "Bare-noun topic sweep over who a memory and a store are attributed to: store author, per-memory created-by/modified-by, claiming, correction and re-attribution, plus origin as human-versus-LLM. Tombstone attribution and the export gate's last-modifier scoping are borderline -- attribution appears there in service of another decision.",
+   "relevant": [
+    "019feb94-69c0-713c-9ad3-4e76d1d8304c",
+    "019febb4-74e0-70f6-bb78-70999d67e65c",
+    "019feb8f-d5e0-7813-9030-7bc739d1953b",
+    "019feb9d-9180-772e-890b-beffb9291319",
+    "019febab-4d20-7d88-bd6f-2a769c4980bd",
+    "019feb8b-4200-7010-9756-07f3aecd3dc2",
+    "019feba2-2560-76c6-8477-875a5a0bcea8",
+    "019febb9-08c0-7d2a-be10-7959b87a8113",
+    "019feb98-fda0-7e8f-9a21-e9cddfc81099",
+    "019febaf-e100-72b8-abca-d1e301c75ea6",
+    "019feba6-b940-7f03-b0cd-d39d39d203c2",
+    "019fc1e1-5d40-7f1b-870a-f176cf9b70b6"
+   ],
+   "borderline": [
+    "019fcc8e-36a0-71ed-8c90-9d0f9c031657",
+    "019fc703-2560-785e-bb1b-8b1f0959d822",
+    "019fc6e3-1a40-70e9-a540-f18fe7fb2f4c",
+    "019fd05d-4000-7916-a1f1-7cd9f21b5972",
+    "019fd04a-f080-7c50-8cff-71217b8061b6"
+   ]
+  },
+  {
+   "q": "reconciliation",
+   "reading": "Bare-noun topic sweep over store-against-file reconciliation: the two reconciliations, the base, the decision table, checksum comparison, tombstones changing what absence means, the anomaly, and the ordering hazard. Base migration, git-side file merging, and the import/restore split are borderline as neighbouring layers.",
+   "relevant": [
+    "019fcc37-3d00-7e3e-ade9-83b198c81774",
+    "019fcc69-97a0-74c3-a3a0-dd41793ec87e",
+    "019ff0ed-2060-754c-95aa-1d708d18abc7",
+    "019fcc49-8c80-7baa-833e-e3de77eec57d",
+    "019fcc4e-2060-72d6-97a9-c9d39808b0e7",
+    "019fcc04-e260-76b6-9bf7-c49326118971",
+    "019fcc89-a2c0-7ca3-ab48-e63eab013864",
+    "019fd081-df00-7daa-a34f-258038990673",
+    "019fcc97-5e60-7e8f-9503-f1b68550c6b5",
+    "019fd14f-dd60-7b3b-b9df-947a20b85884",
+    "019fcc3b-d0e0-7efd-ae86-463c1ef7ddac",
+    "019fd04f-8460-7bbe-949a-3fd732bd3df9",
+    "019fcc44-f8a0-7f03-9279-f35be3f4e78c",
+    "019fcc80-7b00-7c59-bc9d-88ad5d04e32b",
+    "019fcc8e-36a0-71ed-8c90-9d0f9c031657",
+    "019fcc72-bf60-7e05-9a21-aa3e8abe8cbb",
+    "019ff0e8-8c80-761c-8027-39103d8a464e"
+   ],
+   "borderline": [
+    "019ff0f1-b440-759f-80c7-baaac5223c76",
+    "019ff0f6-4820-7fda-ba54-6eda93396dcc",
+    "019ff0fa-dc00-7836-a59e-63c44cede983",
+    "019ff0ff-6fe0-73e7-90f2-1f2eadb4785d",
+    "019fcc77-5340-7f31-bc87-4f63f06ced75",
+    "019fcc0e-0a20-7a4b-8497-db644da6002b",
+    "019fcc09-7640-7715-9d56-5c1944579a4d",
+    "019fcc18-1c40-7bf8-bdeb-1c4533153f73",
+    "019fd154-7140-7cf2-adb2-5b2d5a2effc8",
+    "019fd14b-4980-7f1f-89c1-079640b6c8e0",
+    "019fd15e-8360-7a03-9bbe-43ef28e8fce7",
+    "019fd159-0520-7394-8297-7f93355b664d",
+    "019fd1a6-d700-7541-8a96-b980ffc8204d",
+    "019fd1ab-6ae0-7dc4-aa97-9b9b909e56ad",
+    "019fd199-1b60-7335-a922-88f2bf7a46c0",
+    "019fd086-72e0-7300-aa8d-32a22306e064"
+   ]
+  },
+  {
+   "q": "store registry design",
+   "reading": "Read as a sweep of the store-registry proposal: what the registry holds, identity versus location, placement and discovery, registration, status reporting, inspect, and the costs and consequences. Trust/set-name questions the registry would answer, and the per-target base it would remove, are borderline.",
+   "relevant": [
+    "019fd651-9a60-7175-bcec-7830fa985da6",
+    "019fd664-d440-76de-8d12-1880fbafbc71",
+    "019feb2b-20a0-75a2-8e2a-ed387402cc38",
+    "019fd671-a580-70f8-8d06-a23b230c4324",
+    "019fd66d-11a0-7077-8f98-733865ddf338",
+    "019fd669-6820-79df-b27c-65b105c26e19",
+    "019fd65f-5600-740b-b838-1fc389a84b47",
+    "019ffba3-2180-78af-9c11-a80095dd9489",
+    "019ffbb0-dd20-7dd9-b9aa-42245ed01d0f",
+    "019ffb8c-3e20-71f4-91b3-5c330f781534",
+    "019ffb6c-3300-710c-ba50-b0da57bf023a",
+    "019ffb70-c6e0-7219-abf8-4d76039062b2",
+    "019feb26-8cc0-78d2-b8c3-6d57ec935a57",
+    "019feb42-0400-7dec-9cfd-c6dddadec2b2",
+    "019feb1d-6500-7928-9ade-eb1365bba830",
+    "019feb34-4860-7768-ac33-098c560a3c54",
+    "019feb2f-b480-7387-8f83-508950317878",
+    "019feb38-dc40-7204-9ff4-87d987dc2224",
+    "019feb3d-7020-735a-8649-dd3451adb7b4",
+    "019feb4b-2bc0-7894-8f67-72b0cbc356ea",
+    "019feb46-97e0-7d52-bd47-9addf2fb1ec9",
+    "019fd65b-ac80-73ce-84b4-c76716cf2465",
+    "019fd64d-0680-76ae-9092-8c79e7da9640",
+    "019fd656-2e40-7943-90d8-f64b8b31112f",
+    "019fcc52-b440-741f-85ba-02a4bf6f7bc5",
+    "019ffba7-b560-70b5-b064-91aebabf40a3",
+    "019ffbac-4940-7e33-8717-b9ddcc02ee40",
+    "019ffb90-d200-72f1-8f1c-d3579e279fa2",
+    "019ffb87-aa40-7ed8-85ed-87ec32d55527",
+    "019ffb95-65e0-7d77-82aa-376263adce4c",
+    "019ffb83-1660-7c76-8fa2-49777ac6a933",
+    "019ffb7e-8280-7723-9211-f6ffc8ab36e6",
+    "019ffb75-5ac0-7bd0-a996-d00e2cbc4183",
+    "019ffb79-eea0-74dc-92d3-13d77c3e1e3b",
+    "019feb21-f8e0-7cc8-9f16-f92dbf9d33e5",
+    "019ffbb5-7100-7f86-b729-d092662ccfe7"
+   ],
+   "borderline": [
+    "019fd1a6-d700-7541-8a96-b980ffc8204d",
+    "01a0063d-ab60-74ed-9eb1-1cc66379e424",
+    "019fd19d-af40-71dd-b873-cc6200a5ca09",
+    "019fd1a2-4320-76ae-b730-16189701911e",
+    "019fd13d-8de0-7485-b729-d399eaf08ef6",
+    "019fcc4e-2060-72d6-97a9-c9d39808b0e7"
+   ]
+  },
+  {
+   "q": "store registry in-tree",
+   "reading": "Read as the specific question of putting the store inside the repository tree. Relevant are the memory that rules in-tree out and the proposal that places stores centrally instead; the other placement memories (home versus common directory, the reserved directory's contents) are borderline because they answer where among out-of-tree locations.",
+   "relevant": [
+    "019fd65b-ac80-73ce-84b4-c76716cf2465",
+    "019fd651-9a60-7175-bcec-7830fa985da6"
+   ],
+   "borderline": [
+    "019fd65f-5600-740b-b838-1fc389a84b47",
+    "019feb26-8cc0-78d2-b8c3-6d57ec935a57",
+    "019feb1d-6500-7928-9ade-eb1365bba830",
+    "019fad47-ed40-7e24-9fc6-614a5d6f5416",
+    "019fd664-d440-76de-8d12-1880fbafbc71"
+   ]
+  },
+  {
+   "q": "how keywords should be chosen and spelled when storing a memory",
+   "reading": "Read as the keyword-writing convention: how many, how spelled, whether to coin or reuse, the reserved prefix, and the rejected person-name ban. Keyword use elsewhere -- embedding input, keyword search, set-declared conventions -- is borderline because it is about what keywords do, not how to pick them.",
+   "relevant": [
+    "019ff5e1-21c0-7404-95ac-851478b99ba8",
+    "019ff5d7-fa00-765e-832f-ae137dc58ada",
+    "019ff5dc-8de0-7a96-9482-8a82175cb16f",
+    "019ff5e5-b5a0-7d9c-abca-489a32b8fca5",
+    "019ff581-0060-7b6c-b2f8-01db235441b9",
+    "019ff5ea-4980-79db-a926-a80af4285388"
+   ],
+   "borderline": [
+    "019ff6bc-dbc0-7d34-9eaf-80f659fcc12a",
+    "019fff84-7a60-7278-b323-a5b3dec71885",
+    "01a0052b-02e0-73d1-9ed5-68cf448466fd"
+   ]
+  },
+  {
+   "q": "the Golden Rule, memories about people, charitable judgement versus accurate technical criticism",
+   "reading": "Union of three legs: the Golden Rule itself and its four demands, memories that characterise people, and the charity-versus-accuracy boundary. All three legs live in one body of reasoning, so the relevant list is large by construction. The misuse-friction memory and the reinforcement-channel memories are borderline.",
+   "relevant": [
+    "019fc1b3-9680-7468-918f-836170ea282c",
+    "019fc1bc-be40-70a6-a833-1ddc3d55a53c",
+    "019fc1c5-e600-72fb-861a-3764823d73b8",
+    "019fc1ca-79e0-7eaa-bf64-3ac814edcdb4",
+    "019fc1cf-0dc0-7b39-b67c-e7f9bb437b6b",
+    "019fc1d3-a1a0-7701-a69c-1ec18d01182c",
+    "019fc1d8-3580-7620-a980-feb5fd4dedd4",
+    "019fc1dc-c960-7767-9d1c-dece41355fd2",
+    "019fc1e1-5d40-7f1b-870a-f176cf9b70b6",
+    "019fc1ea-8500-7834-88f3-22bca8415492",
+    "019fc1e5-f120-7250-a971-57b5714be5ea",
+    "019fc1b8-2a60-7201-9e87-b5fc75870c44",
+    "019ffa99-a0c0-7e7c-b877-f7f082021d9c",
+    "019ffaa7-5c60-70fe-b848-a484209e9950",
+    "019ffa9e-34a0-7bd8-8555-0bf113853a8f",
+    "019ffa95-0ce0-723b-bef3-3b0ecc1c4601",
+    "019ffaa2-c880-7c07-bace-cf3754319b53",
+    "019ffa90-7900-7a9d-8a61-30851ec78a31",
+    "019ffaab-f040-75a4-8fbb-d52c4598f703",
+    "019ffab0-8420-70e6-a4e3-bddf1abf5165",
+    "019ffb3e-6c40-73f3-8637-eeecde47d28a",
+    "019ffb35-4480-716e-9970-b61f0227a2d4",
+    "019ffb39-d860-77c0-a8f7-a6aa2a7396a6",
+    "019ff97d-d080-73b1-a50c-76e3e59a00e4",
+    "019fd2be-1360-7813-a728-7566f71ec864",
+    "019ff5ea-4980-79db-a926-a80af4285388",
+    "019ffb43-0020-7af6-905c-543aeb7ae886",
+    "019ffb47-9400-70b7-87c8-e7dc9e5a3b78",
+    "019ffbe7-cba0-7211-975a-e820a15d437e"
+   ],
+   "borderline": [
+    "019fc1c1-5220-7462-b31e-b0142cb959c5",
+    "019fc93a-c5e0-7111-8f75-432165e2fb44",
+    "019fc6e7-ae20-7bc6-9562-f5cedf1e85e9",
+    "019fe7bc-38a0-74fd-90d3-b483f4e44f85"
+   ]
+  },
+  {
+   "q": "tombstones, forgotten memories, counting records in a set versus live memories",
+   "reading": "Union of tombstones, forgetting, and the record-count-versus-live-memory distinction. The first two legs are well covered; the third has no memory that states it directly, so status memory counts and the graph-shape measurement sit borderline rather than being stretched into relevant.",
+   "relevant": [
+    "019fd04a-f080-7c50-8cff-71217b8061b6",
+    "019fd054-1840-7849-b276-7c28b570775c",
+    "019fd05d-4000-7916-a1f1-7cd9f21b5972",
+    "019fd058-ac20-7335-bd63-f30a1a38d290",
+    "019fd061-d3e0-7155-b98a-35ca5b385388",
+    "019fd04f-8460-7bbe-949a-3fd732bd3df9",
+    "019fcc44-f8a0-7f03-9279-f35be3f4e78c",
+    "019fcc85-0ee0-7942-8934-46c892d54be0",
+    "019fcc80-7b00-7c59-bc9d-88ad5d04e32b",
+    "019fb7d4-bb80-7bdc-b65c-391f79bd15f0",
+    "019fd159-0520-7394-8297-7f93355b664d",
+    "019fd154-7140-7cf2-adb2-5b2d5a2effc8",
+    "019febb9-08c0-7d2a-be10-7959b87a8113",
+    "019ff97d-d080-73b1-a50c-76e3e59a00e4",
+    "019fd014-0200-7dde-8d6e-b6eef55b5435",
+    "019fd01d-29c0-7e64-b034-b23e6d9b11e6",
+    "019fcc0e-0a20-7a4b-8497-db644da6002b",
+    "019fcc04-e260-76b6-9bf7-c49326118971"
+   ],
+   "borderline": [
+    "019ffffb-7f20-7738-8c69-b1344ae7add1",
+    "019fcc20-59a0-7765-a5d7-2927b0261594",
+    "019ffb83-1660-7c76-8fa2-49777ac6a933",
+    "01a00072-83e0-7617-9417-1962be56c892",
+    "019fcc8e-36a0-71ed-8c90-9d0f9c031657"
+   ]
+  },
+  {
+   "q": "near-duplicate detection before storing, surfacing neighbours versus warning, similarity thresholds",
+   "reading": "Union of pre-store duplicate checking, the surface-neighbours-rather-than-warn decision, and thresholds. Relevant are the half-overlap argument, the threshold-avoidance argument, the recall-before-storing convention and the twins evidence. Confidence anchors, cold-start separation and the general affordance rule are borderline.",
+   "relevant": [
+    "019ffb71-b140-772c-8bb5-be7602d5370c",
+    "019ffb76-4520-717a-9673-d68f14582965",
+    "019ffb6d-1d60-7379-946e-c38681c939f9",
+    "019ffb7f-6ce0-70ac-bd90-575fbd40cb0b"
+   ],
+   "borderline": [
+    "019ff5dc-8de0-7a96-9482-8a82175cb16f",
+    "019ffbde-a3e0-73b0-9fc7-ec089a2dee22",
+    "01a00670-0600-731b-8386-bd8f5fe50a18",
+    "019fb4a5-e9c0-7456-ab19-3a46786845bf",
+    "019fc8ac-ddc0-7fac-b1f6-aaf6ed0048ad"
+   ]
+  },
+  {
+   "q": "a convention that names an operation the catalog does not define, withholding convention text until tools exist",
+   "reading": "Read as the withholding rule: convention text drafted before the tools it names exist, and held back until they do. The correcting-convention case and the written-but-unserved-is-normal note answer it; catalog adjacency, pointing-versus-restating, and the which-half-first argument are borderline.",
+   "relevant": [
+    "019fd2b9-7f80-7713-91c4-7defdb27da28",
+    "019ffc55-a8a0-74e0-a985-f59a02cee02b"
+   ],
+   "borderline": [
+    "019ffbad-33a0-7154-9f91-d76b93b0a2fe",
+    "019ffb7a-d900-7d31-95af-4965dec88dcd",
+    "019ff57c-6c80-7dbb-99ce-d275627d576e",
+    "019ffb76-4520-717a-9673-d68f14582965"
+   ]
+  },
+  {
+   "q": "confidence field calibration, what a low confidence number means, recalibration versus a new belief",
+   "reading": "Union of confidence calibration, what a low value means, and recalibration versus supersession. Relevant are the ladder and its measurement, the anchors-not-thresholds rule, the laundering hazard at the low end, both recalibration-is-an-amendment memories, the claim/apparatus split, and the low-confidence reading of a sweeping characterisation.",
+   "relevant": [
+    "019ffbda-1000-7819-b730-d57e2aeac06d",
+    "019ffbde-a3e0-73b0-9fc7-ec089a2dee22",
+    "019ffbe7-cba0-7211-975a-e820a15d437e",
+    "019ffbe3-37c0-7052-b886-961998d3e090",
+    "019fd034-0d20-7f85-a89c-43e9ccbd9a18",
+    "019fd018-95e0-7b02-b2e5-f6caeefc59c1",
+    "019fc1d8-3580-7620-a980-feb5fd4dedd4"
+   ],
+   "borderline": [
+    "019fff7f-e680-7b6c-bced-6441b57eb319",
+    "019fb4aa-7da0-71c4-a0f4-d575e717d9b1"
+   ]
+  },
+  {
+   "q": "served convention text read by strangers, examples that assert facts about the reader's own store",
+   "reading": "Read as the drafting rule for served text: it is read by strangers, so an example asserting facts about the drafter's own store is false for its reader. Relevant are that test, the state-don't-derive rule, the reinforcement-versus-comment split, and the routing draft that compiled one user's arrangement into everyone's catalog.",
+   "relevant": [
+    "019ffa62-b240-7daf-aea6-6600a6e24502",
+    "019ffb39-d860-77c0-a8f7-a6aa2a7396a6",
+    "019fc6df-70c0-76a2-aeb8-8dd641496466",
+    "019fc6e7-ae20-7bc6-9562-f5cedf1e85e9",
+    "019ffb7a-d900-7d31-95af-4965dec88dcd",
+    "019ff56e-b0e0-7f12-9894-6b2fd4a648eb"
+   ],
+   "borderline": [
+    "019fe7bc-38a0-74fd-90d3-b483f4e44f85",
+    "019ff5aa-3340-79ac-90bb-63f230d1ba95"
+   ]
+  },
+  {
+   "q": "malformed tool call remark, warning rather than refusing, surfacing damage in the response",
+   "reading": "Union of three: refusing a malformed call in a way the caller can act on, preferring a directive warning to a refusal, and reporting damage in the response rather than silently. Reporting decisions in adjacent subsystems (status, forward-compatibility, tripwires) are borderline.",
+   "relevant": [
+    "01a004f4-1460-7ae4-859e-76fe224bfc53",
+    "01a00554-35c0-794d-83ed-c2646afd545b",
+    "01a00558-c9a0-7972-a3e0-f8adc441787f",
+    "01a0055d-5d80-7d9e-b654-b7f0fafc6744",
+    "019fe617-1420-7bf7-99f3-43625e74aa9f",
+    "019fe612-8040-7543-92d6-3d4a0b88de6f",
+    "019fe600-30c0-76db-86d5-61c0a8cfa44c",
+    "019fe6a9-9020-75ca-8290-5a60ea51374f",
+    "019fcc8e-36a0-71ed-8c90-9d0f9c031657",
+    "019fcc80-7b00-7c59-bc9d-88ad5d04e32b",
+    "019fd1ab-6ae0-7dc4-aa97-9b9b909e56ad",
+    "019ff01f-2200-7085-ac19-79d7af10dad1",
+    "019fd146-b5a0-7d2a-b58e-faeda244b8ea",
+    "019fd16f-e880-7959-a78c-cf062cb21e6f",
+    "01a0054f-a1e0-713e-912f-968b6fc3127c",
+    "01a004b8-9200-75c0-988b-bbd460ce1574",
+    "019fe67b-c960-7367-bfbe-c83f7db2ebc9"
+   ],
+   "borderline": [
+    "019feb9d-9180-772e-890b-beffb9291319",
+    "019feb3d-7020-735a-8649-dd3451adb7b4",
+    "019feb4b-2bc0-7894-8f67-72b0cbc356ea",
+    "019febab-4d20-7d88-bd6f-2a769c4980bd",
+    "019fad51-1500-77c4-b83e-9afd3ca81ab1",
+    "019fad4c-8120-730f-9b60-692426eaf4e1",
+    "019fad55-a8e0-7460-b55f-7a250ae4827f",
+    "019feba2-2560-76c6-8477-875a5a0bcea8"
+   ]
+  },
+  {
+   "q": "graph traversal from seed memories, link labels, decay by distance, fan-out",
+   "reading": "Union of four: the walk from seeds, the link-label vocabulary, decay with distance, and fan-out bounds. Labelled as one body because the traversal design and the label vocabulary are each asked for by name. Reverse-index mechanics, link-target structure and per-label open questions are borderline -- they concern edges without concerning the walk.",
+   "relevant": [
+    "019fff7f-e680-7b6c-bced-6441b57eb319",
+    "01a00024-b200-712a-8bd9-b323158e85b7",
+    "01a00029-45e0-7cff-befb-8f61093d5248",
+    "01a0002d-d9c0-78b6-bf36-4978b76b3d34",
+    "01a00032-6da0-7930-a532-6319c2400be6",
+    "01a00037-0180-7707-b7b8-7c062ebb00de",
+    "01a0003b-9560-7249-b1d5-129bd465e345",
+    "01a00040-2940-7431-ac33-cbccbfeea6b3",
+    "01a00044-bd20-7d7c-88f6-5cd009f7f8e7",
+    "01a00049-5100-776e-a35f-53432dc14509",
+    "01a0004d-e4e0-7d3a-917f-ef9ec276ed54",
+    "01a0006d-f000-7417-a3f3-b44bef432ff2",
+    "01a00069-5c20-749a-b2e7-7a3710f1e6b4",
+    "01a0005b-a080-7558-b884-051d9bd6c783",
+    "019fe71c-0100-7871-b922-393ef9686ebb",
+    "019fff8d-a220-77f8-8ceb-6b7b5ef4ae22",
+    "01a00092-8f00-7edb-accc-bb092ae1c9f7",
+    "019fe6db-eac0-7468-94b7-672434500d1f",
+    "019fbd76-b020-7fee-93b6-f2daa8bd5768",
+    "019fbd72-1c40-7114-b03a-7292ddbc0f0f",
+    "019fbd88-ffa0-770a-9211-5e70352f64ff",
+    "019fbd7b-4400-7d06-b3eb-469f9ad5b657",
+    "019fffc4-90a0-7dff-be81-fe00ff801eee",
+    "019fbd96-bb40-70e2-8c28-54815046e788",
+    "019fbd68-f480-7e81-b4e4-882ce18e8206",
+    "019fffb6-d500-7d96-aac7-f8c6372e4469",
+    "01a00072-83e0-7617-9417-1962be56c892"
+   ],
+   "borderline": [
+    "01a00060-3460-739c-816f-08103686cc3d",
+    "01a00064-c840-7437-9458-a062673b434d",
+    "019fff92-3600-7d2c-b076-5228a081c32e",
+    "019fe1ac-6700-72a2-9320-c8913b6bb0ed",
+    "01a00642-3f40-7e75-bd24-ca2ea538a139",
+    "01a00646-d320-75cb-98ed-5d429dda4855",
+    "019fbd5b-38e0-79f5-8d5b-4ac81656cbf6",
+    "019fbcfb-1780-747c-a956-4855f08756d5",
+    "019fb52f-3e00-7bf4-8c1c-478b2011ab6c",
+    "019fffbb-68e0-75be-8680-ef143f73e74c",
+    "019fffbf-fcc0-7635-998c-6d9d190d1a74",
+    "019fffc9-2480-7023-afba-510407b3fdf6",
+    "01a00004-a6e0-74b8-9b5d-fda24a865735",
+    "019ffff6-eb40-73f8-ae5e-0613df0a8725"
+   ]
+  }
+ ]
+}
