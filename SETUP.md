@@ -140,9 +140,11 @@ writes `sharing-preferences.md` beside your personal memories: in `~/.local/shar
 the directory `SCATTERHOARD_COMMON` names, or `SCATTERHOARD_HOME` if only that is set. It lists what
 about you is kept out of memory sets: some details out of shared sets only, such as your employer, and
 some out of every set, such as your health. It can also list words never to be stored at all, values
-that are always fine to share, and sets you never publish. Edit it to suit you. It is served with the
-conventions at the start of every session, so an edit takes effect at the next one, and Scatterhoard
-never changes the file again. It governs only your own details: what may be recorded about other
+that are always fine to share, and sets you never publish. Edit it to suit you: each item is a line
+starting with `- `, and a line Scatterhoard does not read as an item is pointed out to your session,
+by line number, at the start of the next one. It is served with the conventions at the start of every
+session, so an edit takes effect at the next one, and Scatterhoard never changes the file again. If
+you delete it, the template is written again at the next session start. It governs only your own details: what may be recorded about other
 people stays with the conventions.
 
 **Before a shared set is exported, its new memories are reviewed.** Export refuses memories nobody has
